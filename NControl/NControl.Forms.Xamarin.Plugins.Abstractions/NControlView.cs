@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using NGraphics;
+using System.Collections.Generic;
 
 namespace NControl.Plugins.Abstractions
 {
@@ -18,6 +19,7 @@ namespace NControl.Plugins.Abstractions
 		{
 			Transparent = true;
 			CancelDefaultDrawing = false;
+            BackgroundColor = Xamarin.Forms.Color.Transparent;
 		}
 
 		/// <summary>
@@ -32,7 +34,7 @@ namespace NControl.Plugins.Abstractions
 
 		#endregion
 
-		#region Properties
+        #region Properties
 
 		/// <summary>
 		/// The cancel default drawing property.
@@ -80,6 +82,36 @@ namespace NControl.Plugins.Abstractions
         public virtual void Draw(ICanvas canvas, Rect rect)
 		{
 		}
+
+        /// <summary>
+        /// Touchs down.
+        /// </summary>
+        /// <param name="point">Point.</param>
+        public virtual void TouchesBegan(IEnumerable<NGraphics.Point> points)
+        {
+        }
+
+        /// <summary>
+        /// Toucheses the moved.
+        /// </summary>
+        /// <param name="point">Point.</param>
+        public virtual void TouchesMoved(IEnumerable<NGraphics.Point> points)
+        {
+        }
+
+        /// <summary>
+        /// Toucheses the cancelled.
+        /// </summary>
+        public virtual void TouchesCancelled(IEnumerable<NGraphics.Point> points)
+        {
+        }
+
+        /// <summary>
+        /// Toucheses the ended.
+        /// </summary>
+        public virtual void TouchesEnded(IEnumerable<NGraphics.Point> points)
+        {
+        }
 	}
 }
 

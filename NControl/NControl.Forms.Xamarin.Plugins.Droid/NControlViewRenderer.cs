@@ -3,6 +3,7 @@ using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms;
 using NControl.Plugins.Abstractions;
 using NControl.Plugins.Droid;
+using Android.Views;
 
 [assembly: ExportRenderer(typeof(NControlView), typeof(NControlViewRenderer))]
 namespace NControl.Plugins.Droid
@@ -29,10 +30,14 @@ namespace NControl.Plugins.Droid
 
                 if (Control == null)
                 {
+                    NControlNativeView control = null;
                     if(e.NewElement.DrawingFunction == null)
-                        SetNativeControl(new NControlNativeView((NGraphics.ICanvas canvas, NGraphics.Rect rect) => e.NewElement.Draw(canvas, rect), Context));
+                        control = new NControlNativeView((NGraphics.ICanvas canvas, NGraphics.Rect rect) => e.NewElement.Draw(canvas, rect), Context);
                     else
-                        SetNativeControl(new NControlNativeView(e.NewElement.DrawingFunction, Context));
+                        control = new NControlNativeView(e.NewElement.DrawingFunction, Context);
+
+                    control.Touch += HandleTouch;
+                    SetNativeControl(control);
                 }
 			}
 		}
@@ -51,6 +56,41 @@ namespace NControl.Plugins.Droid
 			else if(e.PropertyName == NControlView.TransparentProperty.PropertyName)
 				(Control as NControlNativeView).Transparent = Element.CancelDefaultDrawing;
 		}
+
+        /// <summary>
+        /// Handles the touch.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">E.</param>
+        private void HandleTouch (object sender, TouchEventArgs e)
+        {
+            if (Control == null)
+                return;
+
+            var touchInfo = new NGraphics.Point[]{ 
+                new NGraphics.Point{X = e.Event.GetX(), Y = e.Event.GetY()}
+            };
+
+            // Handle touch actions
+            switch (e.Event.Action) {
+
+                case MotionEventActions.Down:
+                    Element.TouchesBegan (touchInfo);
+                    break;
+
+                case MotionEventActions.Move:
+                    Element.TouchesMoved (touchInfo);
+                    break;
+
+                case MotionEventActions.Up:
+                    Element.TouchesEnded (touchInfo);
+                    break;          
+
+                case MotionEventActions.Cancel:
+                    Element.TouchesCancelled (touchInfo);
+                    break;
+            }
+        }
 	}
 }
 

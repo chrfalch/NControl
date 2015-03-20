@@ -3,6 +3,9 @@ using Xamarin.Forms.Platform.iOS;
 using Xamarin.Forms;
 using NControl.Plugins.Abstractions;
 using NControl.Plugins.iOS;
+using UIKit;
+using System.Collections.Generic;
+using System.Linq;
 
 [assembly: ExportRenderer(typeof(NControlView), typeof(NControlViewRenderer))]
 namespace NControl.Plugins.iOS
@@ -29,10 +32,19 @@ namespace NControl.Plugins.iOS
 
                 if (Control == null)
                 {
+                    NControlNativeView control = null;
+
                     if(e.NewElement.DrawingFunction == null)
-                        SetNativeControl(new NControlNativeView((NGraphics.ICanvas canvas, NGraphics.Rect rect) => e.NewElement.Draw(canvas, rect)));
+                        control = new NControlNativeView((NGraphics.ICanvas canvas, NGraphics.Rect rect) => e.NewElement.Draw(canvas, rect));
                     else
-                        SetNativeControl(new NControlNativeView(e.NewElement.DrawingFunction));
+                        control = new NControlNativeView(e.NewElement.DrawingFunction);
+
+                    control.TouchesBeganEvent += HandleTouchesBeganEvent;
+                    control.TouchesMovedEvent += HandleTouchesMovedEvent;
+                    control.TouchesEndedEvent += HandleTouchesEndedEvent;
+                    control.TouchesCancelledEvent += HandleTouchesCancelledEvent;
+
+                    SetNativeControl(control);
                 }
 			}
 		}
@@ -53,6 +65,70 @@ namespace NControl.Plugins.iOS
             else if(e.PropertyName == NControlView.BackgroundColorProperty.PropertyName)
                 (Control as NControlNativeView).BackgroundColor = Element.BackgroundColor.ToUIColor();
 		}
+
+        #region Touch Handlers
+
+        /// <summary>
+        /// Handles the touches cancelled event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">E.</param>
+        private void HandleTouchesCancelledEvent (object sender, IEnumerable<UITouch> e)
+        {
+            if (Element == null)
+                return;
+
+            Element.TouchesCancelled (e.Select(t => new NGraphics.Point{
+                X = (float)t.LocationInView(t.View).X, Y = (float)t.LocationInView(t.View).Y
+            }));
+        }
+
+        /// <summary>
+        /// Handles the touches began event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">E.</param>
+        private void HandleTouchesBeganEvent (object sender, IEnumerable<UITouch> e)
+        {
+            if (Element == null)
+                return;
+
+            Element.TouchesBegan (e.Select(t => new NGraphics.Point{
+                X = (float)t.LocationInView(t.View).X, Y = (float)t.LocationInView(t.View).Y
+            }));
+        }
+
+        /// <summary>
+        /// Handles the touches ended event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">E.</param>
+        void HandleTouchesEndedEvent (object sender, IEnumerable<UITouch> e)
+        {
+            if (Element == null)
+                return;
+
+            Element.TouchesEnded (e.Select(t => new NGraphics.Point{
+                X = (float)t.LocationInView(t.View).X, Y = (float)t.LocationInView(t.View).Y
+            }));
+        }
+
+        /// <summary>
+        /// Handles the touches moved event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">E.</param>
+        void HandleTouchesMovedEvent (object sender, IEnumerable<UITouch> e)
+        {
+            if (Element == null)
+                return;
+
+            Element.TouchesMoved (e.Select(t => new NGraphics.Point{
+                X = (float)t.LocationInView(t.View).X, Y = (float)t.LocationInView(t.View).Y
+            }));    
+        }
+
+        #endregion
 	}
 }
 

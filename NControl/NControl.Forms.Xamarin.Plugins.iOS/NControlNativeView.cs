@@ -6,6 +6,8 @@ using NGraphics;
 using CoreGraphics;
 using NControl.Plugins.Abstractions;
 using NControl.Plugins.iOS;
+using System.Collections.Generic;
+using Foundation;
 
 namespace NControl.Plugins.iOS
 {
@@ -53,8 +55,32 @@ namespace NControl.Plugins.iOS
 		{
 			_drawingFunc = drawingFunc;
 		}
-
+            
 		#endregion
+
+        #region Events
+
+        /// <summary>
+        /// Occurs when touches began.
+        /// </summary>
+        public event EventHandler<IEnumerable<UITouch>> TouchesBeganEvent;
+
+        /// <summary>
+        /// Occurs when touches moved.
+        /// </summary>
+        public event EventHandler<IEnumerable<UITouch>> TouchesMovedEvent;
+
+        /// <summary>
+        /// Occurs when touches ended.
+        /// </summary>
+        public event EventHandler<IEnumerable<UITouch>> TouchesEndedEvent;
+
+        /// <summary>
+        /// Occurs when touches cancelled.
+        /// </summary>
+        public event EventHandler<IEnumerable<UITouch>> TouchesCancelledEvent;
+
+        #endregion
 
 		#region Properties
 
@@ -122,6 +148,62 @@ namespace NControl.Plugins.iOS
 		}
 
 		#endregion
+
+        #region Native Touch
+
+        /// <summary>
+        /// Toucheses the began.
+        /// </summary>
+        /// <param name="touches">Touches.</param>
+        /// <param name="evt">Evt.</param>
+        public override void TouchesBegan (Foundation.NSSet touches, UIEvent evt)
+        {
+            base.TouchesBegan (touches, evt);
+
+            if (TouchesBeganEvent != null)
+                TouchesBeganEvent (this, touches.ToArray<UITouch>());
+        }
+
+        /// <summary>
+        /// Toucheses the cancelled.
+        /// </summary>
+        /// <param name="touches">Touches.</param>
+        /// <param name="evt">Evt.</param>
+        public override void TouchesCancelled (Foundation.NSSet touches, UIEvent evt)
+        {
+            base.TouchesCancelled (touches, evt);
+
+            if (TouchesCancelledEvent != null)
+                TouchesCancelledEvent (this, touches.ToArray<UITouch>());
+        }
+
+        /// <summary>
+        /// Toucheses the ended.
+        /// </summary>
+        /// <param name="touches">Touches.</param>
+        /// <param name="evt">Evt.</param>
+        public override void TouchesEnded (Foundation.NSSet touches, UIEvent evt)
+        {
+            base.TouchesEnded (touches, evt);
+
+            if (TouchesEndedEvent != null)
+                TouchesEndedEvent (this, touches.ToArray<UITouch>());
+        }
+
+        /// <summary>
+        /// Toucheses the moved.
+        /// </summary>
+        /// <param name="touches">Touches.</param>
+        /// <param name="evt">Evt.</param>
+        public override void TouchesMoved (Foundation.NSSet touches, UIEvent evt)
+        {
+            base.TouchesMoved (touches, evt);
+
+            if (TouchesMovedEvent != null)
+                TouchesMovedEvent (this, touches.ToArray<UITouch>());
+        }
+
+        #endregion
 	}
 
 }

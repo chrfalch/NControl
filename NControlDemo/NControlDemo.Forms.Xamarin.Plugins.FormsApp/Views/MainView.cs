@@ -19,22 +19,11 @@ namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.Views
         /// <returns>The layout.</returns>
         protected override View CreateContents()
         {
-            return new StackLayout{                
-                Children = {
-                    new FontAwesomeLabel{Text = FontAwesomeLabel.FAAlignJustify},
-                    new NControlView((ICanvas canvas, Rect rect) => {
-
-                        var font = new NGraphics.Font();
-                        font.Family = "Arial";
-                        font.Size = 14;
-
-                        canvas.FillEllipse(rect, NGraphics.Colors.Yellow);
-                        canvas.DrawLine(new NGraphics.Point(rect.X, rect.Y), new NGraphics.Point(rect.Width, rect.Height), NGraphics.Colors.Red);
-                        canvas.DrawText("ABCD", new Rect(50, 50, 50, 50), font, NGraphics.TextAlignment.Left, null, Brushes.Black);
-
-                    }){ WidthRequest = 100, HeightRequest = 100, BackgroundColor = global::Xamarin.Forms.Color.Transparent},
-                }
-            };
+            var layout = new RelativeLayout();
+            layout.Children.Add(new CircularButtonControl(), () => 
+                new global::Xamarin.Forms.Rectangle((layout.Width / 2) - 25, (layout.Height / 2) - 25, 50, 50));
+            
+            return layout;
         }
     }
 }
