@@ -24,3 +24,5 @@ public void MyView()
     BackgroundColor = global::Xamarin.Forms.Color.Transparent
   };
 }
+
+There are two ways of drawing in the control. The example above fraws using a drawing function, but you can also subclass the view itself and override its drawing method.
