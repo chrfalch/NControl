@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>NControlDemo.OS</string>
+	<string>NControlDemo</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.CF.NControlDemo.iOS</string>
 	<key>CFBundleShortVersionString</key>

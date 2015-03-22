@@ -1,3 +1,30 @@
+/************************************************************************
+ * 
+ * The MIT License (MIT)
+ * 
+ * Copyright (c) 2025 - Christian Falch
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining 
+ * a copy of this software and associated documentation files (the 
+ * "Software"), to deal in the Software without restriction, including 
+ * without limitation the rights to use, copy, modify, merge, publish, 
+ * distribute, sublicense, and/or sell copies of the Software, and to 
+ * permit persons to whom the Software is furnished to do so, subject 
+ * to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be 
+ * included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, 
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * 
+ ************************************************************************/
+
 using System;
 using Xamarin.Forms;
 using NControlDemo.FormsApp.Controls;
@@ -7,6 +34,7 @@ using NControlDemo.Localization;
 using System.Threading.Tasks;
 using NControlDemo.FormsApp.Views;
 using NControlDemo.FormsApp.ViewModels;
+using Xamarin.Forms.Maps;
 
 namespace NControlDemo.FormsApp.Views
 {
@@ -15,6 +43,16 @@ namespace NControlDemo.FormsApp.Views
     /// </summary>
     public class MainView: BaseContentsView<MainViewModel>
     {
+        /// <summary>
+        /// The chrome visible.
+        /// </summary>
+        private bool _chromeVisible = false;
+
+        /// <summary>
+        /// The map container.
+        /// </summary>
+        private RelativeLayout _mapContainer;
+
         /// <summary>
         /// The bottom bar.
         /// </summary>
@@ -88,8 +126,12 @@ namespace NControlDemo.FormsApp.Views
             // Progress controll
             _progress = new ProgressControl();
 
+            // Map
+            _mapContainer = new RelativeLayout();
+
             // Layout
             var layout = new RelativeLayout();
+            layout.Children.Add(_mapContainer, () => layout.Bounds);
             layout.Children.Add(_topBackgroundView, () => new Xamarin.Forms.Rectangle(0, 0, layout.Width, layout.Height/2));
             layout.Children.Add(_bottomBackgroundView, () => new Xamarin.Forms.Rectangle(0, layout.Height/2, layout.Width, layout.Height/2));
             layout.Children.Add(_bottomBar, () => new Xamarin.Forms.Rectangle(0, layout.Height, layout.Width, 65));
@@ -115,20 +157,61 @@ namespace NControlDemo.FormsApp.Views
             await Task.Delay(1500);
 
             // Introduce the navigation bar and toolbar
+            await ShowChromeAsync();
+
+            // Hide the background and remove progressbar
+            await Task.WhenAll(new [] {
+                _topBackgroundView.TranslateTo(0, -Height/2, 465, Easing.CubicIn),
+                _bottomBackgroundView.TranslateTo(0, Height, 465, Easing.CubicIn),
+                _progress.FadeTo(0, 365, Easing.CubicIn)
+            });
+
+            // Add map
+            var map = new Map();
+            var mapOverlay = new BoxView{ BackgroundColor = Xamarin.Forms.Color.Transparent};
+            mapOverlay.GestureRecognizers.Add(new TapGestureRecognizer{ 
+                Command = new Command(async (obj) => await ToggleChromeAsync()) 
+            });
+            _mapContainer.Children.Add(map, () => _mapContainer.Bounds);
+            _mapContainer.Children.Add(mapOverlay, () => _mapContainer.Bounds);
+        }
+
+        /// <summary>
+        /// Toggles the chrome async.
+        /// </summary>
+        /// <returns>The chrome async.</returns>
+        private Task ToggleChromeAsync()
+        {
+            if (_chromeVisible)
+                return HideChromeAsync();
+
+            return ShowChromeAsync();
+        }
+
+        /// <summary>
+        /// Shows the chrome, ie the navigation bar and button bar
+        /// </summary>
+        private async Task ShowChromeAsync()
+        {
+            _chromeVisible = true;
+
             await Task.WhenAll(new []{
                 _bottomBar.TranslateTo(0, -_bottomBar.Height, 550, Easing.BounceOut),
                 _navigationBar.TranslateTo(0, Device.OnPlatform<int>(65, 44, 25), 550, Easing.BounceOut),
             }); 
+        }
 
-            // Wait a little bit more
-            await Task.Delay(200);
+        /// <summary>
+        /// Shows the chrome, ie the navigation bar and button bar
+        /// </summary>
+        private async Task HideChromeAsync()
+        {
+            _chromeVisible = false;
 
-            // Hide the background and remove progressbar
-            await Task.WhenAll(new [] {
-                _topBackgroundView.TranslateTo(0, -Height/2, 365, Easing.CubicIn),
-                _bottomBackgroundView.TranslateTo(0, Height, 365, Easing.CubicIn),
-                _progress.FadeTo(0, 265, Easing.CubicIn)
-            });
+            await Task.WhenAll(new []{
+                _bottomBar.TranslateTo(0, 0, 550, Easing.CubicIn),
+                _navigationBar.TranslateTo(0, 0, 550, Easing.CubicIn),
+            }); 
         }
     }
 }
