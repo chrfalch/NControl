@@ -1,5 +1,5 @@
 # NControl
-**NControl** is a Xamarin.Forms wrapper control around the [NGraphics](https://github.com/praeclarum/NGraphics) library enabling developers to create custom controls without the need for custom renderers. 
+**NControl** is a Xamarin.Forms wrapper control built around the [NGraphics](https://github.com/praeclarum/NGraphics) library enabling developers to create custom controls without the need for custom renderers. 
 
 The library contains the ```NControlView``` class where real custom cross-platform drawing can be performed without the need for native implementations thanks to the [NGraphics](https://github.com/praeclarum/NGraphics) library. ```NControlView``` can be used both to do custom drawing and to create complex custom controls.
 
