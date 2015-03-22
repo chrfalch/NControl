@@ -44,9 +44,7 @@
     <Compile Include="Mvvm\IView.cs" />
     <Compile Include="Mvvm\IViewWithParameter.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
-    <Compile Include="Views\MenuView.cs" />
     <Compile Include="ViewModels\MasterViewModel.cs" />
-    <Compile Include="Views\MasterView.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\MainView.cs" />
     <Compile Include="Mvvm\IImageProvider.cs" />

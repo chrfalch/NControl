@@ -64,7 +64,7 @@ namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp
             });
 
             // The root page of your application
-            MainPage = Container.Resolve<MasterView>();
+            MainPage = Container.Resolve<MainView>();
 		}
 
         #region App Properties
@@ -129,8 +129,6 @@ namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp
         /// </summary>
         private void RegisterViews()
         {
-            ViewManager.RegisterView<MasterViewModel, MasterView>();
-            ViewManager.RegisterView<MenuViewModel, MenuView>();
             ViewManager.RegisterView<MainViewModel, MainView>();
         }
         #endregion

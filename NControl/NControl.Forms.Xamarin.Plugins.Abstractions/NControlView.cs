@@ -71,7 +71,7 @@ namespace NControl.Plugins.Abstractions
 		/// Gets the drawing function.
 		/// </summary>
 		/// <value>The drawing function.</value>
-        public Action<ICanvas, Rect> DrawingFunction {get; private set;}
+        public Action<ICanvas, Rect> DrawingFunction {get; set;}
 
 		#endregion
 

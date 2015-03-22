@@ -2,6 +2,8 @@
 using NControl.Plugins.Abstractions;
 using NGraphics;
 using Xamarin.Forms;
+using System.Reflection;
+using System.IO;
 
 namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.Controls
 {
@@ -22,9 +24,12 @@ namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.Controls
         public CircularButtonControl()
         {
             _fontawesomeFont = new NGraphics.Font{
-                Family = "fontawesome",
+                Family = "helvetica",
                 Size = 22,
             };
+
+            HeightRequest = 44;
+            WidthRequest = 44;
         }
 
         /// <summary>
@@ -42,7 +47,6 @@ namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.Controls
             rect.Inflate(new NGraphics.Size(-4, -4));
             canvas.FillEllipse(rect, Colors.LightGray);
 
-            canvas.DrawText("A", new Rect(10, 10, rect.Width-20, rect.Height-20), _fontawesomeFont, NGraphics.TextAlignment.Center, Pens.Black, Brushes.Black);
         }
 
         public override void TouchesBegan(System.Collections.Generic.IEnumerable<NGraphics.Point> points)
