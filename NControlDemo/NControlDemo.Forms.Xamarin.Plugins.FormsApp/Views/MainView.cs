@@ -1,13 +1,14 @@
 using System;
-using NControlDemo.Forms.Xamarin.Plugins.FormsApp.ViewModels;
 using Xamarin.Forms;
-using NControlDemo.Forms.Xamarin.Plugins.FormsApp.Controls;
+using NControlDemo.FormsApp.Controls;
 using NGraphics;
 using NControl.Plugins.Abstractions;
-using NControlDemo.Forms.Xamarin.Plugins.Localization;
+using NControlDemo.Localization;
 using System.Threading.Tasks;
+using NControlDemo.FormsApp.Views;
+using NControlDemo.FormsApp.ViewModels;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.Views
+namespace NControlDemo.FormsApp.Views
 {
     /// <summary>
     /// Main view.
@@ -25,12 +26,17 @@ namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.Views
         private NControlView _navigationBar;
 
         /// <summary>
-        /// The background view.
+        /// The progress.
         /// </summary>
-        private NControlView _backgroundView;
+        private ProgressControl _progress;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NControlDemo.Forms.Xamarin.Plugins.FormsApp.Views.MainView"/> class.
+        /// The background view.
+        /// </summary>
+        private BoxView _backgroundView;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NControlDemo.FormsApp.Views.MainView"/> class.
         /// </summary>
         public MainView()
         {
@@ -43,21 +49,20 @@ namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.Views
         /// <returns>The layout.</returns>
         protected override View CreateContents()
         {
-            _backgroundView = new NControlView
+            _backgroundView = new BoxView
             {
-                BackgroundColor = global::Xamarin.Forms.Color.FromHex("#3498DB"),
+                BackgroundColor = Xamarin.Forms.Color.FromHex("#3498DB"),
             };
 
             _bottomBar = new NControlView {
                 
-                BackgroundColor = global::Xamarin.Forms.Color.FromHex("#EEEEEE"),
-                DrawingFunction = (ICanvas canvas, Rect rect) =>
-                {
-                    canvas.DrawLine(0, 0, rect.Width, 0, NGraphics.Colors.Gray, 0.5);
-                },
+                BackgroundColor = Xamarin.Forms.Color.FromHex("#EEEEEE"),
+                DrawingFunction = (ICanvas canvas, Rect rect) => 
+                    canvas.DrawLine(0, 0, rect.Width, 0, NGraphics.Colors.Gray, 0.5)
+                ,
                 Content = new StackLayout {
                     Orientation = StackOrientation.Horizontal,
-                        HorizontalOptions = LayoutOptions.FillAndExpand,
+                    HorizontalOptions = LayoutOptions.CenterAndExpand,
                     Padding = 11,
                     Children =
                     {
@@ -72,25 +77,48 @@ namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.Views
             // Navigation bar
             _navigationBar = new NavigationBarEx {Title = Strings.AppName};
 
+            // Progress controll
+            _progress = new ProgressControl();
+
             // Layout
             var layout = new RelativeLayout();
             layout.Children.Add(_backgroundView, () => layout.Bounds);
-            layout.Children.Add(_bottomBar, () => new global::Xamarin.Forms.Rectangle(0, layout.Height, layout.Width, 65));
-            layout.Children.Add(_navigationBar, () => new global::Xamarin.Forms.Rectangle(0, -65, layout.Width, 65));
+            layout.Children.Add(_bottomBar, () => new Xamarin.Forms.Rectangle(0, layout.Height, layout.Width, 65));
+            layout.Children.Add(_navigationBar, () => new Xamarin.Forms.Rectangle(0, -65, layout.Width, 65));
+
+            layout.Children.Add(_progress, () => new Xamarin.Forms.Rectangle((layout.Width / 2) - (25),
+                    (layout.Height / 2) - 25, 50, 50));
 
             return layout;
         }
 
+        /// <summary>
+        /// Startup animations
+        /// </summary>
         protected override async void OnAppearing()
         {
             base.OnAppearing();
 
-            await Task.WhenAll(new []{
-                _bottomBar.TranslateTo(0, -_bottomBar.Height + (Device.OnPlatform<int>(0,-65,0)), 550, Easing.BounceOut),
-                _navigationBar.TranslateTo(0, Device.OnPlatform<int>(65, 44, 25), 550, Easing.BounceOut),
-            });
+            // Start the progress control
+            _progress.Start();
 
-            await _backgroundView.ScaleTo(0.0, 300, Easing.CubicIn);
+            // Lets pretend we're doing something
+            await Task.Delay(750);
+
+            // Introduce the navigation bar and toolbar
+            await Task.WhenAll(new []{
+                _bottomBar.TranslateTo(0, -_bottomBar.Height, 550, Easing.BounceOut),
+                _navigationBar.TranslateTo(0, Device.OnPlatform<int>(65, 44, 25), 550, Easing.BounceOut),
+            }); 
+
+            // Wait a little bit more
+            await Task.Delay(1500);
+
+            // Hide the background and remove progressbar
+            await Task.WhenAll(new [] {
+                _backgroundView.FadeTo(0, 350, Easing.CubicIn),
+                _progress.FadeTo(0, 65, Easing.CubicIn)
+            });
         }
     }
 }

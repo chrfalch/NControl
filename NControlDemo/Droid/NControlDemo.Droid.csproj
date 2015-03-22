@@ -6,7 +6,7 @@
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProjectGuid>{617C5658-90A2-4828-8609-F5959C66CF9C}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>NControlDemo.Forms.Xamarin.Plugins.Droid</RootNamespace>
+    <RootNamespace>NControlDemo.Droid</RootNamespace>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -78,18 +78,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NControlDemo.Forms.Xamarin.Plugins.Localization\NControlDemo.Forms.Xamarin.Plugins.Localization.csproj">
-      <Project>{79968FF8-9E85-42D1-9917-73B52F022969}</Project>
-      <Name>NControlDemo.Forms.Xamarin.Plugins.Localization</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NControlDemo.Forms.Xamarin.Plugins.Utils\NControlDemo.Forms.Xamarin.Plugins.Utils.csproj">
-      <Project>{C5A54152-DCDF-4ED8-B9F7-7A701EDD73CB}</Project>
-      <Name>NControlDemo.Forms.Xamarin.Plugins.Utils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NControlDemo.Forms.Xamarin.Plugins.FormsApp\NControlDemo.Forms.Xamarin.Plugins.FormsApp.csproj">
-      <Project>{39EA0550-B11F-4ABC-B23A-61EB4136C775}</Project>
-      <Name>NControlDemo.Forms.Xamarin.Plugins.FormsApp</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\NControl\NControl.Forms.Xamarin.Plugins.Droid\NControl.Forms.Xamarin.Plugins.Droid.csproj">
       <Project>{75DFD328-A91C-4056-B50B-1EFDC595C6A0}</Project>
       <Name>NControl.Forms.Xamarin.Plugins.Droid</Name>
@@ -98,6 +86,18 @@
       <Project>{E0951DAE-4B6E-421D-AA30-5BD2203D5DEC}</Project>
       <Name>NControl.Forms.Xamarin.Plugins.Abstractions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NControlDemo.Forms.Xamarin.Plugins.Utils\NControlDemo.Utils.csproj">
+      <Project>{C5A54152-DCDF-4ED8-B9F7-7A701EDD73CB}</Project>
+      <Name>NControlDemo.Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NControlDemo.Forms.Xamarin.Plugins.FormsApp\NControlDemo.FormsApp.csproj">
+      <Project>{39EA0550-B11F-4ABC-B23A-61EB4136C775}</Project>
+      <Name>NControlDemo.FormsApp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NControlDemo.Forms.Xamarin.Plugins.Localization\NControlDemo.Localization.csproj">
+      <Project>{79968FF8-9E85-42D1-9917-73B52F022969}</Project>
+      <Name>NControlDemo.Localization</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -105,10 +105,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TinyIoC.cs" />
     <Compile Include="Platform\IoC\ContainerProvider.cs" />
-    <Compile Include="Platform\Renderers\RoundedBorderControlRenderer.cs" />
     <Compile Include="Platform\Views\RoundedBorderView.cs" />
     <Compile Include="Platform\Mvvm\ImageProvider.cs" />
     <Compile Include="Platform\Renderers\FontAwesomeLabelRenderer.cs" />
+    <Compile Include="SplashscreenActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -130,6 +130,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
     <AndroidResource Include="Resources\values\styles.xml" />
     <AndroidResource Include="Resources\drawable\small15x1.png" />
+    <AndroidResource Include="Resources\drawable\splash.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.4.0.6341\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.0.6341\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

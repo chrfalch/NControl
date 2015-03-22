@@ -2,9 +2,9 @@ using System;
 using TinyIoC;
 using System.Collections.Generic;
 using System.Diagnostics;
-using NControlDemo.Forms.Xamarin.Plugins.FormsApp.IoC;
+using NControlDemo.FormsApp.IoC;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.Droid.Platform.IoC
+namespace NControlDemo.Droid.Platform.IoC
 {
 	public class ContainerProvider: IContainerProvider
 	{

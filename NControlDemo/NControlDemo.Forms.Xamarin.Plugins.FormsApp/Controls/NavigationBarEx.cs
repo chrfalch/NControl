@@ -3,7 +3,7 @@ using NControl.Plugins.Abstractions;
 using Xamarin.Forms;
 using NGraphics;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.Controls
+namespace NControlDemo.FormsApp.Controls
 {
     /// <summary>
     /// Navigation bar ex.
@@ -21,18 +21,16 @@ namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.Controls
         /// </summary>
         public NavigationBarEx()
         {
-            BackgroundColor = global::Xamarin.Forms.Color.FromHex("FFFFFF");
-            //BackgroundColor = global::Xamarin.Forms.Color.FromHex("#3498db");
+            BackgroundColor = Xamarin.Forms.Color.FromHex("FFFFFF");
             _titleLabel = new Label { 
                 Text = "", 
-                //TextColor = global::Xamarin.Forms.Color.White,
-                BackgroundColor = global::Xamarin.Forms.Color.Transparent,
-                XAlign = global::Xamarin.Forms.TextAlignment.Center, 
-                YAlign = global::Xamarin.Forms.TextAlignment.Center 
+                BackgroundColor = Xamarin.Forms.Color.Transparent,
+                XAlign = Xamarin.Forms.TextAlignment.Center, 
+                YAlign = Xamarin.Forms.TextAlignment.Center 
             };
 
             var layout = new RelativeLayout();
-            layout.Children.Add(_titleLabel, () => new global::Xamarin.Forms.Rectangle(0, layout.Height - 44, layout.Width, 44));
+            layout.Children.Add(_titleLabel, () => new Xamarin.Forms.Rectangle(0, layout.Height - 44, layout.Width, 44));
             Content = layout;
         }
 

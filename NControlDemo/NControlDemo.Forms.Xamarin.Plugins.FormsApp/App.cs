@@ -1,14 +1,14 @@
 using System;
 
 using Xamarin.Forms;
-using NControlDemo.Forms.Xamarin.Plugins.FormsApp.IoC;
+using NControlDemo.FormsApp.IoC;
 using System.Threading.Tasks;
-using NControlDemo.Forms.Xamarin.Plugins.FormsApp.Views;
-using NControlDemo.Forms.Xamarin.Plugins.FormsApp.Providers;
-using NControlDemo.Forms.Xamarin.Plugins.FormsApp.ViewModels;
-using NControlDemo.Forms.Xamarin.Plugins.FormsApp.Mvvm;
+using NControlDemo.FormsApp.Views;
+using NControlDemo.FormsApp.Providers;
+using NControlDemo.FormsApp.ViewModels;
+using NControlDemo.FormsApp.Mvvm;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp
+namespace NControlDemo.FormsApp
 {
     /// <summary>
     /// App.
@@ -25,7 +25,7 @@ namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NControlDemo.Forms.Xamarin.Plugins.App"/> class.
+        /// Initializes a new instance of the <see cref="NControlDemo.App"/> class.
         /// </summary>
         /// <param name="typeResolveProvider">Type resolve provider.</param>
         public App (IContainerProvider containerProvider, Action<IContainerProvider> setupContainerCallback)

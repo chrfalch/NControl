@@ -1,7 +1,7 @@
 using System;
-using NControlDemo.Forms.Xamarin.Plugins.Localization;
+using NControlDemo.Localization;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.ViewModels
+namespace NControlDemo.FormsApp.ViewModels
 {
     /// <summary>
     /// Main view model.
@@ -9,7 +9,7 @@ namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.ViewModels
     public class MainViewModel: BaseViewModel
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NControlDemo.Forms.Xamarin.Plugins.FormsAppViewModels.MainViewModel"/> class.
+        /// Initializes a new instance of the <see cref="NControlDemo.FormsAppViewModels.MainViewModel"/> class.
         /// </summary>
         public MainViewModel()
         {

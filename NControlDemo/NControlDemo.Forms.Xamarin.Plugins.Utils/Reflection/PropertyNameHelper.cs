@@ -11,7 +11,7 @@ WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 using System;
 using System.Linq.Expressions;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.Helpers
+namespace NControlDemo.Helpers
 {
 	/// <summary>
 	/// Maps an expression like (m => m.SomeProperty) to the property name "SomeProperty"

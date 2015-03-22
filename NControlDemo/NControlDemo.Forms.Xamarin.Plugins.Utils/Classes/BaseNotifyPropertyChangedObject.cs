@@ -11,9 +11,9 @@ WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
-using NControlDemo.Forms.Xamarin.Plugins.Helpers;
+using NControlDemo.Helpers;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.Classes
+namespace NControlDemo.Classes
 {
 	/// <summary>
 	/// Base class with propertynotify changed

@@ -7,16 +7,16 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using NControlDemo.Forms.Xamarin.Plugins.FormsApp;
-using NControlDemo.Forms.Xamarin.Plugins.Droid.Platform.IoC;
-using NControlDemo.Forms.Xamarin.Plugins.Droid.Platform.Mvvm;
-using NControlDemo.Forms.Xamarin.Plugins.FormsApp.Mvvm;
+using NControlDemo.FormsApp;
+using NControlDemo.Droid.Platform.IoC;
+using NControlDemo.Droid.Platform.Mvvm;
+using NControlDemo.FormsApp.Mvvm;
 using NControl.Plugins.Droid;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.Droid
+namespace NControlDemo.Droid
 {
-	[Activity (Label = "NControlDemo.Forms.Xamarin.Plugins.Droid", Icon = "@drawable/icon", 
-        MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+	[Activity (Label = "NControlDemo.Droid", Icon = "@drawable/icon", 
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
 	{
 		protected override void OnCreate (Bundle bundle)

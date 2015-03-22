@@ -6,7 +6,7 @@
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProjectGuid>{43A5D241-4140-41A9-9E4B-713E5467A9F9}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>NControlDemo.Forms.Xamarin.Plugins.iOS</RootNamespace>
+    <RootNamespace>NControlDemo.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>NControlDemo.Forms.Xamarin.Plugins.iOS</AssemblyName>
   </PropertyGroup>
@@ -118,18 +118,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NControlDemo.Forms.Xamarin.Plugins.Localization\NControlDemo.Forms.Xamarin.Plugins.Localization.csproj">
-      <Project>{79968FF8-9E85-42D1-9917-73B52F022969}</Project>
-      <Name>NControlDemo.Forms.Xamarin.Plugins.Localization</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NControlDemo.Forms.Xamarin.Plugins.Utils\NControlDemo.Forms.Xamarin.Plugins.Utils.csproj">
-      <Project>{C5A54152-DCDF-4ED8-B9F7-7A701EDD73CB}</Project>
-      <Name>NControlDemo.Forms.Xamarin.Plugins.Utils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NControlDemo.Forms.Xamarin.Plugins.FormsApp\NControlDemo.Forms.Xamarin.Plugins.FormsApp.csproj">
-      <Project>{39EA0550-B11F-4ABC-B23A-61EB4136C775}</Project>
-      <Name>NControlDemo.Forms.Xamarin.Plugins.FormsApp</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\NControl\NControl.Forms.Xamarin.Plugins.iOS\NControl.Forms.Xamarin.Plugins.iOS.csproj">
       <Project>{C1497752-06AF-4FDB-886E-8DD57F5CB5A0}</Project>
       <Name>NControl.Forms.Xamarin.Plugins.iOS</Name>
@@ -137,6 +125,18 @@
     <ProjectReference Include="..\..\NControl\NControl.Forms.Xamarin.Plugins.Abstractions\NControl.Forms.Xamarin.Plugins.Abstractions.csproj">
       <Project>{E0951DAE-4B6E-421D-AA30-5BD2203D5DEC}</Project>
       <Name>NControl.Forms.Xamarin.Plugins.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NControlDemo.Forms.Xamarin.Plugins.Utils\NControlDemo.Utils.csproj">
+      <Project>{C5A54152-DCDF-4ED8-B9F7-7A701EDD73CB}</Project>
+      <Name>NControlDemo.Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NControlDemo.Forms.Xamarin.Plugins.FormsApp\NControlDemo.FormsApp.csproj">
+      <Project>{39EA0550-B11F-4ABC-B23A-61EB4136C775}</Project>
+      <Name>NControlDemo.FormsApp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NControlDemo.Forms.Xamarin.Plugins.Localization\NControlDemo.Localization.csproj">
+      <Project>{79968FF8-9E85-42D1-9917-73B52F022969}</Project>
+      <Name>NControlDemo.Localization</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -148,9 +148,6 @@
     <BundleResource Include="Resources\Fonts\fontawesome-webfont.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
     <None Include="packages.config" />
@@ -160,7 +157,6 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="TinyIoC.cs" />
     <Compile Include="Platform\IoC\ContainerProvider.cs" />
-    <Compile Include="Platform\Renderers\RoundedBorderControlRenderer.cs" />
     <Compile Include="Platform\Mvvm\ImageProvider.cs" />
   </ItemGroup>
   <ItemGroup>

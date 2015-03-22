@@ -6,7 +6,7 @@ using System.Reflection;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.Controls
+namespace NControlDemo.FormsApp.Controls
 {
     /// <summary>
     /// Circular button control.
@@ -24,10 +24,10 @@ namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.Controls
 
             Content = new FontAwesomeLabel {
                 Text = FontAwesomeLabel.FAAdjust,
-                TextColor = global::Xamarin.Forms.Color.White,
-                BackgroundColor = global::Xamarin.Forms.Color.Transparent,
-                XAlign = global::Xamarin.Forms.TextAlignment.Center,
-                YAlign = global::Xamarin.Forms.TextAlignment.Center,
+                TextColor = Xamarin.Forms.Color.White,
+                BackgroundColor = Xamarin.Forms.Color.Transparent,
+                XAlign = Xamarin.Forms.TextAlignment.Center,
+                YAlign = Xamarin.Forms.TextAlignment.Center,
             };
         }
 

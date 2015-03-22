@@ -10,9 +10,9 @@ WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 
 using System;
 using Xamarin.Forms;
-using NControlDemo.Forms.Xamarin.Plugins;
+using NControlDemo;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.IoC
+namespace NControlDemo.FormsApp.IoC
 {
     /// <summary>
     /// Container helper.

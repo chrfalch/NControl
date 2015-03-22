@@ -10,6 +10,15 @@ namespace NControl.Plugins.Abstractions
 	/// </summary>
     public class NControlView: ContentView
 	{
+        #region Events
+
+        /// <summary>
+        /// Occurs when on invalidate.
+        /// </summary>
+        public event System.EventHandler OnInvalidate;
+
+        #endregion
+
 		#region Constructors
 
 		/// <summary>
@@ -41,6 +50,15 @@ namespace NControl.Plugins.Abstractions
         public Action<ICanvas, Rect> DrawingFunction {get; set;}
 
 		#endregion
+
+        /// <summary>
+        /// Invalidate this instance.
+        /// </summary>
+        protected void Invalidate()
+        {
+            if (OnInvalidate != null)
+                OnInvalidate(this, EventArgs.Empty);
+        }
 
 		/// <summary>
 		/// Draw the specified canvas.

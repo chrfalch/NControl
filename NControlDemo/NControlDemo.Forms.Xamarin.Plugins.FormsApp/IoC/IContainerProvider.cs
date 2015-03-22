@@ -10,7 +10,7 @@ WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 
 using System;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.IoC
+namespace NControlDemo.FormsApp.IoC
 {
 	/// <summary>
 	/// Defines the container interface

@@ -10,11 +10,11 @@ WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 
 using System;
 using Xamarin.Forms;
-using NControlDemo.Forms.Xamarin.Plugins.Helpers;
-using NControlDemo.Forms.Xamarin.Plugins.FormsApp.Controls;
-using NControlDemo.Forms.Xamarin.Plugins.FormsApp.ViewModels;
+using NControlDemo.Helpers;
+using NControlDemo.FormsApp.Controls;
+using NControlDemo.FormsApp.ViewModels;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.Views
+namespace NControlDemo.FormsApp.Views
 {
 	/// <summary>
 	/// Decorator for views of different base type

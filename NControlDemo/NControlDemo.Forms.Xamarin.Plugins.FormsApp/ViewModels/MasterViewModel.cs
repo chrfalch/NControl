@@ -1,6 +1,6 @@
 using System;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.ViewModels
+namespace NControlDemo.FormsApp.ViewModels
 {
     /// <summary>
     /// Master view model.
@@ -12,7 +12,7 @@ namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.ViewModels
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NControlDemo.Forms.Xamarin.Plugins.FormsAppViewModels.MainViewModel"/> class.
+        /// Initializes a new instance of the <see cref="NControlDemo.FormsAppViewModels.MainViewModel"/> class.
         /// </summary>
         public MasterViewModel()
         {

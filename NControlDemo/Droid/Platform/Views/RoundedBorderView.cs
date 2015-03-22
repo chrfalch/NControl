@@ -3,7 +3,7 @@ using Android.Views;
 using Android.Content;
 using Android.Graphics.Drawables;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.Droid.Platform.Controls
+namespace NControlDemo.Droid.Platform.Controls
 {
     public class RoundedBorderView: View
     {

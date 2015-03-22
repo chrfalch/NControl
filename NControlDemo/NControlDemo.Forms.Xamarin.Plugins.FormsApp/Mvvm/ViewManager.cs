@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using NControlDemo.Forms.Xamarin.Plugins.FormsApp.ViewModels;
+using NControlDemo.FormsApp.ViewModels;
 using Xamarin.Forms;
-using NControlDemo.Forms.Xamarin.Plugins.FormsApp.IoC;
+using NControlDemo.FormsApp.IoC;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.Mvvm
+namespace NControlDemo.FormsApp.Mvvm
 {
     /// <summary>
     /// Implements helper methods for implementing Mvvm

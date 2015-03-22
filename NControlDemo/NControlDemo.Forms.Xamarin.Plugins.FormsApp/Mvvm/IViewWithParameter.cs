@@ -11,7 +11,7 @@ WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 using System;
 using System.Threading.Tasks;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.Mvvm
+namespace NControlDemo.FormsApp.Mvvm
 {
 	public interface IViewWithParameter: IView
 	{

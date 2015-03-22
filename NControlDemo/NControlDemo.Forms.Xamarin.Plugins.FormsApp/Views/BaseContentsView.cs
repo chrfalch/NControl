@@ -12,13 +12,13 @@ using System;
 using Xamarin.Forms;
 using System.Linq.Expressions;
 using System.Collections.Generic;
-using NControlDemo.Forms.Xamarin.Plugins.Classes;
-using NControlDemo.Forms.Xamarin.Plugins.FormsApp.IoC;
-using NControlDemo.Forms.Xamarin.Plugins.Helpers;
-using NControlDemo.Forms.Xamarin.Plugins.FormsApp.ViewModels;
-using NControlDemo.Forms.Xamarin.Plugins.FormsApp.Mvvm;
+using NControlDemo.Classes;
+using NControlDemo.FormsApp.IoC;
+using NControlDemo.Helpers;
+using NControlDemo.FormsApp.ViewModels;
+using NControlDemo.FormsApp.Mvvm;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.Views
+namespace NControlDemo.FormsApp.Views
 {
 	/// <summary>
 	/// Base view.

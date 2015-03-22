@@ -1,9 +1,9 @@
 using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
-using NControlDemo.Forms.Xamarin.Plugins.Helpers;
+using NControlDemo.Helpers;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.Classes
+namespace NControlDemo.Classes
 {
     /// <summary>
     /// Implements a simple property changed listener

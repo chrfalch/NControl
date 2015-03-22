@@ -1,7 +1,7 @@
 using System;
 using Xamarin.Forms;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.Controls
+namespace NControlDemo.FormsApp.Controls
 {
     /// <summary>
     /// Font awesome label.

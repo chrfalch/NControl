@@ -1,11 +1,11 @@
 using System;
-using NControlDemo.Forms.Xamarin.Plugins.FormsApp;
+using NControlDemo.FormsApp;
 using System.Linq;
 
 using Foundation;
 using UIKit;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.iOS
+namespace NControlDemo.iOS
 {
 	public class Application
 	{

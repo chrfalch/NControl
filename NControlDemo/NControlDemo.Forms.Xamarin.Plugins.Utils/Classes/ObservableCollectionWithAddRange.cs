@@ -16,7 +16,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.Classes
+namespace NControlDemo.Classes
 {
     public class ObservableCollectionWithAddRange<T>: ObservableCollection<T>
     {

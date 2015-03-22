@@ -13,11 +13,11 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using NControlDemo.Forms.Xamarin.Plugins.Classes;
-using NControlDemo.Forms.Xamarin.Plugins.FormsApp.Providers;
-using NControlDemo.Forms.Xamarin.Plugins.Helpers;
+using NControlDemo.Classes;
+using NControlDemo.FormsApp.Providers;
+using NControlDemo.Helpers;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.ViewModels
+namespace NControlDemo.FormsApp.ViewModels
 {
 	/// <summary>
 	/// Base view model.

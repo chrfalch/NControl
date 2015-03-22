@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.Providers
+namespace NControlDemo.FormsApp.Providers
 {
     /// <summary>
     /// View model storage provider.

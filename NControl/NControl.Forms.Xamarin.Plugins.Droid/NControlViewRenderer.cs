@@ -19,6 +19,21 @@ namespace NControl.Plugins.Droid
 		/// </summary>
 		public static void Init() { }
 
+        /// <summary>
+        /// Raises the element changed event.
+        /// </summary>
+        /// <param name="e">E.</param>
+        protected override void OnElementChanged(ElementChangedEventArgs<NControlView> e)
+        {
+            base.OnElementChanged(e);
+
+            if (e.OldElement != null)
+                e.OldElement.OnInvalidate -= HandleInvalidate;
+
+            if (e.NewElement != null)
+                e.NewElement.OnInvalidate += HandleInvalidate;
+        }
+
         #region Native Drawing 
 
         /// <Docs>The Canvas to which the View is rendered.</Docs>
@@ -76,6 +91,19 @@ namespace NControl.Plugins.Droid
             return true;
         }
 
+        #endregion
+
+        #region Private Members
+
+        /// <summary>
+        /// Handles the invalidate.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="args">Arguments.</param>
+        private void HandleInvalidate(object sender, System.EventArgs args)
+        {
+            Invalidate();
+        }
         #endregion
 	}
 }

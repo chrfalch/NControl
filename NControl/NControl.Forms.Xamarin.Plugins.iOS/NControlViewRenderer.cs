@@ -21,6 +21,21 @@ namespace NControl.Plugins.iOS
 		/// Used for registration with dependency service
 		/// </summary>
 		public new static void Init() { }
+
+        /// <summary>
+        /// Raises the element changed event.
+        /// </summary>
+        /// <param name="e">E.</param>
+        protected override void OnElementChanged(ElementChangedEventArgs<NControlView> e)
+        {
+            base.OnElementChanged(e);
+
+            if (e.OldElement != null)
+                e.OldElement.OnInvalidate -= HandleInvalidate;
+
+            if (e.NewElement != null)
+                e.NewElement.OnInvalidate += HandleInvalidate;
+        }
         		
         #region Drawing
 
@@ -118,6 +133,19 @@ namespace NControl.Plugins.iOS
             }));
         }
 
+        #endregion
+
+        #region Private Members
+
+        /// <summary>
+        /// Handles the invalidate.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="args">Arguments.</param>
+        private void HandleInvalidate(object sender, System.EventArgs args)
+        {
+            SetNeedsDisplay();
+        }
         #endregion
 	}
 }

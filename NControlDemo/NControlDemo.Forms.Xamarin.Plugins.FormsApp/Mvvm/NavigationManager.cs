@@ -13,9 +13,9 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using System.Threading.Tasks;
 using System.Linq;
-using NControlDemo.Forms.Xamarin.Plugins.FormsApp.ViewModels;
+using NControlDemo.FormsApp.ViewModels;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.Mvvm
+namespace NControlDemo.FormsApp.Mvvm
 {
     /// <summary>
     /// Navigation helper.

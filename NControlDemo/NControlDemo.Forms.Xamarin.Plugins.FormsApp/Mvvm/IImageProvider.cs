@@ -1,7 +1,7 @@
 using System;
 using Xamarin.Forms;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.Mvvm
+namespace NControlDemo.FormsApp.Mvvm
 {
     /// <summary>
     /// image provider.

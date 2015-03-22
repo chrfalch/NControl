@@ -4,13 +4,13 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
-using NControlDemo.Forms.Xamarin.Plugins.iOS.Platform.IoC;
-using NControlDemo.Forms.Xamarin.Plugins.FormsApp;
-using NControlDemo.Forms.Xamarin.Plugins.FormsApp.Mvvm;
-using NControlDemo.Forms.Xamarin.Plugins.iOS.Platform.Mvvm;
+using NControlDemo.iOS.Platform.IoC;
+using NControlDemo.FormsApp;
+using NControlDemo.FormsApp.Mvvm;
+using NControlDemo.iOS.Platform.Mvvm;
 using NControl.Plugins.iOS;
 
-namespace NControlDemo.Forms.Xamarin.Plugins.iOS
+namespace NControlDemo.iOS
 {
 	[Register ("AppDelegate")]
 	public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
