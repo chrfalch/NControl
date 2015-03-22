@@ -33,7 +33,7 @@ namespace NControlDemo.FormsApp.Views
         /// <summary>
         /// The background view.
         /// </summary>
-        private BoxView _backgroundView;
+        private NControlView _backgroundView;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NControlDemo.FormsApp.Views.MainView"/> class.
@@ -49,9 +49,12 @@ namespace NControlDemo.FormsApp.Views
         /// <returns>The layout.</returns>
         protected override View CreateContents()
         {
-            _backgroundView = new BoxView
-            {
+            _backgroundView = new NControlView {
                 BackgroundColor = Xamarin.Forms.Color.FromHex("#3498DB"),
+                DrawingFunction = (canvas, rect) => {
+                    canvas.DrawLine(rect.Left, rect.Top, rect.Width, rect.Height, NGraphics.Colors.Red);
+                    canvas.DrawLine(rect.Width, rect.Top, rect.Left, rect.Height, NGraphics.Colors.Yellow);
+                }
             };
 
             _bottomBar = new NControlView {
