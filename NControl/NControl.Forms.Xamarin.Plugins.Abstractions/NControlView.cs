@@ -8,7 +8,7 @@ namespace NControl.Plugins.Abstractions
 	/// <summary>
 	/// NControlView Definition
 	/// </summary>
-	public class NControlView: View
+    public class NControlView: ContentView
 	{
 		#region Constructors
 
@@ -17,9 +17,7 @@ namespace NControl.Plugins.Abstractions
 		/// </summary>
 		public NControlView()
 		{
-			Transparent = true;
-			CancelDefaultDrawing = false;
-            BackgroundColor = Xamarin.Forms.Color.Transparent;
+			BackgroundColor = Xamarin.Forms.Color.Transparent;
 		}
 
 		/// <summary>
@@ -37,37 +35,6 @@ namespace NControl.Plugins.Abstractions
         #region Properties
 
 		/// <summary>
-		/// The cancel default drawing property.
-		/// </summary>
-		public static BindableProperty CancelDefaultDrawingProperty = BindableProperty.Create<NControlView, bool> (w => w.CancelDefaultDrawing, false);
-
-		/// <summary>
-		/// The transparent property.
-		/// </summary>
-		public static BindableProperty TransparentProperty = BindableProperty.Create<NControlView, bool> (w => w.Transparent, true);
-
-		/// <summary>
-		/// Gets or sets a value indicating whether this instance cancelels default drawing.
-		/// </summary>
-		/// <value><c>true</c> if this instance cancel default drawing; otherwise, <c>false</c>.</value>
-		public bool CancelDefaultDrawing 
-		{ 
-			get{ return (bool)GetValue (CancelDefaultDrawingProperty);} 
-			set{ SetValue (CancelDefaultDrawingProperty, value); }
-		}
-
-		/// <summary>
-		/// Gets or sets a value indicating whether this <see cref="NControl.Forms.Xamarin.Plugins.iOS.NControlNativeView"/>
-		/// is transparent.
-		/// </summary>
-		/// <value><c>true</c> if transparent; otherwise, <c>false</c>.</value>
-		public bool Transparent 
-		{ 
-			get{ return (bool)GetValue (TransparentProperty);} 
-			set{ SetValue (TransparentProperty, value); }
-		}
-
-		/// <summary>
 		/// Gets the drawing function.
 		/// </summary>
 		/// <value>The drawing function.</value>
@@ -81,6 +48,8 @@ namespace NControl.Plugins.Abstractions
 		/// <param name="canvas">Canvas.</param>
         public virtual void Draw(ICanvas canvas, Rect rect)
 		{
+            if (DrawingFunction != null)
+                DrawingFunction(canvas, rect);
 		}
 
         /// <summary>

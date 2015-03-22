@@ -9,8 +9,6 @@ using Android.Widget;
 using Android.OS;
 using NControlDemo.Forms.Xamarin.Plugins.FormsApp;
 using NControlDemo.Forms.Xamarin.Plugins.Droid.Platform.IoC;
-using NControlDemo.Forms.Xamarin.Plugins.Contracts.Repositories;
-using NControlDemo.Forms.Xamarin.Plugins.Droid.Platform.Repositories;
 using NControlDemo.Forms.Xamarin.Plugins.Droid.Platform.Mvvm;
 using NControlDemo.Forms.Xamarin.Plugins.FormsApp.Mvvm;
 using NControl.Plugins.Droid;
@@ -31,7 +29,6 @@ namespace NControlDemo.Forms.Xamarin.Plugins.Droid
             LoadApplication (new App (new ContainerProvider(), (container) => {
 
                 // Register providers
-                container.Register<IRepositoryProvider, RepositoryProvider>();
                 container.Register<IImageProvider, ImageProvider>();
             }));
 		}

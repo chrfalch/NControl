@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using NControl.Plugins.Abstractions;
 using NControl.Plugins.Droid;
 using Android.Views;
+using NGraphics;
 
 [assembly: ExportRenderer(typeof(NControlView), typeof(NControlViewRenderer))]
 namespace NControl.Plugins.Droid
@@ -11,68 +12,49 @@ namespace NControl.Plugins.Droid
 	/// <summary>
 	/// NControlView renderer.
 	/// </summary>
-	public class NControlViewRenderer: ViewRenderer<NControlView, NControlNativeView>
+    public class NControlViewRenderer: VisualElementRenderer<NControlView>
 	{
 		/// <summary>
 		/// Used for registration with dependency service
 		/// </summary>
 		public static void Init() { }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="e"></param>
-		protected override void OnElementChanged (ElementChangedEventArgs<NControlView> e)
-		{
-			base.OnElementChanged (e);
+        #region Native Drawing 
 
-			if (e.NewElement != null) {
-
-                if (Control == null)
-                {
-                    NControlNativeView control = null;
-                    if(e.NewElement.DrawingFunction == null)
-                        control = new NControlNativeView((NGraphics.ICanvas canvas, NGraphics.Rect rect) => e.NewElement.Draw(canvas, rect), Context);
-                    else
-                        control = new NControlNativeView(e.NewElement.DrawingFunction, Context);
-
-                    control.Touch += HandleTouch;
-                    SetNativeControl(control);
-                }
-			}
-		}
-
-		/// <summary>
-		/// Raises the element property changed event.
-		/// </summary>
-		/// <param name="sender">Sender.</param>
-		/// <param name="e">E.</param>
-		protected override void OnElementPropertyChanged (object sender, System.ComponentModel.PropertyChangedEventArgs e)
-		{
-			base.OnElementPropertyChanged (sender, e);
-
-			if (e.PropertyName == NControlView.CancelDefaultDrawingProperty.PropertyName)
-				(Control as NControlNativeView).CancelDefaultDrawing = Element.CancelDefaultDrawing;
-			else if(e.PropertyName == NControlView.TransparentProperty.PropertyName)
-				(Control as NControlNativeView).Transparent = Element.CancelDefaultDrawing;
-		}
-
+        /// <Docs>The Canvas to which the View is rendered.</Docs>
         /// <summary>
-        /// Handles the touch.
+        /// Draw the specified canvas.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
-        private void HandleTouch (object sender, TouchEventArgs e)
+        /// <param name="canvas">Canvas.</param>
+        public override void Draw (Android.Graphics.Canvas canvas)
         {
-            if (Control == null)
-                return;
+            var ncanvas = new CanvasCanvas(canvas);
+            Element.Draw(ncanvas, new Rect(0, 0, Width, Height));
 
+            base.Draw (canvas);
+
+        }
+        #endregion
+
+        #region Touch Handling
+
+        /// <Docs>The motion event.</Docs>
+        /// <returns>To be added.</returns>
+        /// <para tool="javadoc-to-mdoc">Implement this method to handle touch screen motion events.</para>
+        /// <format type="text/html">[Android Documentation]</format>
+        /// <since version="Added in API level 1"></since>
+        /// <summary>
+        /// Raises the touch event event.
+        /// </summary>
+        /// <param name="e">E.</param>
+        public override bool OnTouchEvent(MotionEvent e)
+        {
             var touchInfo = new NGraphics.Point[]{ 
-                new NGraphics.Point{X = e.Event.GetX(), Y = e.Event.GetY()}
+                new NGraphics.Point{X = e.GetX(), Y = e.GetY()}
             };
 
             // Handle touch actions
-            switch (e.Event.Action) {
+            switch (e.Action) {
 
                 case MotionEventActions.Down:
                     Element.TouchesBegan (touchInfo);
@@ -90,7 +72,11 @@ namespace NControl.Plugins.Droid
                     Element.TouchesCancelled (touchInfo);
                     break;
             }
+
+            return true;
         }
+
+        #endregion
 	}
 }
 

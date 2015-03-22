@@ -4,6 +4,7 @@ using NGraphics;
 using Xamarin.Forms;
 using System.Reflection;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.Controls
 {
@@ -13,24 +14,39 @@ namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.Controls
     public class CircularButtonControl: NControlView
     {
         /// <summary>
-        /// The fontawesomefont.
-        /// </summary>
-        private readonly NGraphics.Font _fontawesomeFont;
-
-        /// <summary>
         /// Initializes a new instance of the
         /// <see cref="NControlDemo.Forms.Xamarin.Plugins.FormsApp.Controls.CircularButtonControl"/> class.
         /// </summary>
         public CircularButtonControl()
         {
-            _fontawesomeFont = new NGraphics.Font{
-                Family = "helvetica",
-                Size = 22,
-            };
-
             HeightRequest = 44;
             WidthRequest = 44;
+
+            Content = new FontAwesomeLabel {
+                Text = FontAwesomeLabel.FAAdjust,
+                TextColor = global::Xamarin.Forms.Color.White,
+                BackgroundColor = global::Xamarin.Forms.Color.Transparent,
+                XAlign = global::Xamarin.Forms.TextAlignment.Center,
+                YAlign = global::Xamarin.Forms.TextAlignment.Center,
+            };
         }
+
+        /// <summary>
+        /// Gets or sets the FA icon.
+        /// </summary>
+        /// <value>The FA icon.</value>
+        public string FAIcon
+        {
+            get
+            {
+                return (Content as FontAwesomeLabel).Text;
+            }
+            set
+            {
+                (Content as FontAwesomeLabel).Text = value;
+            }
+        }
+
 
         /// <summary>
         /// Draw the specified canvas.
@@ -49,23 +65,22 @@ namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp.Controls
 
         }
 
-        public override void TouchesBegan(System.Collections.Generic.IEnumerable<NGraphics.Point> points)
+        public override async void TouchesBegan(System.Collections.Generic.IEnumerable<NGraphics.Point> points)
         {
             base.TouchesBegan(points);
-
-            this.ScaleTo(0.8, 300, Easing.SpringOut);
+            await this.ScaleTo(0.8, 65, Easing.CubicInOut);
         }
 
         public override void TouchesCancelled(System.Collections.Generic.IEnumerable<NGraphics.Point> points)
         {
             base.TouchesCancelled(points);
-            this.ScaleTo(1.0, 250, Easing.SpringIn);
+            TouchesEnded(points);
         }
 
-        public override void TouchesEnded(System.Collections.Generic.IEnumerable<NGraphics.Point> points)
+        public override async void TouchesEnded(System.Collections.Generic.IEnumerable<NGraphics.Point> points)
         {
             base.TouchesEnded(points);
-            this.ScaleTo(1.0, 250, Easing.SpringIn);
+            await this.ScaleTo(1.0, 65, Easing.CubicInOut);
         }
     }
 }

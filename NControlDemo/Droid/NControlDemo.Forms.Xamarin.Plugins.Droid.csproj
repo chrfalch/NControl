@@ -78,14 +78,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NControlDemo.Forms.Xamarin.Plugins.Data\NControlDemo.Forms.Xamarin.Plugins.Data.csproj">
-      <Project>{DA2367DC-20DB-4123-B187-B66A1E9A8E36}</Project>
-      <Name>NControlDemo.Forms.Xamarin.Plugins.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NControlDemo.Forms.Xamarin.Plugins.Contracts\NControlDemo.Forms.Xamarin.Plugins.Contracts.csproj">
-      <Project>{AE6A6C63-9649-4E08-B35D-3F2B8CE9D620}</Project>
-      <Name>NControlDemo.Forms.Xamarin.Plugins.Contracts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NControlDemo.Forms.Xamarin.Plugins.Localization\NControlDemo.Forms.Xamarin.Plugins.Localization.csproj">
       <Project>{79968FF8-9E85-42D1-9917-73B52F022969}</Project>
       <Name>NControlDemo.Forms.Xamarin.Plugins.Localization</Name>
@@ -113,7 +105,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TinyIoC.cs" />
     <Compile Include="Platform\IoC\ContainerProvider.cs" />
-    <Compile Include="Platform\Repositories\RepositoryProvider.cs" />
     <Compile Include="Platform\Renderers\RoundedBorderControlRenderer.cs" />
     <Compile Include="Platform\Views\RoundedBorderView.cs" />
     <Compile Include="Platform\Mvvm\ImageProvider.cs" />

@@ -2,11 +2,6 @@ using System;
 
 using Xamarin.Forms;
 using NControlDemo.Forms.Xamarin.Plugins.FormsApp.IoC;
-using NControlDemo.Forms.Xamarin.Plugins.Contracts.Services;
-using NControlDemo.Forms.Xamarin.Plugins.Data.Services;
-using NControlDemo.Forms.Xamarin.Plugins.Contracts.Models;
-using NControlDemo.Forms.Xamarin.Plugins.Data.Repositories;
-using NControlDemo.Forms.Xamarin.Plugins.Repositories;
 using System.Threading.Tasks;
 using NControlDemo.Forms.Xamarin.Plugins.FormsApp.Views;
 using NControlDemo.Forms.Xamarin.Plugins.FormsApp.Providers;
@@ -54,15 +49,6 @@ namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp
                 RegisterViews();
             }
 
-            // Initialize 
-            Task.Run(async() => {
-
-                // Initialize services
-                await Container.Resolve<IPreferenceService>().InitializeAsync().ContinueWith(t => 
-                    Container.Resolve<ILoggingService>().InitializeAsync());
-
-            });
-
             // The root page of your application
             MainPage = Container.Resolve<MainView>();
 		}
@@ -94,8 +80,7 @@ namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp
         /// <remarks>To be added.</remarks>
 		protected override void OnSleep ()
 		{
-			// Persist preferences
-            Task.Run(async () => await Container.Resolve<IPreferenceService>().PersistAsync()).Wait();
+			
 		}
 
         /// <summary>
@@ -116,12 +101,7 @@ namespace NControlDemo.Forms.Xamarin.Plugins.FormsApp
         /// </summary>
         private void SetupContainer()
         {
-            // Services
-            Container.RegisterSingleton<IPreferenceService, PreferenceService>();
-            Container.RegisterSingleton<ILoggingService, LoggingService>();
-
-            // Repositories
-            Container.RegisterSingleton<IRepository<PreferenceModel>, Repository<PreferenceModel>>();
+            
         }
 
         /// <summary>

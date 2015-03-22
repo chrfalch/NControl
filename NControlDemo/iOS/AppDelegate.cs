@@ -6,8 +6,6 @@ using Foundation;
 using UIKit;
 using NControlDemo.Forms.Xamarin.Plugins.iOS.Platform.IoC;
 using NControlDemo.Forms.Xamarin.Plugins.FormsApp;
-using NControlDemo.Forms.Xamarin.Plugins.Contracts.Repositories;
-using NControlDemo.Forms.Xamarin.Plugins.iOS.Platform.Repositories;
 using NControlDemo.Forms.Xamarin.Plugins.FormsApp.Mvvm;
 using NControlDemo.Forms.Xamarin.Plugins.iOS.Platform.Mvvm;
 using NControl.Plugins.iOS;
@@ -25,7 +23,6 @@ namespace NControlDemo.Forms.Xamarin.Plugins.iOS
             LoadApplication (new App (new ContainerProvider(), (container) => {
 
                 // Register providers
-                container.Register<IRepositoryProvider, RepositoryProvider>();
                 container.Register<IImageProvider, ImageProvider>();
 
             }));

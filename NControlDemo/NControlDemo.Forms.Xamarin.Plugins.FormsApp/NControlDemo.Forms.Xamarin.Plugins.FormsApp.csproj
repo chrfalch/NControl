@@ -50,6 +50,7 @@
     <Compile Include="Mvvm\IImageProvider.cs" />
     <Compile Include="Controls\FontAwesomeLabel.cs" />
     <Compile Include="Controls\CircularButtonControl.cs" />
+    <Compile Include="Controls\NavigationBarEx.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.4.0.6341\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.0.6341\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -69,14 +70,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NControlDemo.Forms.Xamarin.Plugins.Contracts\NControlDemo.Forms.Xamarin.Plugins.Contracts.csproj">
-      <Project>{AE6A6C63-9649-4E08-B35D-3F2B8CE9D620}</Project>
-      <Name>NControlDemo.Forms.Xamarin.Plugins.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NControlDemo.Forms.Xamarin.Plugins.Data\NControlDemo.Forms.Xamarin.Plugins.Data.csproj">
-      <Project>{DA2367DC-20DB-4123-B187-B66A1E9A8E36}</Project>
-      <Name>NControlDemo.Forms.Xamarin.Plugins.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NControlDemo.Forms.Xamarin.Plugins.Localization\NControlDemo.Forms.Xamarin.Plugins.Localization.csproj">
       <Project>{79968FF8-9E85-42D1-9917-73B52F022969}</Project>
       <Name>NControlDemo.Forms.Xamarin.Plugins.Localization</Name>

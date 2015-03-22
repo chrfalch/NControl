@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
     <style name="Theme.NewSolution" parent="@android:style/Theme.Holo.Light">
-        <item name="android:windowFullscreen">true</item> 
+        
         <item name="android:actionBarSize">0dp</item>
         </style>
 </resources>

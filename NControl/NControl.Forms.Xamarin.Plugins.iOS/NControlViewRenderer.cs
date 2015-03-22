@@ -6,6 +6,8 @@ using NControl.Plugins.iOS;
 using UIKit;
 using System.Collections.Generic;
 using System.Linq;
+using CoreGraphics;
+using NGraphics;
 
 [assembly: ExportRenderer(typeof(NControlView), typeof(NControlViewRenderer))]
 namespace NControl.Plugins.iOS
@@ -13,119 +15,107 @@ namespace NControl.Plugins.iOS
 	/// <summary>
 	/// NControlView renderer.
 	/// </summary>
-	public class NControlViewRenderer: ViewRenderer<NControlView, NControlNativeView>
+    public class NControlViewRenderer: VisualElementRenderer<NControlView>
 	{
 		/// <summary>
 		/// Used for registration with dependency service
 		/// </summary>
 		public new static void Init() { }
+        		
+        #region Drawing
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="e"></param>
-		protected override void OnElementChanged (ElementChangedEventArgs<NControlView> e)
-		{
-			base.OnElementChanged (e);
+        /// <summary>
+        /// Draw the specified rect.
+        /// </summary>
+        /// <param name="rect">Rect.</param>
+        public override void Draw(CoreGraphics.CGRect rect)
+        {
+            base.Draw(rect);
 
-			if (e.NewElement != null) {
-
-                if (Control == null)
-                {
-                    NControlNativeView control = null;
-
-                    if(e.NewElement.DrawingFunction == null)
-                        control = new NControlNativeView((NGraphics.ICanvas canvas, NGraphics.Rect rect) => e.NewElement.Draw(canvas, rect));
-                    else
-                        control = new NControlNativeView(e.NewElement.DrawingFunction);
-
-                    control.TouchesBeganEvent += HandleTouchesBeganEvent;
-                    control.TouchesMovedEvent += HandleTouchesMovedEvent;
-                    control.TouchesEndedEvent += HandleTouchesEndedEvent;
-                    control.TouchesCancelledEvent += HandleTouchesCancelledEvent;
-
-                    SetNativeControl(control);
-                }
-			}
-		}
-
-		/// <summary>
-		/// Raises the element property changed event.
-		/// </summary>
-		/// <param name="sender">Sender.</param>
-		/// <param name="e">E.</param>
-		protected override void OnElementPropertyChanged (object sender, System.ComponentModel.PropertyChangedEventArgs e)
-		{
-			base.OnElementPropertyChanged (sender, e);
-
-			if (e.PropertyName == NControlView.CancelDefaultDrawingProperty.PropertyName)
-				(Control as NControlNativeView).CancelDefaultDrawing = Element.CancelDefaultDrawing;
-			else if(e.PropertyName == NControlView.TransparentProperty.PropertyName)
-				(Control as NControlNativeView).Transparent = Element.CancelDefaultDrawing;
-            else if(e.PropertyName == NControlView.BackgroundColorProperty.PropertyName)
-                (Control as NControlNativeView).BackgroundColor = Element.BackgroundColor.ToUIColor();
-		}
+            using (CGContext context = UIGraphics.GetCurrentContext ()) 
+            {
+                var canvas = new CGContextCanvas (context);
+                Element.Draw (canvas, new NGraphics.Rect(rect.Left, rect.Top, rect.Width, rect.Height));
+            }        
+        }
+        #endregion
 
         #region Touch Handlers
 
         /// <summary>
-        /// Handles the touches cancelled event.
+        /// Handles touches began
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
-        private void HandleTouchesCancelledEvent (object sender, IEnumerable<UITouch> e)
+        /// <param name="touches">Touches.</param>
+        /// <param name="evt">Evt.</param>
+        public override void TouchesBegan(Foundation.NSSet touches, UIEvent evt)
         {
+            base.TouchesBegan(touches, evt);
+
             if (Element == null)
                 return;
 
-            Element.TouchesCancelled (e.Select(t => new NGraphics.Point{
+            var touchList = touches.ToArray<UITouch>();
+
+            Element.TouchesBegan (touchList.Select(t => new NGraphics.Point{
                 X = (float)t.LocationInView(t.View).X, Y = (float)t.LocationInView(t.View).Y
             }));
         }
 
         /// <summary>
-        /// Handles the touches began event.
+        /// Handles touches moved
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
-        private void HandleTouchesBeganEvent (object sender, IEnumerable<UITouch> e)
+        /// <param name="touches">Touches.</param>
+        /// <param name="evt">Evt.</param>
+        public override void TouchesMoved(Foundation.NSSet touches, UIEvent evt)
         {
+            base.TouchesMoved(touches, evt);
+
             if (Element == null)
                 return;
 
-            Element.TouchesBegan (e.Select(t => new NGraphics.Point{
+            var touchList = touches.ToArray<UITouch>();
+
+            Element.TouchesMoved (touchList.Select(t => new NGraphics.Point{
                 X = (float)t.LocationInView(t.View).X, Y = (float)t.LocationInView(t.View).Y
             }));
         }
 
         /// <summary>
-        /// Handles the touches ended event.
+        /// Touches ended
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
-        void HandleTouchesEndedEvent (object sender, IEnumerable<UITouch> e)
+        /// <param name="touches">Touches.</param>
+        /// <param name="evt">Evt.</param>
+        public override void TouchesEnded(Foundation.NSSet touches, UIEvent evt)
         {
+            base.TouchesEnded(touches, evt);
+
             if (Element == null)
                 return;
 
-            Element.TouchesEnded (e.Select(t => new NGraphics.Point{
+            var touchList = touches.ToArray<UITouch>();
+
+            Element.TouchesEnded (touchList.Select(t => new NGraphics.Point{
                 X = (float)t.LocationInView(t.View).X, Y = (float)t.LocationInView(t.View).Y
             }));
         }
 
         /// <summary>
-        /// Handles the touches moved event.
+        /// Handles touches cancelled
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
-        void HandleTouchesMovedEvent (object sender, IEnumerable<UITouch> e)
+        /// <param name="touches">Touches.</param>
+        /// <param name="evt">Evt.</param>
+        public override void TouchesCancelled(Foundation.NSSet touches, UIEvent evt)
         {
+            base.TouchesCancelled(touches, evt);
+
             if (Element == null)
                 return;
 
-            Element.TouchesMoved (e.Select(t => new NGraphics.Point{
+            var touchList = touches.ToArray<UITouch>();
+
+            Element.TouchesCancelled (touchList.Select(t => new NGraphics.Point{
                 X = (float)t.LocationInView(t.View).X, Y = (float)t.LocationInView(t.View).Y
-            }));    
+            }));
         }
 
         #endregion
