@@ -10,22 +10,19 @@ The library currently supports native renderers for the following platforms:
 - Android
 - iOS Unified
 
-**Example usage:**
+**Example Usage:**
 
-In your Xamarin.Forms project, add a new NControlView element to your page and provide a drawing function where your custom drawing is performed:
+In your Xamarin.Forms project, add a new NControlView element to your page in the constructor and provide a drawing function where your custom drawing is performed:
 
 ```csharp
-public void MyView()
-{
   Content = new NControlView {
       DrawingFunction = (canvas, rect) => {
           canvas.DrawLine(rect.Left, rect.Top, rect.Width, rect.Height, NGraphics.Colors.Red);
           canvas.DrawLine(rect.Width, rect.Top, rect.Left, rect.Height, NGraphics.Colors.Yellow);
       }
   };
-}
 ```
-**Subclass:**
+**Subclassing:**
 
 You can also create a subclass of the ```NControlView``` class and override its ```Draw``` function to add your own custom drawing:
 
