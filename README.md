@@ -3,15 +3,13 @@
 
 The library contains the ```NControlView``` class where real custom cross-platform drawing can be performed without the need for native implementations thanks to the [NGraphics](https://github.com/praeclarum/NGraphics) library. ```NControlView``` can be used both to do custom drawing and to create complex custom controls.
 
-**Supported Platforms**
-
+## Supported Platforms
 The library currently supports native renderers for the following platforms:
 
 - Android
 - iOS Unified
 
-**Example Usage:**
-
+## Example Usage
 In your Xamarin.Forms project, add a new NControlView element to your page in the constructor and provide a drawing function where your custom drawing is performed:
 
 ```csharp
@@ -22,8 +20,7 @@ In your Xamarin.Forms project, add a new NControlView element to your page in th
       }
   };
 ```
-**Subclassing:**
-
+## Subclassing
 You can also create a subclass of the ```NControlView``` class and override its ```Draw``` function to add your own custom drawing:
 
 ```csharp
@@ -37,8 +34,7 @@ public class MyControl: NControlView
 }
 ```
 
-**Complex controls:**
-
+## Complex Controls
 ```NControlView``` supports containing other controls since it inherits from the ```ContentView``` class. Building composite controls is as simple as setting the Content property of your subclassed control:
 
 ```csharp
@@ -58,43 +54,36 @@ public class MyControl: NControlView
 ```
 Now your custom control will have a label that can draw text in the control. Remember that you can set the Content property to point to anything as long as it is a VisualElement. This means that you can add layouts containing other controls as well as a single control. 
 
-**Invalidate:**
-
+## Invalidation
 If you need to invalide the control when a property has changed, call the ```Invalidate()``` function to redraw your control:
 
 ```csharp
 public class MyControl: NControlView
 {
-  public MyControl()
-  {
-    Content = new Label {BackgroundColor = Xamarin.Forms.Color.Transparent};
-  }
-  
-  public string Text { 
+  private Xamarin.Forms.Color _foregroundColor = Xamarin.Forms.Color.Red;
+  public Xamarin.Forms.Color ForegroundColor { 
     get 
     { 
-      return (Content as Label).Text; 
+      return _foregroundColor; 
     }
     set 
     { 
-      (Content as Label).Text = value;
+      _foregroundColor = value;
       Invalidate();
     }
   }
   
   public override void Draw(NGraphics.ICanvas canvas, NGraphics.Rect rect)
   {
-    canvas.DrawLine(rect.Left, rect.Top, rect.Width, rect.Height, NGraphics.Colors.Red);
-    canvas.DrawLine(rect.Width, rect.Top, rect.Left, rect.Height, NGraphics.Colors.Yellow);
+    canvas.DrawLine(rect.Left, rect.Top, rect.Width, rect.Height, new NGraphics.Color(_foregroundColor.R, _foregroundColor.G,
+      _foregroundColor.B, _foregroundColor.A));
   }
 }
 ```
-**Touch events**
-
+## Touch Events
 The ```NControlView``` class also handles touch events - look at the [CircularButtonControl](https://github.com/chrfalch/NControl/blob/master/NControlDemo/NControlDemo.Forms.Xamarin.Plugins.FormsApp/Controls/CircularButtonControl.cs) for an example of how this can be used.
 
-**Demo controls**
-
+## Demo Controls
 The demo solution contains a few different controls based on the ```NControlView``` class:
 - [RoundedCornerControl](https://github.com/chrfalch/NControl/blob/master/NControlDemo/NControlDemo.Forms.Xamarin.Plugins.FormsApp/Controls/RoundedBorderControl.cs)
 - [CircularButtonControl](https://github.com/chrfalch/NControl/blob/master/NControlDemo/NControlDemo.Forms.Xamarin.Plugins.FormsApp/Controls/CircularButtonControl.cs)
@@ -102,7 +91,6 @@ The demo solution contains a few different controls based on the ```NControlView
 
 The ProgressControl and the CircularButtonControl both internally uses the [FontAwsomeLabel](https://github.com/chrfalch/NControl/blob/master/NControlDemo/NControlDemo.Forms.Xamarin.Plugins.FormsApp/Controls/FontAwesomeLabel.cs) to display glyphs from the [Font Awesome Icon font](http://fortawesome.github.io/Font-Awesome/). 
 
-**Notes**
-
+## Notes
 Note that the ProgressControl and the CircularButtonControl contains animations to make the user experience more alive. The demo solution also uses animation to add some eye candy to the demo itself.
 
