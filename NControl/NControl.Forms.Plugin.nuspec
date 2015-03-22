@@ -19,15 +19,15 @@
    </metadata>
    <files>
       <!--Core-->
-     <file src="NControl.Forms.Xamarin.Plugins.Abstractions/bin/Release/NControl.Xamarin.Plugins.Abstractions.dll" 
-      target="lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\NControl.Xamarin.Plugins.Abstractions.dll" />
+     <file src="NControl.Forms.Xamarin.Plugins.Abstractions/bin/Release/NControl.Abstractions.dll" 
+      target="lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\NControl.Abstractions.dll" />
      
      <!--Xamarin.Android-->
-     <file src="NControl.Forms.Xamarin.Plugins.Droid/bin/Release/NControl.Xamarin.Plugins.Droid.dll" 
-      target="lib\MonoAndroid10\NControl.Forms.Plugin.Droid.dll" />
+     <file src="NControl.Forms.Xamarin.Plugins.Droid/bin/Release/NControl.Droid.dll" 
+      target="lib\MonoAndroid10\NControl.Droid.dll" />
 
-     <file src="NControl.Forms.Xamarin.Plugins.Droid/bin/Release/NControl.Xamarin.Plugins.Abstractions.dll" 
-      target="lib\MonoAndroid10\NControl.Forms.Plugin.Abstractions.dll" />
+     <file src="NControl.Forms.Xamarin.Plugins.Droid/bin/Release/NControl.Abstractions.dll" 
+      target="lib\MonoAndroid10\NControl.Abstractions.dll" />
      
      <!--Xamarin.iOS
      <file src="NControl.Forms.Plugin.iOS\bin\iPhone\Release\NControl.Forms.Plugin.iOS.dll" target="lib\MonoTouch10\NControl.Forms.Plugin.iOS.dll" />
@@ -37,11 +37,11 @@
      -->
 
      <!--Xamarin.iOSUnified-->
-     <file src="NControl.Forms.Xamarin.Plugins.iOS/bin/Release/NControl.Forms.Xamarin.Plugins.iOS.dll" 
-      target="lib\Xamarin.iOS10\NControl.Forms.Plugin.Droid.dll" />
+     <file src="NControl.Forms.Xamarin.Plugins.iOS/bin/Release/NControl.iOS.dll" 
+      target="lib\Xamarin.iOS10\NControl.iOS.dll" />
 
-     <file src="NControl.Forms.Xamarin.Plugins.iOS/bin/Release/NControl.Xamarin.Plugins.Abstractions.dll" 
-      target="lib\Xamarin.iOS10\NControl.Forms.Plugin.Abstractions.dll" />
+     <file src="NControl.Forms.Xamarin.Plugins.iOS/bin/Release/NControl.Abstractions.dll" 
+      target="lib\Xamarin.iOS10\NControl.Abstractions.dll" />
       
    </files>
 </package>

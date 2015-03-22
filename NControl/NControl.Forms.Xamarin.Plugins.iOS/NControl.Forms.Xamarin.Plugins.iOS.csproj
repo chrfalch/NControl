@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>NControl.Plugins.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>NControl.Forms.Xamarin.Plugins.iOS</AssemblyName>
+    <AssemblyName>NControl.iOS</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
