@@ -1,5 +1,5 @@
 # NControl
-Simple Xamarin.Forms wrapper control around the NGraphics library. 
+Simple Xamarin.Forms wrapper control around the [NGraphics](https://github.com/praeclarum/NGraphics) library to enable developers to create custom controls without the need for custom renderers. This library contains one important view - the **NControlView**. This Xamarin.Forms view can be used for direct custom cross-platform drawing or to create complex custom controls.
 
 The library currently supports native renderers for the following platforms:
 
