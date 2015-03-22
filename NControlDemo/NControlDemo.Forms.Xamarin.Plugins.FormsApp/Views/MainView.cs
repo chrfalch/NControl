@@ -31,9 +31,14 @@ namespace NControlDemo.FormsApp.Views
         private ProgressControl _progress;
 
         /// <summary>
-        /// The background view.
+        /// The top background view.
         /// </summary>
-        private NControlView _backgroundView;
+        private NControlView _topBackgroundView;
+
+        /// <summary>
+        /// The bottom background view.
+        /// </summary>
+        private NControlView _bottomBackgroundView;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NControlDemo.FormsApp.Views.MainView"/> class.
@@ -49,12 +54,12 @@ namespace NControlDemo.FormsApp.Views
         /// <returns>The layout.</returns>
         protected override View CreateContents()
         {
-            _backgroundView = new NControlView {
-                BackgroundColor = Xamarin.Forms.Color.FromHex("#3498DB"),
-                DrawingFunction = (canvas, rect) => {
-                    canvas.DrawLine(rect.Left, rect.Top, rect.Width, rect.Height, NGraphics.Colors.Red);
-                    canvas.DrawLine(rect.Width, rect.Top, rect.Left, rect.Height, NGraphics.Colors.Yellow);
-                }
+            _topBackgroundView = new NControlView {
+                BackgroundColor = Xamarin.Forms.Color.FromHex("#3498DB")               
+            };
+
+            _bottomBackgroundView = new NControlView {
+                BackgroundColor = Xamarin.Forms.Color.FromHex("#3498DB")               
             };
 
             _bottomBar = new NControlView {
@@ -85,7 +90,8 @@ namespace NControlDemo.FormsApp.Views
 
             // Layout
             var layout = new RelativeLayout();
-            layout.Children.Add(_backgroundView, () => layout.Bounds);
+            layout.Children.Add(_topBackgroundView, () => new Xamarin.Forms.Rectangle(0, 0, layout.Width, layout.Height/2));
+            layout.Children.Add(_bottomBackgroundView, () => new Xamarin.Forms.Rectangle(0, layout.Height/2, layout.Width, layout.Height/2));
             layout.Children.Add(_bottomBar, () => new Xamarin.Forms.Rectangle(0, layout.Height, layout.Width, 65));
             layout.Children.Add(_navigationBar, () => new Xamarin.Forms.Rectangle(0, -65, layout.Width, 65));
 
@@ -106,7 +112,7 @@ namespace NControlDemo.FormsApp.Views
             _progress.Start();
 
             // Lets pretend we're doing something
-            await Task.Delay(750);
+            await Task.Delay(1500);
 
             // Introduce the navigation bar and toolbar
             await Task.WhenAll(new []{
@@ -115,12 +121,13 @@ namespace NControlDemo.FormsApp.Views
             }); 
 
             // Wait a little bit more
-            await Task.Delay(1500);
+            await Task.Delay(200);
 
             // Hide the background and remove progressbar
             await Task.WhenAll(new [] {
-                _backgroundView.FadeTo(0, 350, Easing.CubicIn),
-                _progress.FadeTo(0, 65, Easing.CubicIn)
+                _topBackgroundView.TranslateTo(0, -Height/2, 365, Easing.CubicIn),
+                _bottomBackgroundView.TranslateTo(0, Height, 365, Easing.CubicIn),
+                _progress.FadeTo(0, 265, Easing.CubicIn)
             });
         }
     }
