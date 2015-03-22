@@ -1,5 +1,7 @@
 # NControl
-Simple Xamarin.Forms wrapper control around the [NGraphics](https://github.com/praeclarum/NGraphics) library to enable developers to create custom controls without the need for custom renderers. This library contains one important view - the **NControlView**. This Xamarin.Forms view can be used for direct custom cross-platform drawing or to create complex custom controls.
+Simple Xamarin.Forms wrapper control around the [NGraphics](https://github.com/praeclarum/NGraphics) library to enable developers to create custom controls without the need for custom renderers. 
+
+The library contains the ```NControlView``` class where real custom cross-platform drawing can be performed without the need for native implementations thanks to the NGraphics library. ```NControlView``` can be used both to do custom drawing and to create complex custom controls.
 
 The library currently supports native renderers for the following platforms:
 
@@ -8,21 +10,28 @@ The library currently supports native renderers for the following platforms:
 
 Example usage:
 
-In your Xamarin.Forms project, add a new NControlView element to your page:
+In your Xamarin.Forms project, add a new NControlView element to your page and provide a drawing function where your custom drawing is performed:
 
 ```csharp
 public void MyView()
 {
-  Content = new NControlView((ICanvas canvas, Rect rect) => {
-    var font = new NGraphics.Font { Family = "Arial", Size = 14 };
-    canvas.FillEllipse(rect, NGraphics.Colors.Yellow);
-    canvas.DrawLine(new NGraphics.Point(rect.X, rect.Y), new NGraphics.Point(rect.Width, rect.Height), NGraphics.Colors.Red);
-    canvas.DrawText("ABCD", new Rect(50, 50, 50, 50), font, NGraphics.TextAlignment.Left, null, Brushes.Black);
-  }){ 
-    WidthRequest = 100, 
-    HeightRequest = 100, 
-    BackgroundColor = global::Xamarin.Forms.Color.Transparent
+  Content = new NControlView {
+      DrawingFunction = (canvas, rect) => {
+          canvas.DrawLine(rect.Left, rect.Top, rect.Width, rect.Height, NGraphics.Colors.Red);
+          canvas.DrawLine(rect.Width, rect.Top, rect.Left, rect.Height, NGraphics.Colors.Yellow);
+      }
   };
 }
 ```
-There are two ways of drawing in the control. The example above fraws using a drawing function, but you can also subclass the view itself and override its drawing method.
+You can also create a subclass of the ```NControlView``` class and override its ```Draw``` function to add your own custom drawing:
+
+```csharp
+public class MyControl: NControlView
+{
+  public override void Draw(NGraphics.ICanvas canvas, NGraphics.Rect rect)
+  {
+    canvas.DrawLine(rect.Left, rect.Top, rect.Width, rect.Height, NGraphics.Colors.Red);
+    canvas.DrawLine(rect.Width, rect.Top, rect.Left, rect.Height, NGraphics.Colors.Yellow);
+  }
+}
+```
