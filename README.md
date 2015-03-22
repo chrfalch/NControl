@@ -1,7 +1,7 @@
 # NControl
-Simple Xamarin.Forms wrapper control around the [NGraphics](https://github.com/praeclarum/NGraphics) library to enable developers to create custom controls without the need for custom renderers. 
+**NControl** is a Xamarin.Forms wrapper control around the [NGraphics](https://github.com/praeclarum/NGraphics) library enabling developers to create custom controls without the need for custom renderers. 
 
-The library contains the ```NControlView``` class where real custom cross-platform drawing can be performed without the need for native implementations thanks to the NGraphics library. ```NControlView``` can be used both to do custom drawing and to create complex custom controls.
+The library contains the ```NControlView``` class where real custom cross-platform drawing can be performed without the need for native implementations thanks to the [NGraphics](https://github.com/praeclarum/NGraphics) library. ```NControlView``` can be used both to do custom drawing and to create complex custom controls.
 
 **Supported Platforms**
 
@@ -42,7 +42,7 @@ public class MyControl: NControlView
 
 **Complex controls:**
 
-```NControlView``` supports containing other controls since it inherits from the ```ContentView``` class - so building composite custom controls is as easy as setting the Content property of your subclassed control:
+```NControlView``` supports containing other controls since it inherits from the ```ContentView``` class. Building composite controls is as simple as setting the Content property of your subclassed control:
 
 ```csharp
 public class MyControl: NControlView
@@ -59,7 +59,7 @@ public class MyControl: NControlView
   }
 }
 ```
-Now your custom control will have a label that can draw text in the control. 
+Now your custom control will have a label that can draw text in the control. Remember that you can set the Content property to point to anything as long as it is a VisualElement. This means that you can add layouts containing other controls as well as a single control. 
 
 **Invalidate:**
 
