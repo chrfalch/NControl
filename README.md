@@ -3,6 +3,8 @@
 
 The library contains the ```NControlView``` class where real custom cross-platform drawing can be performed without the need for native implementations thanks to the [NGraphics](https://github.com/praeclarum/NGraphics) library. ```NControlView``` can be used both to do custom drawing and to create complex custom controls.
 
+![Screenshot](/../screenshots/Screens/Startup.gif?raw=true)
+
 ## Supported Platforms
 The library currently supports native renderers for the following platforms:
 
