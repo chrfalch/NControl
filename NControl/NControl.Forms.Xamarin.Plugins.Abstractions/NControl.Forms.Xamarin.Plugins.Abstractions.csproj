@@ -7,7 +7,7 @@
     <ProjectGuid>{E0951DAE-4B6E-421D-AA30-5BD2203D5DEC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>NControl.Plugins.Abstractions</RootNamespace>
-    <AssemblyName>NControl.Xamarin.Plugins.Abstractions</AssemblyName>
+    <AssemblyName>NControl.Abstractions</AssemblyName>
     <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
