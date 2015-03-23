@@ -9,6 +9,9 @@ The library currently supports native renderers for the following platforms:
 - Android
 - iOS Unified
 
+## Installation
+Install in your iOS, Android and Forms-project from [Nuget](https://www.nuget.org/packages/NControl/).
+
 ## Example Usage
 In your Xamarin.Forms project, add a new NControlView element to your page in the constructor and provide a drawing function where your custom drawing is performed:
 
