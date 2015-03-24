@@ -61,7 +61,23 @@ namespace NControl.Plugins.iOS
                 e.OldElement.OnInvalidate -= HandleInvalidate;
 
             if (e.NewElement != null)
+            {
                 e.NewElement.OnInvalidate += HandleInvalidate;
+                Layer.MasksToBounds = e.NewElement.Clip;
+            }
+        }
+
+        /// <summary>
+        /// Raises the element property changed event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">E.</param>
+        protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            base.OnElementPropertyChanged(sender, e);
+
+            if (e.PropertyName == NControlView.ClipProperty.PropertyName)
+                Layer.MasksToBounds = Element.Clip;
         }
         		
         #region Drawing

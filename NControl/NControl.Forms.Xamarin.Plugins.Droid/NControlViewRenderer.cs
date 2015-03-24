@@ -32,6 +32,7 @@ using NControl.Plugins.Abstractions;
 using NControl.Plugins.Droid;
 using Android.Views;
 using NGraphics;
+using Android.Graphics;
 
 [assembly: ExportRenderer(typeof(NControlView), typeof(NControlViewRenderer))]
 namespace NControl.Plugins.Droid
@@ -70,9 +71,15 @@ namespace NControl.Plugins.Droid
         /// <param name="canvas">Canvas.</param>
         public override void Draw (Android.Graphics.Canvas canvas)
         {
-            var ncanvas = new CanvasCanvas(canvas);
-            Element.Draw(ncanvas, new Rect(0, 0, Width, Height));
+            // Should we clip?
+            if(Element != null && Element.Clip)
+                canvas.ClipRect(new Android.Graphics.Rect(0, 0, Width, Height), Region.Op.Replace);
 
+            // Perform custom drawing
+            var ncanvas = new CanvasCanvas(canvas);
+            Element.Draw(ncanvas, new NGraphics.Rect(0, 0, Width, Height));
+
+            // Draw elements/children etc.
             base.Draw (canvas);
 
         }

@@ -12,6 +12,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NControlDemo.Utils", "NControlDemo\NControlDemo.Forms.Xamarin.Plugins.Utils\NControlDemo.Utils.csproj", "{C5A54152-DCDF-4ED8-B9F7-7A701EDD73CB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{915A7419-1DC8-43AE-962D-2F1046F01070}"
+	ProjectSection(SolutionItems) = preProject
+		NControl\NControl.Forms.Plugin.nuspec = NControl\NControl.Forms.Plugin.nuspec
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NControl.Forms.Xamarin.Plugins.Abstractions", "NControl\NControl.Forms.Xamarin.Plugins.Abstractions\NControl.Forms.Xamarin.Plugins.Abstractions.csproj", "{E0951DAE-4B6E-421D-AA30-5BD2203D5DEC}"
 EndProject

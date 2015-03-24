@@ -80,11 +80,28 @@ namespace NControl.Plugins.Abstractions
 
         #region Properties
 
-		/// <summary>
+       	/// <summary>
 		/// Gets the drawing function.
 		/// </summary>
 		/// <value>The drawing function.</value>
         public Action<ICanvas, Rect> DrawingFunction {get; set;}
+
+        /// <summary>
+        /// The clip property.
+        /// </summary>
+        public static BindableProperty ClipProperty = 
+            BindableProperty.Create<NControlView, bool>(p => p.Clip, false, 
+                propertyChanged: (owner, oldValue, newValue) => (owner as NControlView).Invalidate());
+        
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="NControl.Plugins.Abstractions.NControlView"/> is clip.
+        /// </summary>
+        /// <value><c>true</c> if clip; otherwise, <c>false</c>.</value>
+        public bool Clip 
+        { 
+            get { return (bool)GetValue(ClipProperty); }
+            set { SetValue(ClipProperty, value); }
+        }
 
         /// <summary>
         /// Gets or sets the color which will fill the background of a VisualElement. This is a bindable property.
