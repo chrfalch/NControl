@@ -77,6 +77,7 @@ namespace NControlDemo.FormsApp
             }
 
             // The root page of your application
+            // MainPage = Container.Resolve<MainViewXaml>();
             MainPage = Container.Resolve<MainView>();
 		}
 
@@ -136,7 +137,8 @@ namespace NControlDemo.FormsApp
         /// </summary>
         private void RegisterViews()
         {
-            ViewManager.RegisterView<MainViewModel, MainView>();
+            //ViewManager.RegisterView<MainViewModel, MainView>();
+            ViewManager.RegisterView<MainViewModel, MainViewXaml>();
         }
         #endregion
 	}

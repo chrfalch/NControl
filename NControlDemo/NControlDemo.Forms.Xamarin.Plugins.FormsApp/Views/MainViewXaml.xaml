@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+xmlns="http://xamarin.com/schemas/2014/forms" 
+xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+xmlns:qcontrols="clr-namespace:NControlDemo.FormsApp.Controls;assembly=NControlDemo.Forms.Xamarin.Plugins"
+x:Class="NControlDemo.FormsApp.Views.MainViewXaml">
+    <ContentPage.Content>
+        <StackLayout Padding="40" BackgroundColor="Yellow">
+            <qcontrols:RoundedBorderControl BackgroundColor="Blue" CornerRadius="8" WidthRequest="100" HeightRequest="100" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
