@@ -197,7 +197,7 @@ namespace NControlDemo.FormsApp.Views
 
             await Task.WhenAll(new []{
                 _bottomBar.TranslateTo(0, -_bottomBar.Height, 550, Easing.BounceOut),
-                _navigationBar.TranslateTo(0, Device.OnPlatform<int>(65, 44, 25), 550, Easing.BounceOut),
+                _navigationBar.TranslateTo(0, Device.OnPlatform<int>(65, 44, 55), 550, Easing.BounceOut),
             }); 
         }
 

@@ -59,10 +59,10 @@ namespace NControlDemo.FormsApp.IoC
         /// </summary>
         /// <typeparam name="RegisterType">The 1st type parameter.</typeparam>
         /// <typeparam name="RegisterImplementation">The 2nd type parameter.</typeparam>
-        public static void RegisterType<RegisterType, RegisterImplementation> () where RegisterType : class 
-            where RegisterImplementation : class, RegisterType
+        public static void RegisterType<RegisterType2, RegisterImplementation> () where RegisterType2 : class 
+            where RegisterImplementation : class, RegisterType2
         {
-            (Application.Current as App).Container.Register<RegisterType, RegisterImplementation>();
+            (Application.Current as App).Container.Register<RegisterType2, RegisterImplementation>();
         }
 
         /// <summary>
