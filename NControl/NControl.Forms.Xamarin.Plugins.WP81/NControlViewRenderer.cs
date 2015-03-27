@@ -58,7 +58,7 @@ namespace NControl.Plugins.WP81
 		/// <summary>
 		/// Used for registration with dependency service
 		/// </summary>
-		public new static void Init() { }
+		public static void Init() { }
 
         /// <summary>
         /// Raises the element changed event.
