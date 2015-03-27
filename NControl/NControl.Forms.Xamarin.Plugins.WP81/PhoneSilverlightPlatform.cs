@@ -1,6 +1,7 @@
 ﻿using NGraphics;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace NControl.Plugins.WP81
 {
@@ -42,7 +44,7 @@ namespace NControl.Plugins.WP81
         /// <returns></returns>
         public IImage CreateImage(NGraphics.Color[] colors, int width, double scale = 1.0)
         {
-            return new PhoneSilverlightImage();
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -52,7 +54,9 @@ namespace NControl.Plugins.WP81
         /// <returns></returns>
         public IImage LoadImage(Stream stream)
         {
-            return new PhoneSilverlightImage();
+            var bitmap = new BitmapImage();
+            bitmap.SetSource(stream);
+            return new BitmapImageImage(bitmap);
         }
 
         /// <summary>
@@ -62,7 +66,42 @@ namespace NControl.Plugins.WP81
         /// <returns></returns>
         public IImage LoadImage(string path)
         {
-            return new PhoneSilverlightImage();
+            using(var fs = File.OpenRead(path))
+            {
+                var bitmap = new BitmapImage();
+                bitmap.SetSource(fs);
+                return new BitmapImageImage(bitmap);
+
+                fs.Close();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Bitmap encapsulation
+    /// </summary>
+    public class BitmapImageImage : IImage
+    {
+        /// <summary>
+        /// Bitmap
+        /// </summary>
+        public BitmapImage Bitmap { get; private set; }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public BitmapImageImage(BitmapImage bitmap)
+        {
+            Bitmap = bitmap;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        public void SaveAsPng(string path)
+        {
+            throw new NotImplementedException();
         }
     }
 
@@ -95,7 +134,7 @@ namespace NControl.Plugins.WP81
         /// <returns></returns>
         public IImage GetImage()
         {
-            return new PhoneSilverlightImage();
+            throw new NotImplementedException();
         }
 
         #region Properties
@@ -127,6 +166,51 @@ namespace NControl.Plugins.WP81
         /// <param name="transform"></param>
         public void Transform(NGraphics.Transform transform)
         {
+            var t = transform;
+            var stack = new Stack<NGraphics.Transform>();
+            while (t != null)
+            {
+                stack.Push(t);
+                t = t.Previous;
+            }
+
+            var transforms = new TransformGroup();
+
+            while (stack.Count > 0)
+            {
+                t = stack.Pop();
+
+                var rt = t as Rotate;
+                if (rt != null)
+                {
+                    var rotate = new RotateTransform();
+                    rotate.Angle = rt.Angle;
+                    transforms.Children.Add(rotate);
+                    continue;
+                }
+                var st = t as Scale;
+                if (st != null)
+                {
+                    var scale = new ScaleTransform();
+                    scale.ScaleX = st.Size.Width;
+                    scale.ScaleY = st.Size.Height;
+                    transforms.Children.Add(scale);
+                    continue;
+                }
+                var tt = t as Translate;
+                if (tt != null)
+                {
+                    var translate = new TranslateTransform();
+                    translate.X = tt.Size.Width;
+                    translate.Y = tt.Size.Height;
+                    transforms.Children.Add(translate);
+                    continue;
+                }
+
+                throw new NotSupportedException("Transform " + t);
+            }
+
+            _canvas.RenderTransform = transforms;
         }
             
         /// <summary>
@@ -148,6 +232,24 @@ namespace NControl.Plugins.WP81
         public void DrawText(string text, Rect frame, Font font, TextAlignment alignment = TextAlignment.Left, 
             Pen pen = null, NGraphics.Brush brush = null)
         {
+            var textBlock = new TextBlock();
+            textBlock.Text = text;
+            Canvas.SetLeft(textBlock, frame.X);
+            Canvas.SetTop(textBlock, frame.Y);
+
+            textBlock.FontFamily = new FontFamily(font.Family);
+            textBlock.FontSize = font.Size;
+
+            if (pen != null)
+                textBlock.Foreground = new SolidColorBrush(new System.Windows.Media.Color
+                {
+                    A = pen.Color.A,
+                    R = pen.Color.R,
+                    G = pen.Color.G,
+                    B = pen.Color.B
+                });
+
+            _canvas.Children.Add(textBlock);
         }
             
         /// <summary>
@@ -179,21 +281,21 @@ namespace NControl.Plugins.WP81
                 var mt = op as MoveTo;
                 if (mt != null)
                 {
-                    geo.AppendFormat(" M {0},{1}", mt.Point.X, mt.Point.Y);
+                    geo.AppendFormat(CultureInfo.InvariantCulture, " M {0},{1}", mt.Point.X, mt.Point.Y);
                     continue;
                 }
 
                 var lt = op as LineTo;
                 if(lt != null)
                 {
-                    geo.AppendFormat(" L {0},{1}", lt.Point.X, lt.Point.Y);
+                    geo.AppendFormat(CultureInfo.InvariantCulture, " L {0},{1}", lt.Point.X, lt.Point.Y);
                     continue;
                 }
 
                 var at = op as ArcTo;
                 if (at != null)
                 {
-                    geo.AppendFormat(" L {0},{1}", at.Point.X, at.Point.Y);
+                    geo.AppendFormat(CultureInfo.InvariantCulture, " L {0},{1}", at.Point.X, at.Point.Y);
                     continue;
                 }
 
@@ -203,7 +305,7 @@ namespace NControl.Plugins.WP81
                     var p = ct.Point;
                     var c1 = ct.Control1;
                     var c2 = ct.Control2;
-                    geo.AppendFormat(" C {0},{1} {2},{3} {4},{5}",
+                    geo.AppendFormat(CultureInfo.InvariantCulture, " C {0},{1} {2},{3} {4},{5}",
                         c1.X, c1.Y, c2.X, c2.Y, p.X, p.Y);
                     continue;
                 }
@@ -284,7 +386,18 @@ namespace NControl.Plugins.WP81
         /// <param name="alpha"></param>
         public void DrawImage(IImage image, Rect frame, double alpha = 1.0)
         {
-            throw new NotImplementedException();
+            var ii = image as BitmapImageImage;
+            if(ii != null)
+            {
+                var imageEl = new Image();
+                imageEl.Source = ii.Bitmap;
+                imageEl.Width = frame.Width;
+                imageEl.Height = frame.Height;
+
+                _canvas.Children.Add(imageEl);
+                Canvas.SetLeft(imageEl, frame.X);
+                Canvas.SetTop(imageEl, frame.Y); 
+            }
         }
 
         #endregion
@@ -338,16 +451,6 @@ namespace NControl.Plugins.WP81
         }
 
         #endregion
-    }
-
-    /// <summary>
-    /// Implements the IImage interface
-    /// </summary>
-    public class PhoneSilverlightImage : IImage
-    {
-        public void SaveAsPng(string path)
-        {
-        }
-    }    
+    } 
 }    
 

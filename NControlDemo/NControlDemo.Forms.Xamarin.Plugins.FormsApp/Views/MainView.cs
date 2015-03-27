@@ -92,21 +92,25 @@ namespace NControlDemo.FormsApp.Views
         /// <returns>The layout.</returns>
         protected override View CreateContents()
         {
-            _topBackgroundView = new NControlView {
-                BackgroundColor = Xamarin.Forms.Color.FromHex("#3498DB")               
+            _topBackgroundView = new NControlView
+            {
+                BackgroundColor = Xamarin.Forms.Color.FromHex("#3498DB")
             };
 
-            _bottomBackgroundView = new NControlView {
-                BackgroundColor = Xamarin.Forms.Color.FromHex("#3498DB")               
+            _bottomBackgroundView = new NControlView
+            {
+                BackgroundColor = Xamarin.Forms.Color.FromHex("#3498DB")
             };
 
-            _bottomBar = new NControlView {
-                
+            _bottomBar = new NControlView
+            {
+
                 BackgroundColor = Xamarin.Forms.Color.FromHex("#EEEEEE"),
-                DrawingFunction = (ICanvas canvas, Rect rect) => 
+                DrawingFunction = (ICanvas canvas, Rect rect) =>
                     canvas.DrawLine(0, 0, rect.Width, 0, NGraphics.Colors.Gray, 0.5)
                 ,
-                Content = new StackLayout {
+                Content = new StackLayout
+                {
                     Orientation = StackOrientation.Horizontal,
                     HorizontalOptions = LayoutOptions.CenterAndExpand,
                     Padding = 11,
@@ -119,9 +123,9 @@ namespace NControlDemo.FormsApp.Views
                     }
                 }
             };
-                        
+
             // Navigation bar
-            _navigationBar = new NavigationBarEx {Title = Strings.AppName};
+            _navigationBar = new NavigationBarEx { Title = Strings.AppName };
 
             // Progress controll
             _progress = new ProgressControl();
@@ -132,8 +136,8 @@ namespace NControlDemo.FormsApp.Views
             // Layout
             var layout = new RelativeLayout();
             layout.Children.Add(_mapContainer, () => layout.Bounds);
-            layout.Children.Add(_topBackgroundView, () => new Xamarin.Forms.Rectangle(0, 0, layout.Width, layout.Height/2));
-            layout.Children.Add(_bottomBackgroundView, () => new Xamarin.Forms.Rectangle(0, layout.Height/2, layout.Width, layout.Height/2));
+            layout.Children.Add(_topBackgroundView, () => new Xamarin.Forms.Rectangle(0, 0, layout.Width, 1 + (layout.Height / 2)));
+            layout.Children.Add(_bottomBackgroundView, () => new Xamarin.Forms.Rectangle(0, layout.Height / 2, layout.Width, layout.Height / 2));
             layout.Children.Add(_bottomBar, () => new Xamarin.Forms.Rectangle(0, layout.Height, layout.Width, 65));
             layout.Children.Add(_navigationBar, () => new Xamarin.Forms.Rectangle(0, -65, layout.Width, 65));
 
@@ -160,7 +164,7 @@ namespace NControlDemo.FormsApp.Views
             await ShowChromeAsync();
 
             // Hide the background and remove progressbar
-            await Task.WhenAll(new [] {
+            await Task.WhenAll(new[] {
                 _topBackgroundView.TranslateTo(0, -Height/2, 465, Easing.CubicIn),
                 _bottomBackgroundView.TranslateTo(0, Height, 465, Easing.CubicIn),
                 _progress.FadeTo(0, 365, Easing.CubicIn)
@@ -168,9 +172,10 @@ namespace NControlDemo.FormsApp.Views
 
             // Add map
             var map = new Map();
-            var mapOverlay = new BoxView{ BackgroundColor = Xamarin.Forms.Color.Transparent};
-            mapOverlay.GestureRecognizers.Add(new TapGestureRecognizer{ 
-                Command = new Command(async (obj) => await ToggleChromeAsync()) 
+            var mapOverlay = new BoxView { BackgroundColor = Xamarin.Forms.Color.Transparent };
+            mapOverlay.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = new Command(async (obj) => await ToggleChromeAsync())
             });
             _mapContainer.Children.Add(map, () => _mapContainer.Bounds);
             _mapContainer.Children.Add(mapOverlay, () => _mapContainer.Bounds);

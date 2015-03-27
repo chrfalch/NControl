@@ -53,6 +53,26 @@ namespace NControl.Plugins.Abstractions
         /// </summary>
         public event System.EventHandler OnInvalidate;
 
+        /// <summary>
+        /// Touches began
+        /// </summary>
+        public event System.EventHandler<IEnumerable<NGraphics.Point>> OnTouchesBegan;
+
+        /// <summary>
+        /// Touches moved
+        /// </summary>
+        public event System.EventHandler<IEnumerable<NGraphics.Point>> OnTouchesMoved;
+
+        /// <summary>
+        /// Touches ended
+        /// </summary>
+        public event System.EventHandler<IEnumerable<NGraphics.Point>> OnTouchesEnded;
+
+        /// <summary>
+        /// Touches cancelled
+        /// </summary>
+        public event System.EventHandler<IEnumerable<NGraphics.Point>> OnTouchesCancelled;
+
         #endregion
 
 		#region Constructors
@@ -122,6 +142,8 @@ namespace NControl.Plugins.Abstractions
 
 		#endregion
 
+        #region Drawing
+
         /// <summary>
         /// Invalidate this instance.
         /// </summary>
@@ -145,12 +167,18 @@ namespace NControl.Plugins.Abstractions
                 DrawingFunction(canvas, rect);
 		}
 
+        #endregion
+
+        #region Touches
+
         /// <summary>
         /// Touchs down.
         /// </summary>
         /// <param name="point">Point.</param>
         public virtual void TouchesBegan(IEnumerable<NGraphics.Point> points)
         {
+            if (OnTouchesBegan != null)
+                OnTouchesBegan(this, points);
         }
 
         /// <summary>
@@ -159,6 +187,8 @@ namespace NControl.Plugins.Abstractions
         /// <param name="point">Point.</param>
         public virtual void TouchesMoved(IEnumerable<NGraphics.Point> points)
         {
+            if (OnTouchesMoved != null)
+                OnTouchesMoved(this, points);
         }
 
         /// <summary>
@@ -166,6 +196,8 @@ namespace NControl.Plugins.Abstractions
         /// </summary>
         public virtual void TouchesCancelled(IEnumerable<NGraphics.Point> points)
         {
+            if (OnTouchesCancelled != null)
+                OnTouchesCancelled(this, points);
         }
 
         /// <summary>
@@ -173,7 +205,11 @@ namespace NControl.Plugins.Abstractions
         /// </summary>
         public virtual void TouchesEnded(IEnumerable<NGraphics.Point> points)
         {
+            if (OnTouchesEnded != null)
+                OnTouchesEnded(this, points);
         }
-	}
+
+        #endregion
+    }
 }
 

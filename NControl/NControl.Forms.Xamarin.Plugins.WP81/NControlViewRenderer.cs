@@ -25,9 +25,11 @@
  * 
  ************************************************************************/
 
+using Microsoft.Phone.Controls;
 using NControl.Plugins.Abstractions;
 using NControl.Plugins.WP81;
 using System;
+using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
@@ -77,20 +79,73 @@ namespace NControl.Plugins.WP81
             if (Control == null)
             {
                 var b = new NControlNativeView();
-                _canvas = new Canvas();
+                _canvas = new Canvas();                                
                 b.Children.Add(_canvas);
-                
+
                 SetNativeControl(b);
                 
-                b.MouseLeftButtonDown += HandleLeftButtonDown;                
-                b.MouseMove += HandleMove;
-                b.MouseLeave += HandleLeave;
-                b.MouseLeftButtonUp += HandleLeftButtonUp;
-                
+                Touch.FrameReported += Touch_FrameReported;
+
                 RedrawControl();
             }
         }
 
+        void Touch_FrameReported(object sender, TouchFrameEventArgs e)
+        {
+            var parent = VisualTreeHelper.GetParent(this);
+            while(parent != null)
+            {
+                if(parent is PhoneApplicationPage)
+                {
+                    var page = parent as PhoneApplicationPage;
+
+                    // Get this' position on screen
+                    var transform = this.TransformToVisual(page);
+                    var absolutePosition = transform.Transform(new System.Windows.Point(0, 0));
+                    var ourRect = new Xamarin.Forms.Rectangle(absolutePosition.X, absolutePosition.Y, this.Width, this.Height);
+
+                    // Get main touch point
+                    var mainTouchPoint = e.GetPrimaryTouchPoint(page);
+
+                    // Make sure our control is actually in the touch zone                    
+                    if (!ourRect.Contains(mainTouchPoint.Position.X, mainTouchPoint.Position.Y))
+                        return;
+
+                    var touches = e.GetTouchPoints(page).Select(t => new NGraphics.Point(t.Position.X, t.Position.Y));
+
+                    if (mainTouchPoint.Action == TouchAction.Move)
+                    {
+                        Element.TouchesMoved(touches);
+                    }
+                    else if (mainTouchPoint.Action == TouchAction.Down)
+                    {
+                        Element.TouchesBegan(touches);
+                    }
+                    else if (mainTouchPoint.Action == TouchAction.Up)
+                    {
+                        Element.TouchesEnded(touches);
+                    }
+                    else if (mainTouchPoint.Action == TouchAction.Leave)
+                    {
+                        Element.TouchesCancelled(touches);
+                    }
+
+                    break;
+                }
+
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+        }
+        
+        /// <summary>
+        /// Redraw when background color changes
+        /// </summary>
+        protected override void UpdateBackgroundColor()
+        {
+            base.UpdateBackgroundColor();
+
+            RedrawControl();
+        }
 
         /// <summary>
         /// Raises the element property changed event.
@@ -109,11 +164,13 @@ namespace NControl.Plugins.WP81
                         Control.Clip = new RectangleGeometry { Rect = new Rect(0, 0, Control.Width, Control.Height) };
                     else
                         Control.Clip = null;
-                if (e.PropertyName == NControlView.BackgroundColorProperty.PropertyName ||
-                    e.PropertyName == NControlView.HeightProperty.PropertyName ||
+
+            }
+
+            // Redraw when height/width changes
+            if (e.PropertyName == NControlView.HeightProperty.PropertyName ||
                     e.PropertyName == NControlView.WidthProperty.PropertyName)
-                    RedrawControl();
-            }                        
+                RedrawControl();
         }
 
         #region Drawing
@@ -136,57 +193,7 @@ namespace NControl.Plugins.WP81
 
         #region Touch Handlers
 
-        /// <summary>
-        /// Touch up
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void HandleLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            var pos = e.GetPosition(Control);
-            Element.TouchesEnded(new NGraphics.Point[] { 
-                new NGraphics.Point(pos.X, pos.Y)
-            });
-        }
-
-        /// <summary>
-        /// Mouse left
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void HandleLeave(object sender, MouseEventArgs e)
-        {
-            var pos = e.GetPosition(Control);
-            Element.TouchesCancelled(new NGraphics.Point[] { 
-                new NGraphics.Point(pos.X, pos.Y)
-            });
-        }
-
-        /// <summary>
-        /// Moved
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void HandleMove(object sender, MouseEventArgs e)
-        {
-            var pos = e.GetPosition(Control);
-            Element.TouchesMoved(new NGraphics.Point[] { 
-                new NGraphics.Point(pos.X, pos.Y)
-            });
-        }
-
-        /// <summary>
-        /// Mouse down
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void HandleLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {            
-            var pos = e.GetPosition(Control);
-            Element.TouchesBegan(new NGraphics.Point[] { 
-                new NGraphics.Point(pos.X, pos.Y)
-            });
-        }
+        
 
         #endregion
 

@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace NControl.Plugins.WP81
 {
-    public class NControlNativeView : Grid
+    public class NControlNativeView : Panel
     {
         public NControlNativeView()
-        {                        
-        }
+        {           
+        }   
+     
     }
 }
