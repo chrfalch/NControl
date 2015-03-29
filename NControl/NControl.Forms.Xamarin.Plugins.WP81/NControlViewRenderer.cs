@@ -83,6 +83,8 @@ namespace NControl.Plugins.WP81
                 b.Children.Add(_canvas);
 
                 SetNativeControl(b);
+
+                UpdateClip();
                 
                 Touch.FrameReported += Touch_FrameReported;
 
@@ -90,12 +92,72 @@ namespace NControl.Plugins.WP81
             }
         }
 
-        void Touch_FrameReported(object sender, TouchFrameEventArgs e)
+        /// <summary>
+        /// Redraw when background color changes
+        /// </summary>
+        protected override void UpdateBackgroundColor()
+        {
+            base.UpdateBackgroundColor();
+
+            RedrawControl();
+        }
+
+        /// <summary>
+        /// Raises the element property changed event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">E.</param>
+        protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            base.OnElementPropertyChanged(sender, e);
+            
+            if (Control != null && Control.Clip == null)
+            {
+                if (e.PropertyName == NControlView.ClipProperty.PropertyName)
+                    UpdateClip();
+            }
+
+            // Redraw when height/width changes
+            if (e.PropertyName == NControlView.HeightProperty.PropertyName ||
+                e.PropertyName == NControlView.WidthProperty.PropertyName)
+            {
+                UpdateClip();
+                RedrawControl();                
+            }
+        }
+
+        #region Drawing
+
+        /// <summary>
+        /// Redraws the control by clearing the canvas element and adding new elements
+        /// </summary>
+        private void RedrawControl()
+        {
+            if (Element.Width == -1 || Element.Height == -1)
+                return;
+
+            _canvas.Children.Clear();
+            var canvas = new CanvasCanvas(_canvas);
+
+            Element.Draw(canvas, new NGraphics.Rect(0, 0, Element.Width, Element.Height));
+        }
+
+        #endregion
+
+        #region Touch Handlers
+
+        /// <summary>
+        /// Touch handling
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        private void Touch_FrameReported(object sender, TouchFrameEventArgs e)
         {
             var parent = VisualTreeHelper.GetParent(this);
-            while(parent != null)
+            while (parent != null)
             {
-                if(parent is PhoneApplicationPage)
+                if (parent is PhoneApplicationPage)
                 {
                     var page = parent as PhoneApplicationPage;
 
@@ -136,68 +198,23 @@ namespace NControl.Plugins.WP81
                 parent = VisualTreeHelper.GetParent(parent);
             }
         }
-        
-        /// <summary>
-        /// Redraw when background color changes
-        /// </summary>
-        protected override void UpdateBackgroundColor()
-        {
-            base.UpdateBackgroundColor();
-
-            RedrawControl();
-        }
-
-        /// <summary>
-        /// Raises the element property changed event.
-        /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
-        protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            base.OnElementPropertyChanged(sender, e);
-            
-            if (Control != null && Control.Clip == null)
-            {
-                if (e.PropertyName == NControlView.ClipProperty.PropertyName)
-                    // Update clip 
-                    if (Element.Clip)
-                        Control.Clip = new RectangleGeometry { Rect = new Rect(0, 0, Control.Width, Control.Height) };
-                    else
-                        Control.Clip = null;
-
-            }
-
-            // Redraw when height/width changes
-            if (e.PropertyName == NControlView.HeightProperty.PropertyName ||
-                    e.PropertyName == NControlView.WidthProperty.PropertyName)
-                RedrawControl();
-        }
-
-        #region Drawing
-
-        /// <summary>
-        /// Redraws the control by clearing the canvas element and adding new elements
-        /// </summary>
-        private void RedrawControl()
-        {
-            if (Element.Width == -1 || Element.Height == -1)
-                return;
-
-            _canvas.Children.Clear();
-            var canvas = new CanvasCanvas(_canvas);
-
-            Element.Draw(canvas, new NGraphics.Rect(0, 0, Element.Width, Element.Height));
-        }
-
-        #endregion
-
-        #region Touch Handlers
-
-        
 
         #endregion
 
         #region Private Members
+
+        /// <summary>
+        /// Updates clic on the element
+        /// </summary>
+        private void UpdateClip()
+        {
+            if (Element.Width == -1 || Element.Height == -1)
+                return;
+
+            Control.Clip = Element.Clip ?
+                new RectangleGeometry { Rect = new Rect(0, 0, Element.Width, Element.Height) } : 
+                null;
+        }
 
         /// <summary>
         /// Handles the invalidate.
