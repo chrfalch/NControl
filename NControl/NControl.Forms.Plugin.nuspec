@@ -28,6 +28,13 @@
 
      <file src="NControl.Forms.Xamarin.Plugins.Droid/bin/Release/NControl.Abstractions.dll" 
       target="lib\MonoAndroid10\NControl.Abstractions.dll" />
+
+     <!--Xamarin.WP81-->
+     <file src="NControl.Forms.Xamarin.Plugins.WP81/bin/Release/NControl.WP81.dll"
+      target="lib\wp81\NControl.WP81.dll" />
+
+     <file src="NControl.Forms.Xamarin.Plugins.WP81/bin/Release/NControl.Abstractions.dll"
+      target="lib\wp81\NControl.Abstractions.dll" />
      
      <!--Xamarin.iOS
      <file src="NControl.Forms.Plugin.iOS\bin\iPhone\Release\NControl.Forms.Plugin.iOS.dll" target="lib\MonoTouch10\NControl.Forms.Plugin.iOS.dll" />
