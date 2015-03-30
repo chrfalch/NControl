@@ -71,8 +71,6 @@ namespace NControl.Plugins.WP81
                 var bitmap = new BitmapImage();
                 bitmap.SetSource(fs);
                 return new BitmapImageImage(bitmap);
-
-                fs.Close();
             }
         }
     }
@@ -414,6 +412,7 @@ namespace NControl.Plugins.WP81
             var sb = fromBrush as SolidBrush;
             if(sb != null)
             {                
+                // Solid brush
                 return new SolidColorBrush(new System.Windows.Media.Color { 
                     A = sb.Color.A, R = sb.Color.R, G = sb.Color.G, B = sb.Color.B
                 });
@@ -422,13 +421,60 @@ namespace NControl.Plugins.WP81
             var lb = fromBrush as NGraphics.LinearGradientBrush;
             if(lb != null)
             {
+                // Linear gradient
+                var gradStops = new GradientStopCollection();
+                var n = lb.Stops.Count;                
+                if (n >= 2)
+                {
+                    var locs = new float[n];
+                    var comps = new int[n];
+                    for (var i = 0; i < n; i++)
+                    {
+                        var s = lb.Stops[i];
+                        gradStops.Add(new System.Windows.Media.GradientStop
+                        {
+                            Color = new System.Windows.Media.Color { 
+                                A = s.Color.A,
+                                R = s.Color.R,
+                                B = s.Color.B,
+                                G = s.Color.G,
+                            },
+                            Offset = s.Offset,
+                        });                        
+                    }                    
+                }
 
+                var grad = new System.Windows.Media.LinearGradientBrush(gradStops, 90);
+                return grad;
             }
 
             var rb = fromBrush as NGraphics.RadialGradientBrush;
             if(rb != null)
             {
-
+                // Radial gradient
+                var grad = new System.Windows.Media.RadialGradientBrush();
+                var n = rb.Stops.Count;
+                if (n >= 2)
+                {
+                    var locs = new float[n];
+                    var comps = new int[n];
+                    for (var i = 0; i < n; i++)
+                    {
+                        var s = rb.Stops[i];
+                        grad.GradientStops.Add(new System.Windows.Media.GradientStop
+                        {
+                            Color = new System.Windows.Media.Color
+                            {
+                                A = s.Color.A,
+                                R = s.Color.R,
+                                B = s.Color.B,
+                                G = s.Color.G,
+                            },
+                            Offset = s.Offset,
+                        });
+                    }
+                }
+                return grad;
             }
 
             return null;
