@@ -39,7 +39,7 @@ using NControlDemo.FormsApp;
 using NControlDemo.Droid.Platform.IoC;
 using NControlDemo.Droid.Platform.Mvvm;
 using NControlDemo.FormsApp.Mvvm;
-using NControl.Plugins.Droid;
+using NControl.Droid;
 
 namespace NControlDemo.Droid
 {
@@ -55,11 +55,7 @@ namespace NControlDemo.Droid
             Xamarin.FormsMaps.Init(this, bundle);
             NControlViewRenderer.Init();
 
-            LoadApplication (new App (new ContainerProvider(), (container) => {
-
-                // Register providers
-                container.Register<IImageProvider, ImageProvider>();
-            }));
+            LoadApplication (new App (new ContainerProvider(), (container) => container.Register<IImageProvider, ImageProvider>()));
 		}
 	}
 }
