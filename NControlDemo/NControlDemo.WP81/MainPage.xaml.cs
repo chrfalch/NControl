@@ -26,7 +26,7 @@ namespace NControlDemo.WP81
             Forms.Init();
             Xamarin.FormsMaps.Init();
 
-            NControl.Plugins.WP81.NControlViewRenderer.Init();
+            NControl.WP81.NControlViewRenderer.Init();
 
             LoadApplication(new NControlDemo.FormsApp.App(new ContainerProvider(), (container) =>
             {
