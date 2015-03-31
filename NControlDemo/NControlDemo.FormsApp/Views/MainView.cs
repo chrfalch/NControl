@@ -101,7 +101,7 @@ namespace NControlDemo.FormsApp.Views
                         new GradientStop(1.0, NGraphics.Colors.White),
                         new GradientStop(0, new NGraphics.Color("#3498DB")),
                     }
-                    })        
+                })        
             };
 
             _bottomBackgroundView = new NControlView
