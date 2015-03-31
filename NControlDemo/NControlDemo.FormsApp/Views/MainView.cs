@@ -92,27 +92,12 @@ namespace NControlDemo.FormsApp.Views
         /// <returns>The layout.</returns>
         protected override View CreateContents()
         {
-            _topBackgroundView = new NControlView
-            {
-                DrawingFunction = (canvas, rect) =>
-                    canvas.FillRectangle(rect, new RadialGradientBrush
-                    {                        
-                        Stops = {
-                        new GradientStop(1.0, NGraphics.Colors.White),
-                        new GradientStop(0, new NGraphics.Color("#3498DB")),
-                    }
-                })        
+            _topBackgroundView = new NControlView {    
+                DrawingFunction = (canvas, rect) => canvas.FillRectangle(rect, new SolidBrush(new NGraphics.Color("#3498DB")))
             };
 
-            _bottomBackgroundView = new NControlView
-            {
-                DrawingFunction = (canvas, rect) => 
-                    canvas.FillRectangle(rect, new LinearGradientBrush{
-                    Stops = {
-                        new GradientStop(0, NGraphics.Colors.White),
-                        new GradientStop(1.0, new NGraphics.Color("#3498DB")),
-                    }
-                })                
+            _bottomBackgroundView = new NControlView {
+                DrawingFunction = (canvas, rect) => canvas.FillRectangle(rect, new SolidBrush(new NGraphics.Color("#3498DB")))               
             };
 
             _bottomBar = new NControlView
