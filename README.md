@@ -88,15 +88,15 @@ public class MyControl: NControlView
 }
 ```
 ## Touch Events
-The ```NControlView``` class also handles touch events - look at the [CircularButtonControl](NControlDemo/NControlDemo.Forms.Xamarin.Plugins.FormsApp/Controls/CircularButtonControl.cs) for an example of how this can be used.
+The ```NControlView``` class also handles touch events - look at the [CircularButtonControl](NControlDemo/NControlDemo.FormsApp/Controls/CircularButtonControl.cs) for an example of how this can be used.
 
 ## Demo Controls
 The demo solution contains a few different controls based on the ```NControlView``` class:
-- [RoundedCornerControl](NControlDemo/NControlDemo.Forms.Xamarin.Plugins.FormsApp/Controls/RoundedBorderControl.cs)
-- [CircularButtonControl](NControlDemo/NControlDemo.Forms.Xamarin.Plugins.FormsApp/Controls/CircularButtonControl.cs)
-- [ProgressControl](NControlDemo/NControlDemo.Forms.Xamarin.Plugins.FormsApp/Controls/ProgressControl.cs)
+- [RoundedCornerControl](NControlDemo/NControlDemo.FormsApp/Controls/RoundedBorderControl.cs)
+- [CircularButtonControl](NControlDemo/NControlDemo.FormsApp/Controls/CircularButtonControl.cs)
+- [ProgressControl](NControlDemo/NControlDemo.FormsApp/Controls/ProgressControl.cs)
 
-The ProgressControl and the CircularButtonControl both internally uses the [FontAwsomeLabel](NControlDemo/NControlDemo.Forms.Xamarin.Plugins.FormsApp/Controls/FontAwesomeLabel.cs) to display glyphs from the [Font Awesome Icon font](http://fortawesome.github.io/Font-Awesome/). 
+The ProgressControl and the CircularButtonControl both internally uses the [FontAwsomeLabel](NControlDemo/NControlDemo.FormsApp/Controls/FontAwesomeLabel.cs) to display glyphs from the [Font Awesome Icon font](http://fortawesome.github.io/Font-Awesome/). 
 
 ## Notes
 Note that the ProgressControl and the CircularButtonControl contains animations to make the user experience more alive. The demo solution also uses animation to add some eye candy to the demo itself.
