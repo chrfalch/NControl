@@ -34,7 +34,6 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using NControl.Droid;
 using NControlDemo.FormsApp;
 using NControlDemo.Droid.Platform.IoC;
 using NControlDemo.Droid.Platform.Mvvm;

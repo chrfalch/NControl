@@ -61,6 +61,10 @@ namespace NControlDemo.FormsApp.Controls
             var layout = new RelativeLayout();
             layout.Children.Add(_titleLabel, () => new Xamarin.Forms.Rectangle(0, layout.Height - 44, layout.Width, 44));
             layout.Children.Add(new BoxView() { BackgroundColor = Color.Blue }, () => new Xamarin.Forms.Rectangle(layout.Width-44, layout.Height - 24, layout.Width, 84));
+
+            Device.OnPlatform(null, () => 
+                layout.Children.Add(new BoxView() { BackgroundColor = Color.Black, Opacity = 0.25 }, () => new Xamarin.Forms.Rectangle(0, 0, layout.Width, 24)), null, null);
+            
             layout.IsClippedToBounds = true;
             Content = layout;
         }

@@ -137,7 +137,7 @@ namespace NControlDemo.FormsApp.Views
             layout.Children.Add(_topBackgroundView, () => new Xamarin.Forms.Rectangle(0, 0, layout.Width, 1 + (layout.Height / 2)));
             layout.Children.Add(_bottomBackgroundView, () => new Xamarin.Forms.Rectangle(0, layout.Height / 2, layout.Width, layout.Height / 2));
             layout.Children.Add(_bottomBar, () => new Xamarin.Forms.Rectangle(0, layout.Height, layout.Width, 65));
-            layout.Children.Add(_navigationBar, () => new Xamarin.Forms.Rectangle(0, -65, layout.Width, 65));
+            layout.Children.Add(_navigationBar, () => new Xamarin.Forms.Rectangle(0, -80, layout.Width, 80));
 
             layout.Children.Add(_progress, () => new Xamarin.Forms.Rectangle((layout.Width / 2) - (25),
                     (layout.Height / 2) - 25, 50, 50));
@@ -200,7 +200,7 @@ namespace NControlDemo.FormsApp.Views
 
             await Task.WhenAll(new []{
                 _bottomBar.TranslateTo(0, -_bottomBar.Height, 550, Easing.BounceOut),
-                _navigationBar.TranslateTo(0, Device.OnPlatform<int>(65, 44, 55), 550, Easing.BounceOut),
+                _navigationBar.TranslateTo(0, Device.OnPlatform<int>(61, 80, 55), 550, Easing.BounceOut),
             }); 
         }
 
