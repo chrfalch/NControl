@@ -130,7 +130,7 @@ namespace NControl.Abstractions
         /// <summary>
         /// Invalidate this instance.
         /// </summary>
-        protected void Invalidate()
+        public void Invalidate()
         {
             if (OnInvalidate != null)
                 OnInvalidate(this, EventArgs.Empty);
