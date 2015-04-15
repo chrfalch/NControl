@@ -101,27 +101,29 @@ namespace NControl.Droid
                 new NGraphics.Point{X = e.GetX(), Y = e.GetY()}
             };
 
+            var result = false;
+
             // Handle touch actions
             switch (e.Action) {
 
                 case MotionEventActions.Down:
-                    Element.TouchesBegan (touchInfo);
+                    result = Element.TouchesBegan (touchInfo);
                     break;
 
                 case MotionEventActions.Move:
-                    Element.TouchesMoved (touchInfo);
+                    result = Element.TouchesMoved(touchInfo);
                     break;
 
                 case MotionEventActions.Up:
-                    Element.TouchesEnded (touchInfo);
+                    result = Element.TouchesEnded(touchInfo);
                     break;          
 
                 case MotionEventActions.Cancel:
-                    Element.TouchesCancelled (touchInfo);
+                    result = Element.TouchesCancelled(touchInfo);
                     break;
             }
 
-            return true;
+            return result;
         }
 
         #endregion

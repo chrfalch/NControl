@@ -158,38 +158,57 @@ namespace NControl.Abstractions
         /// Touchs down.
         /// </summary>
         /// <param name="point">Point.</param>
-        public virtual void TouchesBegan(IEnumerable<NGraphics.Point> points)
+        public virtual bool TouchesBegan(IEnumerable<NGraphics.Point> points)
         {
             if (OnTouchesBegan != null)
+            {
                 OnTouchesBegan(this, points);
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>
         /// Toucheses the moved.
         /// </summary>
         /// <param name="point">Point.</param>
-        public virtual void TouchesMoved(IEnumerable<NGraphics.Point> points)
+        public virtual bool TouchesMoved(IEnumerable<NGraphics.Point> points)
         {
             if (OnTouchesMoved != null)
+            {
                 OnTouchesMoved(this, points);
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>
         /// Toucheses the cancelled.
         /// </summary>
-        public virtual void TouchesCancelled(IEnumerable<NGraphics.Point> points)
+        public virtual bool TouchesCancelled(IEnumerable<NGraphics.Point> points)
         {
             if (OnTouchesCancelled != null)
+            {
                 OnTouchesCancelled(this, points);
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>
         /// Toucheses the ended.
         /// </summary>
-        public virtual void TouchesEnded(IEnumerable<NGraphics.Point> points)
+        public virtual bool TouchesEnded(IEnumerable<NGraphics.Point> points)
         {
-            if (OnTouchesEnded != null)
+            if (OnTouchesEnded != null) { 
                 OnTouchesEnded(this, points);
+                return true;
+            }
+
+            return false;
         }
 
         #endregion

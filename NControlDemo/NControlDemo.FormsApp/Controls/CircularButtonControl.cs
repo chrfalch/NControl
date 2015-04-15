@@ -93,22 +93,25 @@ namespace NControlDemo.FormsApp.Controls
 
         }
 
-        public override async void TouchesBegan(System.Collections.Generic.IEnumerable<NGraphics.Point> points)
+        public override bool TouchesBegan(System.Collections.Generic.IEnumerable<NGraphics.Point> points)
         {
             base.TouchesBegan(points);
-            await this.ScaleTo(0.8, 65, Easing.CubicInOut);
+            this.ScaleTo(0.8, 65, Easing.CubicInOut);
+            return true;
         }
 
-        public override void TouchesCancelled(System.Collections.Generic.IEnumerable<NGraphics.Point> points)
+        public override bool TouchesCancelled(System.Collections.Generic.IEnumerable<NGraphics.Point> points)
         {
             base.TouchesCancelled(points);
             TouchesEnded(points);
+            return true;
         }
 
-        public override async void TouchesEnded(System.Collections.Generic.IEnumerable<NGraphics.Point> points)
+        public override bool TouchesEnded(System.Collections.Generic.IEnumerable<NGraphics.Point> points)
         {
             base.TouchesEnded(points);
-            await this.ScaleTo(1.0, 65, Easing.CubicInOut);
+            this.ScaleTo(1.0, 65, Easing.CubicInOut);
+            return true;
         }
     }
 }
