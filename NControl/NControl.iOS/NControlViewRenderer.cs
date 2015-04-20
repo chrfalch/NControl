@@ -89,6 +89,10 @@ namespace NControl.iOS
 
             using (CGContext context = UIGraphics.GetCurrentContext ()) 
             {
+                context.SetAllowsAntialiasing(true);
+                context.SetShouldAntialias(true);
+                context.SetShouldSmoothFonts(true);
+
                 var canvas = new CGContextCanvas (context);
                 Element.Draw (canvas, new NGraphics.Rect(rect.Left, rect.Top, rect.Width, rect.Height));
             }        
