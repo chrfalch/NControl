@@ -25,7 +25,9 @@
  * 
  ************************************************************************/
 
+using System;
 using Android.Graphics;
+using Android.Runtime;
 using Android.Views;
 using NControl.Abstractions;
 using NControl.Droid;
@@ -41,7 +43,7 @@ namespace NControl.Droid
 	/// </summary>
     public class NControlViewRenderer: VisualElementRenderer<NControlView>
 	{
-		/// <summary>
+        /// <summary>
 		/// Used for registration with dependency service
 		/// </summary>
 		public static void Init() { }
@@ -98,29 +100,33 @@ namespace NControl.Droid
         public override bool OnTouchEvent(MotionEvent e)
         {
             var touchInfo = new NGraphics.Point[]{ 
-                new NGraphics.Point{X = e.GetX(), Y = e.GetY()}
+                new NGraphics.Point{X = ConvertPixelsToDp(e.GetX()), Y = ConvertPixelsToDp(e.GetY())}
             };
 
             var result = false;
 
-            // Handle touch actions
-            switch (e.Action) {
+            if (Element != null)
+            {
+                // Handle touch actions
+                switch (e.Action)
+                {
 
-                case MotionEventActions.Down:
-                    result = Element.TouchesBegan (touchInfo);
-                    break;
+                    case MotionEventActions.Down:
+                        result = Element.TouchesBegan(touchInfo);
+                        break;
 
-                case MotionEventActions.Move:
-                    result = Element.TouchesMoved(touchInfo);
-                    break;
+                    case MotionEventActions.Move:
+                        result = Element.TouchesMoved(touchInfo);
+                        break;
 
-                case MotionEventActions.Up:
-                    result = Element.TouchesEnded(touchInfo);
-                    break;          
+                    case MotionEventActions.Up:
+                        result = Element.TouchesEnded(touchInfo);
+                        break;          
 
-                case MotionEventActions.Cancel:
-                    result = Element.TouchesCancelled(touchInfo);
-                    break;
+                    case MotionEventActions.Cancel:
+                        result = Element.TouchesCancelled(touchInfo);
+                        break;
+                }
             }
 
             return result;
@@ -138,6 +144,30 @@ namespace NControl.Droid
         private void HandleInvalidate(object sender, System.EventArgs args)
         {
             Invalidate();
+        }
+
+        /// <summary>
+        /// Gets the size of the screen.
+        /// </summary>
+        /// <returns>The screen size.</returns>
+        protected Xamarin.Forms.Size GetScreenSize ()
+        {           
+            var metrics = Forms.Context.Resources.DisplayMetrics;
+            var widthInDp = ConvertPixelsToDp(metrics.WidthPixels);
+            var heightInDp = ConvertPixelsToDp(metrics.HeightPixels);
+
+            return new Xamarin.Forms.Size (widthInDp, heightInDp);
+        }
+
+        /// <summary>
+        /// Converts the pixels to dp.
+        /// </summary>
+        /// <returns>The pixels to dp.</returns>
+        /// <param name="pixelValue">Pixel value.</param>
+        private int ConvertPixelsToDp(float pixelValue)
+        {
+            var dp = (int) ((pixelValue) / Forms.Context.Resources.DisplayMetrics.Density);
+            return dp;
         }
         #endregion
 	}
