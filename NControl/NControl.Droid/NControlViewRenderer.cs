@@ -77,7 +77,7 @@ namespace NControl.Droid
                 canvas.ClipRect(new Android.Graphics.Rect(0, 0, Width, Height), Region.Op.Replace);
 
             // Perform custom drawing
-            var ncanvas = new CanvasCanvas(canvas);
+			var ncanvas = new CanvasCanvas(canvas);
             Element.Draw(ncanvas, new NGraphics.Rect(0, 0, Width, Height));
 
             // Draw elements/children etc.
@@ -105,25 +105,29 @@ namespace NControl.Droid
 
             var result = false;
 
-            if (Element != null)
+            
             {
                 // Handle touch actions
                 switch (e.Action)
                 {
 
                     case MotionEventActions.Down:
+					if (Element != null)
                         result = Element.TouchesBegan(touchInfo);
                         break;
 
                     case MotionEventActions.Move:
+					if (Element != null)
                         result = Element.TouchesMoved(touchInfo);
                         break;
 
                     case MotionEventActions.Up:
+					if (Element != null)
                         result = Element.TouchesEnded(touchInfo);
                         break;          
 
                     case MotionEventActions.Cancel:
+					if (Element != null)
                         result = Element.TouchesCancelled(touchInfo);
                         break;
                 }

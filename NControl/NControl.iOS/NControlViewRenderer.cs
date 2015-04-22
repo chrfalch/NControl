@@ -113,6 +113,8 @@ namespace NControl.iOS
             if (Element == null)
                 return;
 
+			System.Diagnostics.Debug.WriteLine ("TouchesBegan for " + Element.GetType ().Name);
+
             var touchList = touches.ToArray<UITouch>();
 
             Element.TouchesBegan (touchList.Select(t => new NGraphics.Point{
