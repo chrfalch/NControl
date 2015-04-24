@@ -110,15 +110,18 @@ namespace NControl.iOS
         {
             base.TouchesBegan(touches, evt);
 
-            if (Element == null)
+			if (Element == null) // || ((UITouch)evt.AllTouches.FirstOrDefault()).View != this.NativeView)
                 return;
 
+			var touch = (UITouch)evt.AllTouches.AnyObject;
+			var p = touch.LocationInView (this);
+			System.Diagnostics.Debug.WriteLine ("TouchesBegan p " + p.ToString ());
 			System.Diagnostics.Debug.WriteLine ("TouchesBegan for " + Element.GetType ().Name);
 
             var touchList = touches.ToArray<UITouch>();
 
             Element.TouchesBegan (touchList.Select(t => new NGraphics.Point{
-                X = (float)t.LocationInView(t.View).X, Y = (float)t.LocationInView(t.View).Y
+				X = (float)t.LocationInView(this).X, Y = (float)t.LocationInView(this).Y
             }));
         }
 
@@ -131,13 +134,13 @@ namespace NControl.iOS
         {
             base.TouchesMoved(touches, evt);
 
-            if (Element == null)
+			if (Element == null) // || ((UITouch)evt.AllTouches.FirstOrDefault()).View != this.NativeView)
                 return;
 
             var touchList = touches.ToArray<UITouch>();
 
             Element.TouchesMoved (touchList.Select(t => new NGraphics.Point{
-                X = (float)t.LocationInView(t.View).X, Y = (float)t.LocationInView(t.View).Y
+				X = (float)t.LocationInView(this).X, Y = (float)t.LocationInView(this).Y
             }));
         }
 
@@ -150,13 +153,13 @@ namespace NControl.iOS
         {
             base.TouchesEnded(touches, evt);
 
-            if (Element == null)
+			if (Element == null) // || ((UITouch)evt.AllTouches.FirstOrDefault()).View != this.NativeView)
                 return;
 
             var touchList = touches.ToArray<UITouch>();
 
             Element.TouchesEnded (touchList.Select(t => new NGraphics.Point{
-                X = (float)t.LocationInView(t.View).X, Y = (float)t.LocationInView(t.View).Y
+				X = (float)t.LocationInView(this).X, Y = (float)t.LocationInView(this).Y
             }));
         }
 
@@ -169,13 +172,13 @@ namespace NControl.iOS
         {
             base.TouchesCancelled(touches, evt);
 
-            if (Element == null)
+			if (Element == null) // || ((UITouch)evt.AllTouches.FirstOrDefault()).View != this.NativeView)
                 return;
 
             var touchList = touches.ToArray<UITouch>();
 
             Element.TouchesCancelled (touchList.Select(t => new NGraphics.Point{
-                X = (float)t.LocationInView(t.View).X, Y = (float)t.LocationInView(t.View).Y
+				X = (float)t.LocationInView(this).X, Y = (float)t.LocationInView(this).Y
             }));
         }
 
