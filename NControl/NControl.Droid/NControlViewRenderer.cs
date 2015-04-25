@@ -133,6 +133,9 @@ namespace NControl.Droid
                 }
             }
 
+			System.Diagnostics.Debug.WriteLine("OnTouchEvent: " + e.Action.ToString() + 
+				" for " + Element.GetType().Name + " returning " + result);
+
             return result;
         }
 

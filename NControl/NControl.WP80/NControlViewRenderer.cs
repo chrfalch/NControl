@@ -39,7 +39,6 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using NControl.WP80;
-using NControl.WP81;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.WinPhone;
 

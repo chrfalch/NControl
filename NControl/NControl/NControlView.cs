@@ -100,11 +100,11 @@ namespace NControl.Abstractions
 
         #region Properties
 
-       	/// <summary>
-		/// Gets the drawing function.
-		/// </summary>
-		/// <value>The drawing function.</value>
-        public Action<ICanvas, Rect> DrawingFunction {get; set;}
+	    /// <summary>
+	    /// Gets the drawing function.
+	    /// </summary>
+	    /// <value>The drawing function.</value>	    
+	    public Action<ICanvas, Rect> DrawingFunction { get; set; }
 
         /// <summary>
         /// Gets or sets the color which will fill the background of a VisualElement. This is a bindable property.

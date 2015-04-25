@@ -84,13 +84,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\NControl.WP81\NControlNativeView.cs">
-      <Link>NControlNativeView.cs</Link>
-    </Compile>
-    <Compile Include="..\NControl.WP81\PhoneSilverlightPlatform.cs">
-      <Link>PhoneSilverlightPlatform.cs</Link>
-    </Compile>
+    <Compile Include="NControlNativeView.cs" />
     <Compile Include="NControlViewRenderer.cs" />
+    <Compile Include="PhoneSilverlightPlatform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

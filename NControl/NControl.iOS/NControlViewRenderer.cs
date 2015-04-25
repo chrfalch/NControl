@@ -115,8 +115,8 @@ namespace NControl.iOS
 
 			var touch = (UITouch)evt.AllTouches.AnyObject;
 			var p = touch.LocationInView (this);
-			System.Diagnostics.Debug.WriteLine ("TouchesBegan p " + p.ToString ());
-			System.Diagnostics.Debug.WriteLine ("TouchesBegan for " + Element.GetType ().Name);
+			System.Diagnostics.Debug.WriteLine ("TouchesBegan for " + Element.GetType ().Name + " (" + p.ToString() + ") on " + 
+				(touch as UITouch).View.DebugDescription);
 
             var touchList = touches.ToArray<UITouch>();
 
