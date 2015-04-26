@@ -59,8 +59,15 @@ namespace NControl.WP81
 		/// Used for registration with dependency service
 		/// </summary>
 		public static void Init() { }
-        
+
         /// <summary>
+        /// Constructor
+        /// </summary>
+	    public NControlViewRenderer(): base()
+	    {
+	    }
+
+	    /// <summary>
         /// Raises the element changed event.
         /// </summary>
         /// <param name="e">E.</param>
@@ -86,10 +93,10 @@ namespace NControl.WP81
 
                 UpdateClip();
                 
-                Touch.FrameReported += Touch_FrameReported;
-
-                RedrawControl();
+                Touch.FrameReported += Touch_FrameReported;                
             }
+
+            RedrawControl();
         }
 
         /// <summary>

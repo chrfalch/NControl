@@ -61,6 +61,13 @@ namespace NControl.WP80
         public static void Init() { }
 
         /// <summary>
+        /// Constructor
+        /// </summary>
+        public NControlViewRenderer() : base()
+        {
+        }
+
+        /// <summary>
         /// Raises the element changed event.
         /// </summary>
         /// <param name="e">E.</param>
@@ -87,9 +94,9 @@ namespace NControl.WP80
                 UpdateClip();
 
                 Touch.FrameReported += Touch_FrameReported;
-
-                RedrawControl();
             }
+
+            RedrawControl();
         }
 
         /// <summary>
