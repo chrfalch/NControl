@@ -41,7 +41,7 @@ namespace NControlDemo.FormsApp.Controls
         /// <summary>
         /// The title label.
         /// </summary>
-        private Label _titleLabel;
+        private readonly Label _titleLabel;
 
         /// <summary>
         /// Initializes a new instance of the
@@ -52,6 +52,7 @@ namespace NControlDemo.FormsApp.Controls
             IsClippedToBounds = true;
             BackgroundColor = Xamarin.Forms.Color.FromHex("FFFFFF");
             _titleLabel = new Label { 
+                TextColor = Color.Black,
                 Text = "", 
                 BackgroundColor = Xamarin.Forms.Color.Transparent,
                 XAlign = Xamarin.Forms.TextAlignment.Center, 
