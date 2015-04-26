@@ -40,6 +40,8 @@ namespace NControlDemo.FormsApp.Controls
     /// </summary>
     public class CircularButtonControl: NControlView
     {
+        private readonly Label _label;
+
         /// <summary>
         /// Initializes a new instance of the
         /// <see cref="NControlDemo.Forms.Xamarin.Plugins.FormsApp.Controls.CircularButtonControl"/> class.
@@ -49,13 +51,32 @@ namespace NControlDemo.FormsApp.Controls
             HeightRequest = 44;
             WidthRequest = 44;
 
-            Content = new FontAwesomeLabel {
+            _label = new FontAwesomeLabel
+            {
                 Text = FontAwesomeLabel.FAAdjust,
                 TextColor = Xamarin.Forms.Color.White,
                 FontSize = 17,
                 BackgroundColor = Xamarin.Forms.Color.Transparent,
                 XAlign = Xamarin.Forms.TextAlignment.Center,
                 YAlign = Xamarin.Forms.TextAlignment.Center,
+            };
+            
+
+            Content = new Grid{
+                Children =
+                {
+                    new NControlView
+                    {
+                        DrawingFunction = (canvas1, rect) => {
+                            canvas1.FillEllipse(rect, Colors.LightGray);
+                            rect.Inflate(new NGraphics.Size(-2, -2));
+                            canvas1.FillEllipse(rect, Colors.White);
+                            rect.Inflate(new NGraphics.Size(-4, -4));
+                            canvas1.FillEllipse(rect, Colors.LightGray);
+                        }    
+                    },
+                    _label,
+                }
             };
         }
 
@@ -67,11 +88,11 @@ namespace NControlDemo.FormsApp.Controls
         {
             get
             {
-                return (Content as FontAwesomeLabel).Text;
+                return _label.Text;
             }
             set
             {
-                (Content as FontAwesomeLabel).Text = value;
+                _label.Text = value;
             }
         }
 
@@ -81,17 +102,13 @@ namespace NControlDemo.FormsApp.Controls
         /// </summary>
         /// <param name="canvas">Canvas.</param>
         /// <param name="rect">Rect.</param>
-        public override void Draw(NGraphics.ICanvas canvas, NGraphics.Rect rect)
-        {
-            base.Draw(canvas, rect);
+        //public override void Draw(NGraphics.ICanvas canvas, NGraphics.Rect rect)
+        //{
+        //    base.Draw(canvas, rect);
 
-            canvas.FillEllipse(rect, Colors.LightGray);
-            rect.Inflate(new NGraphics.Size(-2, -2));
-            canvas.FillEllipse(rect, Colors.White);
-            rect.Inflate(new NGraphics.Size(-4, -4));
-            canvas.FillEllipse(rect, Colors.LightGray);
+            
 
-        }
+        //}
 
         public override bool TouchesBegan(System.Collections.Generic.IEnumerable<NGraphics.Point> points)
         {

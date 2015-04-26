@@ -7,7 +7,7 @@
     <ProjectGuid>{79968FF8-9E85-42D1-9917-73B52F022969}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>NControlDemo.Localization</RootNamespace>
-    <AssemblyName>Clooger.Localization</AssemblyName>
+    <AssemblyName>NControlDemo.Localization</AssemblyName>
     <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>

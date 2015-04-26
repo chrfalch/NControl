@@ -215,7 +215,7 @@ namespace NControl.WP81
             //    throw new NotSupportedException("Transform " + t);
             //}
 
-            //_canvas.RenderTransform = transforms;
+            //Canvas.RenderTransform = transforms;
         }
             
         /// <summary>
