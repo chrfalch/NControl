@@ -44,30 +44,36 @@ using Xamarin.Forms.Platform.WinPhone;
 
 [assembly: ExportRenderer(typeof(NControlView), typeof(NControlViewRenderer))]
 namespace NControl.WP81
-{    
-	/// <summary>
-	/// NControlView renderer.
-	/// </summary>
+{
+    /// <summary>
+    /// NControlView renderer.
+    /// </summary>
     public class NControlViewRenderer : ViewRenderer<NControlView, NControlNativeView>
-	{
+    {
         /// <summary>
         /// Canvas element
         /// </summary>
         protected Canvas Canvas;
 
-		/// <summary>
-		/// Used for registration with dependency service
-		/// </summary>
-		public static void Init() { }
+        /// <summary>
+        /// Border element
+        /// </summary>
+        protected Border Border;
+
+        /// <summary>
+        /// Used for registration with dependency service
+        /// </summary>
+        public static void Init() { }
 
         /// <summary>
         /// Constructor
         /// </summary>
-	    public NControlViewRenderer(): base()
-	    {
-	    }
+        public NControlViewRenderer()
+            : base()
+        {
+        }
 
-	    /// <summary>
+        /// <summary>
         /// Raises the element changed event.
         /// </summary>
         /// <param name="e">E.</param>
@@ -80,20 +86,21 @@ namespace NControl.WP81
 
             if (e.NewElement != null)
             {
-                e.NewElement.OnInvalidate += HandleInvalidate;                              
+                e.NewElement.OnInvalidate += HandleInvalidate;
             }
 
             if (Control == null)
             {
                 var b = new NControlNativeView();
-                Canvas = new Canvas();                                
-                b.Children.Add(Canvas);
+                Canvas = new Canvas();
+                Border = new Border { Child = Canvas };
+                b.Children.Add(Border);
 
                 SetNativeControl(b);
 
                 UpdateClip();
-                
-                Touch.FrameReported += Touch_FrameReported;                
+
+                Touch.FrameReported += Touch_FrameReported;
             }
 
             RedrawControl();
@@ -117,19 +124,19 @@ namespace NControl.WP81
         protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
-            
+
             if (Control != null)
             {
-                if (e.PropertyName == NControlView.IsClippedToBoundsProperty.PropertyName)                    
+                if (e.PropertyName == NControlView.IsClippedToBoundsProperty.PropertyName)
                     UpdateClip();
-            }            
+            }
 
             // Redraw when height/width changes
             if (e.PropertyName == NControlView.HeightProperty.PropertyName ||
                 e.PropertyName == NControlView.WidthProperty.PropertyName)
             {
                 UpdateClip();
-                RedrawControl();                
+                RedrawControl();
             }
         }
 
@@ -194,10 +201,6 @@ namespace NControl.WP81
                     {
                         Element.TouchesEnded(touches);
                     }
-                    else if (mainTouchPoint.Action == TouchAction.Leave)
-                    {
-                        Element.TouchesCancelled(touches);
-                    }
 
                     break;
                 }
@@ -217,7 +220,7 @@ namespace NControl.WP81
         {
             if (Element.Width == -1 || Element.Height == -1)
                 return;
-            
+
             Control.SetClip(Element.IsClippedToBounds);
         }
 
@@ -233,8 +236,5 @@ namespace NControl.WP81
         }
 
         #endregion
-	}
+    }
 }
-
-
-

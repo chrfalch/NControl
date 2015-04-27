@@ -53,7 +53,12 @@ namespace NControl.WP80
         /// <summary>
         /// Canvas element
         /// </summary>
-        private Canvas _canvas;
+        protected Canvas Canvas;
+
+        /// <summary>
+        /// Border element
+        /// </summary>
+        protected Border Border;
 
         /// <summary>
         /// Used for registration with dependency service
@@ -86,8 +91,9 @@ namespace NControl.WP80
             if (Control == null)
             {
                 var b = new NControlNativeView();
-                _canvas = new Canvas();
-                b.Children.Add(_canvas);
+                Canvas = new Canvas();
+                Border = new Border {Child = Canvas};
+                b.Children.Add(Border);
 
                 SetNativeControl(b);
 
@@ -143,8 +149,8 @@ namespace NControl.WP80
             if (Element.Width == -1 || Element.Height == -1)
                 return;
 
-            _canvas.Children.Clear();
-            var canvas = new CanvasCanvas(_canvas);
+            Canvas.Children.Clear();
+            var canvas = new CanvasCanvas(Canvas);
 
             Element.Draw(canvas, new NGraphics.Rect(0, 0, Element.Width, Element.Height));
         }
