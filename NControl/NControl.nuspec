@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
    <metadata minClientVersion="2.8.1">
        <id>NControl</id>
-    <version>0.5.5</version>
+    <version>0.5.51</version>
     <authors>Christian Falch</authors>
     <owners>Christian Falch</owners>
     <licenseUrl>https://github.com/chrfalch/NControl/blob/master/LICENSE.md</licenseUrl>
