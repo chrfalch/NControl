@@ -4,7 +4,7 @@ using System.Windows.Media;
 
 namespace NControl.WP81
 {
-    public class NControlNativeView : Panel
+    public class NControlNativeView : Grid
     {
         public NControlNativeView()
         {
