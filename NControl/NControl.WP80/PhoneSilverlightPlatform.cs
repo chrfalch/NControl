@@ -122,6 +122,16 @@ namespace NControl.WP80
         /// </summary>
         private readonly Canvas _canvas;
 
+        private Stack<Transform> _savedStates;
+
+        private Transform CurrentTransform
+        {
+            get
+            {
+                return _savedStates.Count > 0 ? _savedStates.Peek() : NGraphics.Transform.Identity;
+            }
+        }
+
         #endregion
 
         /// <summary>
@@ -163,6 +173,7 @@ namespace NControl.WP80
         /// </summary>
         public void SaveState()
         {
+            _savedStates.Push(CurrentTransform);
         }
 
         /// <summary>
@@ -171,51 +182,13 @@ namespace NControl.WP80
         /// <param name="transform"></param>
         public void Transform(NGraphics.Transform transform)
         {
-            //var t = transform;
-            //var stack = new Stack<NGraphics.Transform>();
-            //while (t != null)
-            //{
-            //    stack.Push(t);
-            //    t = t.Previous;
-            //}
+            // Remove current state (if any). It is replaced by the new state.
+            if(_savedStates.Count > 0)
+            {
+                _savedStates.Pop();
+            }
 
-            //var transforms = new TransformGroup();
-
-            //while (stack.Count > 0)
-            //{
-            //    t = stack.Pop();
-
-            //    var rt = t as Rotate;
-            //    if (rt != null)
-            //    {
-            //        var rotate = new RotateTransform();
-            //        rotate.Angle = rt.Angle;
-            //        transforms.Children.Add(rotate);
-            //        continue;
-            //    }
-            //    var st = t as Scale;
-            //    if (st != null)
-            //    {
-            //        var scale = new ScaleTransform();
-            //        scale.ScaleX = st.Size.Width;
-            //        scale.ScaleY = st.Size.Height;
-            //        transforms.Children.Add(scale);
-            //        continue;
-            //    }
-            //    var tt = t as Translate;
-            //    if (tt != null)
-            //    {
-            //        var translate = new TranslateTransform();
-            //        translate.X = tt.Size.Width;
-            //        translate.Y = tt.Size.Height;
-            //        transforms.Children.Add(translate);
-            //        continue;
-            //    }
-
-            //    throw new NotSupportedException("Transform " + t);
-            //}
-
-            //Canvas.RenderTransform = transforms;
+            _savedStates.Push(transform);
         }
 
         /// <summary>
@@ -223,6 +196,7 @@ namespace NControl.WP80
         /// </summary>
         public void RestoreState()
         {
+            _savedStates.Pop();
         }
 
         /// <summary>
@@ -254,6 +228,7 @@ namespace NControl.WP80
                     B = pen.Color.B
                 });
 
+            textBlock.RenderTransform = Conversions.GetTransform(CurrentTransform);
             _canvas.Children.Add(textBlock);
         }
 
@@ -327,6 +302,7 @@ namespace NControl.WP80
             var b = new Binding { Source = geo.ToString() };
             BindingOperations.SetBinding(pathEl, System.Windows.Shapes.Path.DataProperty, b);
 
+            pathEl.RenderTransform = Conversions.GetTransform(CurrentTransform);
             _canvas.Children.Add(pathEl);
         }
 
@@ -352,6 +328,7 @@ namespace NControl.WP80
                 rectangleEl.StrokeThickness = pen.Width;
             }
 
+            rectangleEl.RenderTransform = Conversions.GetTransform(CurrentTransform);
             _canvas.Children.Add(rectangleEl);
             Canvas.SetLeft(rectangleEl, frame.X);
             Canvas.SetTop(rectangleEl, frame.Y);
@@ -378,6 +355,7 @@ namespace NControl.WP80
                 ellipseEl.StrokeThickness = pen.Width;
             }
 
+            ellipseEl.RenderTransform = Conversions.GetTransform(CurrentTransform);
             _canvas.Children.Add(ellipseEl);
             Canvas.SetLeft(ellipseEl, frame.X);
             Canvas.SetTop(ellipseEl, frame.Y);
@@ -399,6 +377,7 @@ namespace NControl.WP80
                 imageEl.Width = frame.Width;
                 imageEl.Height = frame.Height;
 
+                imageEl.RenderTransform = Conversions.GetTransform(CurrentTransform);
                 _canvas.Children.Add(imageEl);
                 Canvas.SetLeft(imageEl, frame.X);
                 Canvas.SetTop(imageEl, frame.Y);
@@ -509,6 +488,17 @@ namespace NControl.WP80
         }
 
         #endregion
+    }
+
+    public class Conversions
+    {
+        public static System.Windows.Media.Transform GetTransform(Transform trans)
+        {
+            return new MatrixTransform()
+            {
+                Matrix = new Matrix(trans.A, trans.B, trans.C, trans.D, trans.E, trans.F)
+            };
+        }
     }
 }
 
