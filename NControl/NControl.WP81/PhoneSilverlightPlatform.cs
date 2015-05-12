@@ -300,7 +300,14 @@ namespace NControl.WP81
                 var at = op as ArcTo;
                 if (at != null)
                 {
-                    geo.AppendFormat(CultureInfo.InvariantCulture, " L {0},{1}", at.Point.X, at.Point.Y);
+                    var p = at.Point;
+                    var r = at.Radius;
+
+                    geo.AppendFormat(CultureInfo.InvariantCulture, " A {0},{1} 0 {2} {3} {4},{5}",
+                        r.Width, r.Height,
+                        at.LargeArc ? 1 : 0,
+                        at.SweepClockwise ? 1 : 0,
+                        p.X, p.Y);
                     continue;
                 }
 
