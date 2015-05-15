@@ -41,6 +41,7 @@ using System.Windows.Shapes;
 using NControl.WP81;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.WinPhone;
+using Thickness = System.Windows.Thickness;
 
 [assembly: ExportRenderer(typeof(NControlView), typeof(NControlViewRenderer))]
 namespace NControl.WP81
@@ -91,12 +92,16 @@ namespace NControl.WP81
 
             if (Control == null)
             {
-                var b = new NControlNativeView();
+                var ctrl = new NControlNativeView();
                 Canvas = new Canvas();
-                Border = new Border { Child = Canvas };
-                b.Children.Add(Border);
+                Border = new Border
+                {
+                    Child = Canvas,                    
+                };                
+                
+                ctrl.Children.Add(Border);
 
-                SetNativeControl(b);
+                SetNativeControl(ctrl);
 
                 UpdateClip();
 
@@ -127,17 +132,18 @@ namespace NControl.WP81
 
             if (Control != null)
             {
-                if (e.PropertyName == NControlView.IsClippedToBoundsProperty.PropertyName)
+                if (e.PropertyName == Layout.IsClippedToBoundsProperty.PropertyName)
                     UpdateClip();
             }
 
             // Redraw when height/width changes
-            if (e.PropertyName == NControlView.HeightProperty.PropertyName ||
-                e.PropertyName == NControlView.WidthProperty.PropertyName)
+            if (e.PropertyName == VisualElement.HeightProperty.PropertyName ||
+                e.PropertyName == VisualElement.WidthProperty.PropertyName)
             {
                 UpdateClip();
                 RedrawControl();
             }
+           
         }
 
         #region Drawing
@@ -147,7 +153,10 @@ namespace NControl.WP81
         /// </summary>
         private void RedrawControl()
         {
-            if (Element.Width == -1 || Element.Height == -1)
+            if (Element.Width.Equals(-1) || Element.Height.Equals(-1))
+                return;
+
+            if (Canvas == null)
                 return;
 
             Canvas.Children.Clear();
@@ -218,7 +227,7 @@ namespace NControl.WP81
         /// </summary>
         private void UpdateClip()
         {
-            if (Element.Width == -1 || Element.Height == -1)
+            if (Element.Width.Equals(-1) || Element.Height.Equals(-1))
                 return;
 
             Control.SetClip(Element.IsClippedToBounds);

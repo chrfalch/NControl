@@ -68,7 +68,8 @@ namespace NControl.WP80
         /// <summary>
         /// Constructor
         /// </summary>
-        public NControlViewRenderer() : base()
+        public NControlViewRenderer()
+            : base()
         {
         }
 
@@ -90,12 +91,16 @@ namespace NControl.WP80
 
             if (Control == null)
             {
-                var b = new NControlNativeView();
+                var ctrl = new NControlNativeView();
                 Canvas = new Canvas();
-                Border = new Border {Child = Canvas};
-                b.Children.Add(Border);
+                Border = new Border
+                {
+                    Child = Canvas,
+                };
 
-                SetNativeControl(b);
+                ctrl.Children.Add(Border);
+
+                SetNativeControl(ctrl);
 
                 UpdateClip();
 
@@ -126,17 +131,18 @@ namespace NControl.WP80
 
             if (Control != null)
             {
-                if (e.PropertyName == NControlView.IsClippedToBoundsProperty.PropertyName)
+                if (e.PropertyName == Layout.IsClippedToBoundsProperty.PropertyName)
                     UpdateClip();
             }
 
             // Redraw when height/width changes
-            if (e.PropertyName == NControlView.HeightProperty.PropertyName ||
-                e.PropertyName == NControlView.WidthProperty.PropertyName)
+            if (e.PropertyName == VisualElement.HeightProperty.PropertyName ||
+                e.PropertyName == VisualElement.WidthProperty.PropertyName)
             {
                 UpdateClip();
                 RedrawControl();
             }
+
         }
 
         #region Drawing
@@ -146,7 +152,10 @@ namespace NControl.WP80
         /// </summary>
         private void RedrawControl()
         {
-            if (Element.Width == -1 || Element.Height == -1)
+            if (Element.Width.Equals(-1) || Element.Height.Equals(-1))
+                return;
+
+            if (Canvas == null)
                 return;
 
             Canvas.Children.Clear();
@@ -200,7 +209,7 @@ namespace NControl.WP80
                     {
                         Element.TouchesEnded(touches);
                     }
-                    
+
                     break;
                 }
 
@@ -217,7 +226,7 @@ namespace NControl.WP80
         /// </summary>
         private void UpdateClip()
         {
-            if (Element.Width == -1 || Element.Height == -1)
+            if (Element.Width.Equals(-1) || Element.Height.Equals(-1))
                 return;
 
             Control.SetClip(Element.IsClippedToBounds);
@@ -237,6 +246,3 @@ namespace NControl.WP80
         #endregion
     }
 }
-
-
-
