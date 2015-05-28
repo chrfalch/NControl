@@ -347,8 +347,9 @@ namespace NControl.WP80
         public void DrawRectangle(Rect frame, Pen pen = null, NGraphics.Brush brush = null)
         {
             var rectangleEl = new System.Windows.Shapes.Rectangle();
-            rectangleEl.Width = frame.Width;
-            rectangleEl.Height = frame.Height;
+            var offset = pen != null ? pen.Width : 0.0;
+            rectangleEl.Width = frame.Width + offset;
+            rectangleEl.Height = frame.Height + offset;
 
             if (brush != null)
                 rectangleEl.Fill = GetBrush(brush);
@@ -360,8 +361,8 @@ namespace NControl.WP80
             }
 
             _canvas.Children.Add(rectangleEl);
-            Canvas.SetLeft(rectangleEl, frame.X);
-            Canvas.SetTop(rectangleEl, frame.Y);
+            Canvas.SetLeft(rectangleEl, frame.X - offset / 2.0);
+            Canvas.SetTop(rectangleEl, frame.Y - offset / 2.0);
         }
 
         /// <summary>
@@ -373,8 +374,10 @@ namespace NControl.WP80
         public void DrawEllipse(Rect frame, Pen pen = null, NGraphics.Brush brush = null)
         {
             var ellipseEl = new System.Windows.Shapes.Ellipse();
-            ellipseEl.Width = frame.Width;
-            ellipseEl.Height = frame.Height;
+            var offset = pen != null ? pen.Width : 0.0;
+
+            ellipseEl.Width = frame.Width + offset;
+            ellipseEl.Height = frame.Height + offset;
 
             if (brush != null)
                 ellipseEl.Fill = GetBrush(brush);
@@ -386,8 +389,8 @@ namespace NControl.WP80
             }
 
             _canvas.Children.Add(ellipseEl);
-            Canvas.SetLeft(ellipseEl, frame.X);
-            Canvas.SetTop(ellipseEl, frame.Y);
+            Canvas.SetLeft(ellipseEl, frame.X - offset / 2.0);
+            Canvas.SetTop(ellipseEl, frame.Y - offset / 2.0);
         }
 
         /// <summary>
