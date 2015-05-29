@@ -38,15 +38,15 @@ using Xamarin.Forms.Platform.Android;
 [assembly: ExportRenderer(typeof(NControlView), typeof(NControlViewRenderer))]
 namespace NControl.Droid
 {
-	/// <summary>
-	/// NControlView renderer.
-	/// </summary>
+    /// <summary>
+    /// NControlView renderer.
+    /// </summary>
     public class NControlViewRenderer: VisualElementRenderer<NControlView>
-	{
+    {
         /// <summary>
-		/// Used for registration with dependency service
-		/// </summary>
-		public static void Init() { }
+        /// Used for registration with dependency service
+        /// </summary>
+        public static void Init() { }
 
         /// <summary>
         /// Raises the element changed event.
@@ -77,7 +77,7 @@ namespace NControl.Droid
                 canvas.ClipRect(new Android.Graphics.Rect(0, 0, Width, Height), Region.Op.Replace);
 
             // Perform custom drawing
-			var ncanvas = new CanvasCanvas(canvas);
+            var ncanvas = new CanvasCanvas(canvas);
             Element.Draw(ncanvas, new NGraphics.Rect(0, 0, Width, Height));
 
             // Draw elements/children etc.
@@ -105,36 +105,32 @@ namespace NControl.Droid
 
             var result = false;
 
-            
+            // Handle touch actions
+            switch (e.Action)
             {
-                // Handle touch actions
-                switch (e.Action)
-                {
+                case MotionEventActions.Down:
+                if (Element != null)
+                    result = Element.TouchesBegan(touchInfo);
+                    break;
 
-                    case MotionEventActions.Down:
-					if (Element != null)
-                        result = Element.TouchesBegan(touchInfo);
-                        break;
+                case MotionEventActions.Move:
+                if (Element != null)
+                    result = Element.TouchesMoved(touchInfo);
+                    break;
 
-                    case MotionEventActions.Move:
-					if (Element != null)
-                        result = Element.TouchesMoved(touchInfo);
-                        break;
+                case MotionEventActions.Up:
+                if (Element != null)
+                    result = Element.TouchesEnded(touchInfo);
+                    break;          
 
-                    case MotionEventActions.Up:
-					if (Element != null)
-                        result = Element.TouchesEnded(touchInfo);
-                        break;          
-
-                    case MotionEventActions.Cancel:
-					if (Element != null)
-                        result = Element.TouchesCancelled(touchInfo);
-                        break;
-                }
+                case MotionEventActions.Cancel:
+                if (Element != null)
+                    result = Element.TouchesCancelled(touchInfo);
+                    break;
             }
 
-			System.Diagnostics.Debug.WriteLine("OnTouchEvent: " + e.Action.ToString() + 
-				" for " + Element.GetType().Name + " returning " + result);
+            System.Diagnostics.Debug.WriteLine("OnTouchEvent: " + e.Action.ToString() + 
+                " for " + Element.GetType().Name + " returning " + result);
 
             return result;
         }
@@ -163,6 +159,6 @@ namespace NControl.Droid
             return new Xamarin.Forms.Size (metrics.WidthPixels, metrics.HeightPixels);
         }
         #endregion
-	}
+    }
 }
 
