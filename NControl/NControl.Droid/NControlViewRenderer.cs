@@ -99,8 +99,8 @@ namespace NControl.Droid
         /// <param name="e">E.</param>
         public override bool OnTouchEvent(MotionEvent e)
         {
-            var touchInfo = new NGraphics.Point[]{ 
-                new NGraphics.Point{X = ConvertPixelsToDp(e.GetX()), Y = ConvertPixelsToDp(e.GetY())}
+            var touchInfo = new[]{ 
+                new NGraphics.Point(e.GetX(),e.GetY())
             };
 
             var result = false;
@@ -160,21 +160,7 @@ namespace NControl.Droid
         protected Xamarin.Forms.Size GetScreenSize ()
         {           
             var metrics = Forms.Context.Resources.DisplayMetrics;
-            var widthInDp = ConvertPixelsToDp(metrics.WidthPixels);
-            var heightInDp = ConvertPixelsToDp(metrics.HeightPixels);
-
-            return new Xamarin.Forms.Size (widthInDp, heightInDp);
-        }
-
-        /// <summary>
-        /// Converts the pixels to dp.
-        /// </summary>
-        /// <returns>The pixels to dp.</returns>
-        /// <param name="pixelValue">Pixel value.</param>
-        private int ConvertPixelsToDp(float pixelValue)
-        {
-            var dp = (int) ((pixelValue) / Forms.Context.Resources.DisplayMetrics.Density);
-            return dp;
+            return new Xamarin.Forms.Size (metrics.WidthPixels, metrics.HeightPixels);
         }
         #endregion
 	}
