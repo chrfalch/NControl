@@ -8,6 +8,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using NGraphics;
+using Transform = NGraphics.Transform;
 
 namespace NControl.WP81
 {
