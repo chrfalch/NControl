@@ -195,7 +195,7 @@ namespace NControl.WP80
                     if (!ourRect.Contains(mainTouchPoint.Position.X, mainTouchPoint.Position.Y))
                         return;
 
-                    var touches = e.GetTouchPoints(page).Select(t => new NGraphics.Point(t.Position.X, t.Position.Y));
+                    var touches = e.GetTouchPoints(this).Select(t => new NGraphics.Point(t.Position.X, t.Position.Y));
 
                     if (mainTouchPoint.Action == TouchAction.Move)
                     {
