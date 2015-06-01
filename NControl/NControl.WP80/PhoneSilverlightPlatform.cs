@@ -213,11 +213,26 @@ namespace NControl.WP80
         {
             var textBlock = new TextBlock();
             textBlock.Text = text;
+            textBlock.Width = frame.Width;
+            textBlock.Height = frame.Height;
             Canvas.SetLeft(textBlock, frame.X);
             Canvas.SetTop(textBlock, frame.Y);
 
             textBlock.FontFamily = new FontFamily(font.Family);
             textBlock.FontSize = font.Size;
+
+            switch (alignment)
+            {
+                case TextAlignment.Left:
+                    textBlock.TextAlignment = System.Windows.TextAlignment.Left;
+                    break;
+                case TextAlignment.Center:
+                    textBlock.TextAlignment = System.Windows.TextAlignment.Center;
+                    break;
+                case TextAlignment.Right:
+                    textBlock.TextAlignment = System.Windows.TextAlignment.Right;
+                    break;
+            }
 
             if (pen != null)
                 textBlock.Foreground = new SolidColorBrush(new System.Windows.Media.Color
