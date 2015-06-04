@@ -26,6 +26,7 @@
  ************************************************************************/
 
 using System;
+using System.Reflection;
 using System.Collections.Generic;
 using NGraphics;
 using Xamarin.Forms;
@@ -105,6 +106,36 @@ namespace NControl.Abstractions
 	    /// </summary>
 	    /// <value>The drawing function.</value>	    
 	    public Action<ICanvas, Rect> DrawingFunction { get; set; }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance has touch events.
+        /// </summary>
+        /// <value><c>true</c> if this instance has touch events; otherwise, <c>false</c>.</value>
+        public bool HasTouchEvents 
+        {
+            get 
+            {
+                // Events
+                var retVal = !(OnTouchesBegan == null && OnTouchesCancelled == null &&
+                    OnTouchesEnded == null && OnTouchesMoved == null);
+
+                if (retVal)
+                    return retVal;
+                
+                // Check Overridden methods
+                var tpList = new []{typeof(IEnumerable<NGraphics.Point>)};
+
+                var m = this.GetType().GetRuntimeMethod("TouchesBegan", tpList);
+
+                retVal = retVal || 
+                    (this.GetType().GetRuntimeMethod("TouchesBegan", tpList).DeclaringType != typeof(NControlView) ||
+                    this.GetType().GetRuntimeMethod("TouchesCancelled", tpList).DeclaringType != typeof(NControlView) ||
+                    this.GetType().GetRuntimeMethod("TouchesMoved", tpList).DeclaringType != typeof(NControlView) ||
+                    this.GetType().GetRuntimeMethod("TouchesEnded", tpList).DeclaringType != typeof(NControlView));
+
+                return retVal;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the color which will fill the background of a VisualElement. This is a bindable property.

@@ -115,12 +115,15 @@ namespace NControlDemo.FormsApp.Views
                     }
                 }, 0, 0);
 
-            grid.Children.Add(new NControlView{ 
-                DrawingFunction = (canvas, rect) => {
+            var buttonOverlay = new NControlView { 
+                DrawingFunction = (canvas, rect) =>
+                {
                     rect.Inflate(-10, -10);
                     canvas.DrawRectangle(rect, Pens.Blue, null);
-                }
-            }, 0, 0);
+                },
+            };
+
+            grid.Children.Add(buttonOverlay, 0, 0);
 
             _bottomBar = new NControlView
             {
@@ -180,11 +183,10 @@ namespace NControlDemo.FormsApp.Views
 
             // Add map
             var map = new Map();
-            var mapOverlay = new BoxView { BackgroundColor = Xamarin.Forms.Color.Transparent };
-            mapOverlay.GestureRecognizers.Add(new TapGestureRecognizer
-            {
-                Command = new Command(async (obj) => await ToggleChromeAsync())
-            });
+            var mapOverlay = new NControlView { 
+                BackgroundColor = Xamarin.Forms.Color.Transparent,
+            };
+            mapOverlay.OnTouchesBegan += async (sender, e) => await ToggleChromeAsync();
             _mapContainer.Children.Add(map, () => _mapContainer.Bounds);
             _mapContainer.Children.Add(mapOverlay, () => _mapContainer.Bounds);
         }
