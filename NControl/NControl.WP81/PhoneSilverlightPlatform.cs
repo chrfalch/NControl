@@ -123,7 +123,10 @@ namespace NControl.WP81
         /// </summary>
         private readonly Canvas _canvas;
 
-        private Stack<Transform> _savedStates;
+        /// <summary>
+        /// Saved transforms
+        /// </summary>
+        private readonly Stack<Transform> _savedStates = new Stack<Transform>();
 
         private Transform CurrentTransform
         {
