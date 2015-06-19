@@ -38,15 +38,6 @@ namespace NControl.Abstractions
 	/// </summary>
     public class NControlView: ContentView
 	{
-        #region Private Members
-
-        /// <summary>
-        /// The color of the background.
-        /// </summary>
-        private Xamarin.Forms.Color _backgroundColor;
-
-        #endregion
-
         #region Events
 
         /// <summary>
@@ -83,8 +74,7 @@ namespace NControl.Abstractions
 		/// </summary>
 		public NControlView()
 		{
-			base.BackgroundColor = Xamarin.Forms.Color.Transparent;
-            BackgroundColor = Xamarin.Forms.Color.Transparent;
+			BackgroundColor = Xamarin.Forms.Color.Transparent;
 		}
 
 		/// <summary>
@@ -105,54 +95,7 @@ namespace NControl.Abstractions
 	    /// Gets the drawing function.
 	    /// </summary>
 	    /// <value>The drawing function.</value>	    
-	    public Action<ICanvas, Rect> DrawingFunction { get; set; }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance has touch events.
-        /// </summary>
-        /// <value><c>true</c> if this instance has touch events; otherwise, <c>false</c>.</value>
-        public bool HasTouchEvents 
-        {
-            get 
-            {
-                // Events
-                var retVal = !(OnTouchesBegan == null && OnTouchesCancelled == null &&
-                    OnTouchesEnded == null && OnTouchesMoved == null);
-
-                if (retVal)
-                    return retVal;
-                
-                // Check Overridden methods
-                var tpList = new []{typeof(IEnumerable<NGraphics.Point>)};
-
-                var m = this.GetType().GetRuntimeMethod("TouchesBegan", tpList);
-
-                retVal = retVal || 
-                    (this.GetType().GetRuntimeMethod("TouchesBegan", tpList).DeclaringType != typeof(NControlView) ||
-                    this.GetType().GetRuntimeMethod("TouchesCancelled", tpList).DeclaringType != typeof(NControlView) ||
-                    this.GetType().GetRuntimeMethod("TouchesMoved", tpList).DeclaringType != typeof(NControlView) ||
-                    this.GetType().GetRuntimeMethod("TouchesEnded", tpList).DeclaringType != typeof(NControlView));
-
-                return retVal;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the color which will fill the background of a VisualElement. This is a bindable property.
-        /// </summary>
-        /// <value>The color of the background.</value>
-        public new Xamarin.Forms.Color BackgroundColor
-        {
-            get
-            {
-                return _backgroundColor;
-            }
-            set
-            {
-                _backgroundColor = value;
-                Invalidate();
-            }
-        }
+	    public Action<ICanvas, Rect> DrawingFunction { get; set; }       
 
 		#endregion
 
@@ -173,10 +116,6 @@ namespace NControl.Abstractions
 		/// <param name="canvas">Canvas.</param>
         public virtual void Draw(ICanvas canvas, Rect rect)
 		{
-            if(_backgroundColor != Xamarin.Forms.Color.Transparent)
-                canvas.FillRectangle(rect, new NGraphics.Color(
-                    _backgroundColor.R, _backgroundColor.G, _backgroundColor.B));
-            
             if (DrawingFunction != null)
                 DrawingFunction(canvas, rect);
 		}

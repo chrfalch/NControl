@@ -143,7 +143,8 @@ namespace NControl.WP81
                 UpdateClip();
                 RedrawControl();
             }
-           
+            else if (e.PropertyName == NControlView.BackgroundColorProperty.PropertyName)
+                RedrawControl();
         }
 
         #region Drawing

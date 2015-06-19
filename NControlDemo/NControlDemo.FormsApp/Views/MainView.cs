@@ -122,6 +122,7 @@ namespace NControlDemo.FormsApp.Views
                     canvas.DrawRectangle(rect, Pens.Blue, null);
                 },
             };
+            buttonOverlay.InputTransparent = true;
 
             grid.Children.Add(buttonOverlay, 0, 0);
 

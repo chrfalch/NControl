@@ -63,6 +63,19 @@ namespace NControl.Droid
                 e.NewElement.OnInvalidate += HandleInvalidate;
         }
 
+        /// <summary>
+        /// Raises the element property changed event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">E.</param>
+        protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            base.OnElementPropertyChanged(sender, e);
+
+            if (e.PropertyName == NControlView.BackgroundColorProperty.PropertyName)
+                Element.Invalidate();
+        }
+
         #region Native Drawing 
 
         /// <Docs>The Canvas to which the View is rendered.</Docs>

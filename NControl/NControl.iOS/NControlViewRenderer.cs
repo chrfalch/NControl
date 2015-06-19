@@ -89,21 +89,9 @@ namespace NControl.iOS
             base.OnElementPropertyChanged(sender, e);
 
             if (e.PropertyName == NControlView.IsClippedToBoundsProperty.PropertyName)
-                Layer.MasksToBounds = Element.IsClippedToBounds;            
-        }
-
-        /// <summary>
-        /// Points the inside.
-        /// </summary>
-        /// <returns><c>true</c>, if inside was pointed, <c>false</c> otherwise.</returns>
-        /// <param name="point">Point.</param>
-        /// <param name="uievent">Uievent.</param>
-        public override bool PointInside(CGPoint point, UIEvent uievent)
-        {
-            if (Element != null && Element.HasTouchEvents)
-                return base.PointInside(point, uievent);
-            else
-                return false;
+                Layer.MasksToBounds = Element.IsClippedToBounds;
+            else if (e.PropertyName == NControlView.BackgroundColorProperty.PropertyName)
+                Element.Invalidate();
         }
 
         #region Drawing
