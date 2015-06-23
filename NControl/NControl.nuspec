@@ -26,14 +26,14 @@
 
      <file src="NControl.Droid/bin/Release/NControl.dll" target="lib\MonoAndroid10\NControl.dll" />
 
-     <!--Xamarin.WP80
+     <!--Xamarin.WP80 -->
     <file src="NControl.WP80/Bin/Release/NControl.WP80.dll" target="lib\wp80\NControl.WP80.dll" />
     <file src="NControl.WP80/Bin/Release/NControl.dll" target="lib\wp80\NControl.dll" />
-    -->
-     <!--Xamarin.WP81
+
+     <!--Xamarin.WP81 -->
      <file src="NControl.WP81/Bin/Release/NControl.WP81.dll" target="lib\wp81\NControl.WP81.dll" />
      <file src="NControl.WP81/Bin/Release/NControl.dll" target="lib\wp81\NControl.dll" />
-     -->
+
     <!--Xamarin.iOSUnified-->
      <file src="NControl.iOS/bin/Release/NControl.iOS.dll" target="lib\Xamarin.iOS10\NControl.iOS.dll" />
      <file src="NControl.iOS/bin/Release/NControl.dll" target="lib\Xamarin.iOS10\NControl.dll" />
