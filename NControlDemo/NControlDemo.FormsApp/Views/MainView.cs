@@ -111,7 +111,7 @@ namespace NControlDemo.FormsApp.Views
                         new CircularButtonControl { FAIcon = FontAwesomeLabel.FAPlay },
                         new CircularButtonControl { FAIcon = FontAwesomeLabel.FAPlus },
                         new CircularButtonControl { FAIcon = FontAwesomeLabel.FATerminal },
-                        new CircularButtonControl { FAIcon = FontAwesomeLabel.FAHospitalO },
+                        new Button { Text = "Hello" },
                     }
                 }, 0, 0);
 

@@ -106,12 +106,10 @@ namespace NControl.iOS
         {
             base.TouchesBegan(touches, evt);
 
-            var points = GetTouchPoints(touches);
-
-            if (this._element.TouchesBegan(points))
-            {
+            if (this._element.TouchesBegan(GetTouchPoints(touches)))
                 this.State = UIGestureRecognizerState.Began;
-            }
+            else
+                this.State = UIGestureRecognizerState.Cancelled;
         }
 
         /// <summary>
@@ -123,12 +121,8 @@ namespace NControl.iOS
         {
             base.TouchesMoved(touches, evt);
 
-            var points = GetTouchPoints(touches);
-
-            if (this._element.TouchesMoved(points))
-            {
-                this.State = UIGestureRecognizerState.Changed;
-            }
+            if (this._element.TouchesMoved(GetTouchPoints(touches)))
+                this.State = UIGestureRecognizerState.Changed;            
         }
 
         /// <summary>
@@ -140,12 +134,8 @@ namespace NControl.iOS
         {
             base.TouchesEnded(touches, evt);
 
-            var points = GetTouchPoints(touches);
-
-            if (this._element.TouchesEnded(points))
-            {
-                this.State = UIGestureRecognizerState.Ended;
-            }
+            if (this._element.TouchesEnded(GetTouchPoints(touches)))
+                this.State = UIGestureRecognizerState.Ended;            
         }
 
         /// <summary>
@@ -157,10 +147,7 @@ namespace NControl.iOS
         {
             base.TouchesCancelled(touches, evt);
 
-            var points = GetTouchPoints(touches);
-
-            this._element.TouchesCancelled(points);
-
+            this._element.TouchesCancelled(GetTouchPoints(touches));
             this.State = UIGestureRecognizerState.Cancelled;
         }
     }
