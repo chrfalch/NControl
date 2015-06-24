@@ -71,6 +71,8 @@ namespace NControl.iOS
 
             if (e.NewElement != null)
             {
+                e.NewElement.OnInvalidate += HandleInvalidate;
+
                 if ((null == _gestureRecognizer) && (null != NativeView))
                 {
                     _gestureRecognizer = new UITouchesGestureRecognizer(e.NewElement, NativeView);
