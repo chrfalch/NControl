@@ -41,6 +41,7 @@ using System.Windows.Shapes;
 using NControl.WP80;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.WinPhone;
+using Thickness = System.Windows.Thickness;
 
 [assembly: ExportRenderer(typeof(NControlView), typeof(NControlViewRenderer))]
 namespace NControl.WP80
@@ -63,7 +64,10 @@ namespace NControl.WP80
         /// <summary>
         /// Used for registration with dependency service
         /// </summary>
-        public static void Init() { }
+        public static void Init()
+        {
+            Touch.FrameReported += Touch_FrameReported;
+        }
 
         /// <summary>
         /// Constructor
@@ -103,8 +107,7 @@ namespace NControl.WP80
                 SetNativeControl(ctrl);
 
                 UpdateClip();
-
-                Touch.FrameReported += Touch_FrameReported;
+                UpdateInputTransparent();
             }
 
             RedrawControl();
@@ -129,21 +132,23 @@ namespace NControl.WP80
         {
             base.OnElementPropertyChanged(sender, e);
 
-            if (Control != null)
-            {
-                if (e.PropertyName == Layout.IsClippedToBoundsProperty.PropertyName)
-                    UpdateClip();
-            }
+            if (Control == null)
+                return;
 
-            // Redraw when height/width changes
-            if (e.PropertyName == VisualElement.HeightProperty.PropertyName ||
+            if (e.PropertyName == Layout.IsClippedToBoundsProperty.PropertyName)
+                UpdateClip();
+
+            else if (e.PropertyName == VisualElement.HeightProperty.PropertyName ||
                 e.PropertyName == VisualElement.WidthProperty.PropertyName)
             {
+                // Redraw when height/width changes
                 UpdateClip();
                 RedrawControl();
             }
             else if (e.PropertyName == NControlView.BackgroundColorProperty.PropertyName)
                 RedrawControl();
+            else if (e.PropertyName == NControlView.InputTransparentProperty.PropertyName)
+                UpdateInputTransparent();
         }
 
         #region Drawing
@@ -167,59 +172,6 @@ namespace NControl.WP80
 
         #endregion
 
-        #region Touch Handlers
-
-        /// <summary>
-        /// Touch handling
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-
-        private void Touch_FrameReported(object sender, TouchFrameEventArgs e)
-        {
-            var parent = VisualTreeHelper.GetParent(this);
-            while (parent != null)
-            {
-                if (parent is PhoneApplicationPage)
-                {
-                    var page = parent as PhoneApplicationPage;
-
-                    // Get this' position on screen
-                    var transform = this.TransformToVisual(page);
-                    var absolutePosition = transform.Transform(new System.Windows.Point(0, 0));
-                    var ourRect = new Xamarin.Forms.Rectangle(absolutePosition.X, absolutePosition.Y, this.Width, this.Height);
-
-                    // Get main touch point
-                    var mainTouchPoint = e.GetPrimaryTouchPoint(page);
-
-                    // Make sure our control is actually in the touch zone                    
-                    if (!ourRect.Contains(mainTouchPoint.Position.X, mainTouchPoint.Position.Y))
-                        return;
-
-                    var touches = e.GetTouchPoints(this).Select(t => new NGraphics.Point(t.Position.X, t.Position.Y));
-
-                    if (mainTouchPoint.Action == TouchAction.Move)
-                    {
-                        Element.TouchesMoved(touches);
-                    }
-                    else if (mainTouchPoint.Action == TouchAction.Down)
-                    {
-                        Element.TouchesBegan(touches);
-                    }
-                    else if (mainTouchPoint.Action == TouchAction.Up)
-                    {
-                        Element.TouchesEnded(touches);
-                    }
-
-                    break;
-                }
-
-                parent = VisualTreeHelper.GetParent(parent);
-            }
-        }
-
-        #endregion
-
         #region Private Members
 
         /// <summary>
@@ -234,6 +186,14 @@ namespace NControl.WP80
         }
 
         /// <summary>
+        /// Updates the IsHitTestVisible property on the native control
+        /// </summary>
+        private void UpdateInputTransparent()
+        {
+            Control.IsHitTestVisible = !Element.InputTransparent;
+        }
+
+        /// <summary>
         /// Handles the invalidate.
         /// </summary>
         /// <param name="sender">Sender.</param>
@@ -244,6 +204,58 @@ namespace NControl.WP80
             RedrawControl();
         }
 
+        #endregion
+
+        #region Static Touch Handler
+
+        /// <summary>
+        /// Touch handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected static void Touch_FrameReported(object sender, TouchFrameEventArgs e)
+        {
+            // Get the primary touch point. We do not track multitouch at the moment.
+            var primaryTouchPoint = e.GetPrimaryTouchPoint(System.Windows.Application.Current.RootVisual);
+
+            var uiElements = VisualTreeHelper.FindElementsInHostCoordinates(primaryTouchPoint.Position, System.Windows.Application.Current.RootVisual);
+            foreach (var uiElement in uiElements)
+            {
+                // Are we interested?
+                var renderer = uiElement as NControlViewRenderer;
+                if (renderer == null)
+                    continue;
+
+                // Get NControlView element
+                var element = renderer.Element;
+
+                // Get this' position on screen
+                var transform = System.Windows.Application.Current.RootVisual.TransformToVisual(renderer.Control);
+
+                // Transform touches
+                var touchPoints = e.GetTouchPoints(System.Windows.Application.Current.RootVisual);
+                var touches = touchPoints
+                    .Select(t => transform.Transform(new System.Windows.Point(t.Position.X, t.Position.Y)))
+                    .Select(t => new NGraphics.Point(t.X, t.Y)).ToList();
+
+                var result = false;
+                if (primaryTouchPoint.Action == TouchAction.Move)
+                {
+                    result = element.TouchesMoved(touches);
+                }
+                else if (primaryTouchPoint.Action == TouchAction.Down)
+                {
+                    result = element.TouchesBegan(touches);
+                }
+                else if (primaryTouchPoint.Action == TouchAction.Up)
+                {
+                    result = element.TouchesEnded(touches);
+                }
+
+                if (result)
+                    break;
+            }
+        }
         #endregion
     }
 }

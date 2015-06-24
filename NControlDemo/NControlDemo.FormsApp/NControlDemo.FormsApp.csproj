@@ -34,6 +34,7 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Controls\BlueFrameControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IoC\Container.cs" />
     <Compile Include="IoC\IContainerProvider.cs" />

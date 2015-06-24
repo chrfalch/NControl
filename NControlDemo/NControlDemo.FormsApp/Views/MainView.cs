@@ -106,23 +106,15 @@ namespace NControlDemo.FormsApp.Views
                     Orientation = StackOrientation.Horizontal,
                     HorizontalOptions = LayoutOptions.CenterAndExpand,
                     Padding = 11,
-                    Children =
-                    {
+                    Children = {
                         new CircularButtonControl { FAIcon = FontAwesomeLabel.FAPlay },
                         new CircularButtonControl { FAIcon = FontAwesomeLabel.FAPlus },
                         new CircularButtonControl { FAIcon = FontAwesomeLabel.FATerminal },
-                        new Button { Text = "Hello" },
+                        new CircularButtonControl { FAIcon = FontAwesomeLabel.FATasks },
                     }
                 }, 0, 0);
 
-            var buttonOverlay = new NControlView { 
-                DrawingFunction = (canvas, rect) =>
-                {
-                    rect.Inflate(-10, -10);
-                    canvas.DrawRectangle(rect, Pens.Blue, null);
-                },
-            };
-            buttonOverlay.InputTransparent = true;
+            var buttonOverlay = new BlueFrameControl();
 
             grid.Children.Add(buttonOverlay, 0, 0);
 
