@@ -100,6 +100,12 @@ namespace NControlDemo.FormsApp.Views
                 DrawingFunction = (canvas, rect) => canvas.FillRectangle(rect, new SolidBrush(new NGraphics.Color("#3498DB")))               
             };
 
+            var firstButton = new CircularButtonControl { FAIcon = FontAwesomeLabel.FAPlay };
+            var secondButton = new CircularButtonControl { 
+                FAIcon = FontAwesomeLabel.FAPlus,
+                Command = new Command(()=> firstButton.FillColor = Xamarin.Forms.Color.Red)
+            };
+
             var grid = new Grid();
             grid.Children.Add(new StackLayout
                 {
@@ -107,8 +113,8 @@ namespace NControlDemo.FormsApp.Views
                     HorizontalOptions = LayoutOptions.CenterAndExpand,
                     Padding = 11,
                     Children = {
-                        new CircularButtonControl { FAIcon = FontAwesomeLabel.FAPlay },
-                        new CircularButtonControl { FAIcon = FontAwesomeLabel.FAPlus },
+                        firstButton,
+                        secondButton,
                         new CircularButtonControl { FAIcon = FontAwesomeLabel.FATerminal },
                         new CircularButtonControl { FAIcon = FontAwesomeLabel.FATasks },
                     }

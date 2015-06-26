@@ -67,6 +67,8 @@ namespace NControl.iOS
                     RemoveGestureRecognizer(_gestureRecognizer);
                     _gestureRecognizer = null;
                 }
+
+                e.OldElement.OnInvalidate -= HandleInvalidate;
             }
 
             if (e.NewElement != null)

@@ -32,6 +32,7 @@ using Xamarin.Forms;
 using System.Reflection;
 using System.IO;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace NControlDemo.FormsApp.Controls
 {
@@ -41,6 +42,7 @@ namespace NControlDemo.FormsApp.Controls
     public class CircularButtonControl: NControlView
     {
         private readonly Label _label;
+        private readonly NControlView _circles;
 
         /// <summary>
         /// Initializes a new instance of the
@@ -61,23 +63,94 @@ namespace NControlDemo.FormsApp.Controls
                 YAlign = Xamarin.Forms.TextAlignment.Center,
             };
             
-
+            _circles = new NControlView {
+                
+                DrawingFunction = (canvas1, rect) => {
+                    var fillColor = new NGraphics.Color(FillColor.R,
+                        FillColor.G, FillColor.B, FillColor.A);
+                    
+                    canvas1.FillEllipse(rect, fillColor);
+                    rect.Inflate(new NGraphics.Size(-2, -2));
+                    canvas1.FillEllipse(rect, Colors.White);
+                    rect.Inflate(new NGraphics.Size(-4, -4));
+                    canvas1.FillEllipse(rect, fillColor);
+                }    
+            };
+            
             Content = new Grid{
-                Children =
-                {
-                    new NControlView
-                    {
-                        DrawingFunction = (canvas1, rect) => {
-                            canvas1.FillEllipse(rect, Colors.LightGray);
-                            rect.Inflate(new NGraphics.Size(-2, -2));
-                            canvas1.FillEllipse(rect, Colors.White);
-                            rect.Inflate(new NGraphics.Size(-4, -4));
-                            canvas1.FillEllipse(rect, Colors.LightGray);
-                        }    
-                    },
+                Children = {
+                    _circles,
                     _label,
                 }
             };
+        }
+
+        /// <summary>
+        /// The Command property.
+        /// </summary>
+        public static BindableProperty CommandProperty = 
+            BindableProperty.Create<CircularButtonControl, ICommand> (p => p.Command, null,
+                propertyChanged: (bindable, oldValue, newValue) => {
+                var ctrl = (CircularButtonControl)bindable;
+                ctrl.Command = newValue;
+            });
+
+        /// <summary>
+        /// Gets or sets the Command of the CircularButtonControl instance.
+        /// </summary>
+        /// <value>The color of the buton.</value>
+        public ICommand Command {
+            get{ return (ICommand)GetValue (CommandProperty); }
+            set {
+                SetValue (CommandProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// The CommandParameter property.
+        /// </summary>
+        public static BindableProperty CommandParameterProperty = 
+            BindableProperty.Create<CircularButtonControl, object> (p => p.CommandParameter, null,
+                propertyChanged: (bindable, oldValue, newValue) => {
+                var ctrl = (CircularButtonControl)bindable;
+                ctrl.CommandParameter = newValue;
+            });
+
+        /// <summary>
+        /// Gets or sets the CommandParameter of the CircularButtonControl instance.
+        /// </summary>
+        /// <value>The color of the buton.</value>
+        public object CommandParameter {
+            get{ return (object)GetValue (CommandParameterProperty); }
+            set {
+                SetValue (CommandParameterProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// The FillColor property.
+        /// </summary>
+        public static BindableProperty FillColorProperty = 
+            BindableProperty.Create<CircularButtonControl, Xamarin.Forms.Color>(p => p.FillColor, 
+                Xamarin.Forms.Color.Gray, BindingMode.TwoWay,
+                propertyChanged: (bindable, oldValue, newValue) =>
+                {
+                    var ctrl = (CircularButtonControl)bindable;
+                    ctrl.FillColor = newValue;
+                });
+
+        /// <summary>
+        /// Gets or sets the FillColor of the CircularButtonControl instance.
+        /// </summary>
+        /// <value>The color of the buton.</value>
+        public Xamarin.Forms.Color FillColor
+        {
+            get{ return (Xamarin.Forms.Color)GetValue(FillColorProperty); }
+            set
+            {
+                SetValue(FillColorProperty, value);
+                _circles.Invalidate();
+            }
         }
 
         /// <summary>
@@ -96,20 +169,6 @@ namespace NControlDemo.FormsApp.Controls
             }
         }
 
-
-        /// <summary>
-        /// Draw the specified canvas.
-        /// </summary>
-        /// <param name="canvas">Canvas.</param>
-        /// <param name="rect">Rect.</param>
-        //public override void Draw(NGraphics.ICanvas canvas, NGraphics.Rect rect)
-        //{
-        //    base.Draw(canvas, rect);
-
-            
-
-        //}
-
         public override bool TouchesBegan(System.Collections.Generic.IEnumerable<NGraphics.Point> points)
         {
             base.TouchesBegan(points);
@@ -120,7 +179,7 @@ namespace NControlDemo.FormsApp.Controls
         public override bool TouchesCancelled(System.Collections.Generic.IEnumerable<NGraphics.Point> points)
         {
             base.TouchesCancelled(points);
-            TouchesEnded(points);
+            this.ScaleTo(1.0, 65, Easing.CubicInOut);
             return true;
         }
 
@@ -128,6 +187,9 @@ namespace NControlDemo.FormsApp.Controls
         {
             base.TouchesEnded(points);
             this.ScaleTo(1.0, 65, Easing.CubicInOut);
+            if (Command != null && Command.CanExecute(CommandParameter))
+                Command.Execute(CommandParameter);
+            
             return true;
         }
     }
