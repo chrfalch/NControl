@@ -57,6 +57,13 @@ namespace NControl.WindowsStore
         protected Border Border;
 
         /// <summary>
+        /// Used for registration with dependency service
+        /// </summary>
+        public static void Init()
+        {
+        }
+        
+        /// <summary>
         /// Constructor
         /// </summary>
         public NControlViewRenderer()
