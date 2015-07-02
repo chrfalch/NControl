@@ -11,6 +11,7 @@ The library currently supports native renderers for the following platforms:
 - Android
 - iOS Unified
 - Windows Phone
+- Windows Store
 
 ## Installation
 Add the [Nuget](https://www.nuget.org/packages/NControl/) packages to your iOS, Android and Forms-project.

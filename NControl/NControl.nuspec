@@ -9,7 +9,7 @@
     <projectUrl>https://github.com/chrfalch/NControl/</projectUrl>    
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>NControl is a Xamarin.Forms wrapper control built around the NGraphics library enabling developers to create custom controls without the need for custom renderers.</description>
-    <releaseNotes>Released for iOS, Android and Windows Phone Silverlight 8.1.</releaseNotes>
+    <releaseNotes>Released for iOS, Android, Windows Phone Silverlight 8.1 and Windows Store.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>xamarin, pcl, xam.pcl, android, xamarin.forms, ios</tags>
        <dependencies>
@@ -33,6 +33,10 @@
      <!--Xamarin.WP81 -->
      <file src="NControl.WP81/Bin/Release/NControl.WP81.dll" target="lib\wp81\NControl.WP81.dll" />
      <file src="NControl.WP81/Bin/Release/NControl.dll" target="lib\wp81\NControl.dll" />
+
+     <!--Xamarin.WIN81 -->
+     <file src="NControl.WindowsStore/Bin/Release/NControl.WindowsStore.dll" target="lib\win81\NControl.WindowsStore.dll" />
+     <file src="NControl.WindowsStore/Bin/Release/NControl.dll" target="lib\win81\NControl.dll" />
 
     <!--Xamarin.iOSUnified-->
      <file src="NControl.iOS/bin/Release/NControl.iOS.dll" target="lib\Xamarin.iOS10\NControl.iOS.dll" />
