@@ -77,7 +77,7 @@ namespace NControlDemo.FormsApp
             }
 
             // The root page of your application
-            // MainPage = Container.Resolve<MainViewXaml>();
+            //MainPage = Container.Resolve<MainViewXaml>();
             MainPage = Container.Resolve<MainView>();
 		}
 
