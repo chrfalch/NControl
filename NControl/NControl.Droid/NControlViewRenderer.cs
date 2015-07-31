@@ -41,7 +41,7 @@ namespace NControl.Droid
     /// <summary>
     /// NControlView renderer.
     /// </summary>
-    public class NControlViewRenderer: VisualElementRenderer<NControlView>
+    public class NControlViewRenderer : VisualElementRenderer<NControlView>
     {
         /// <summary>
         /// Used for registration with dependency service
@@ -61,6 +61,8 @@ namespace NControl.Droid
 
             if (e.NewElement != null)
                 e.NewElement.OnInvalidate += HandleInvalidate;
+
+            Invalidate();
         }
 
         /// <summary>
@@ -83,20 +85,27 @@ namespace NControl.Droid
         /// Draw the specified canvas.
         /// </summary>
         /// <param name="canvas">Canvas.</param>
-        public override void Draw (Android.Graphics.Canvas canvas)
+        public override void Draw(Android.Graphics.Canvas canvas)
         {
-            // Should we clip?
-            if(Element != null && Element.IsClippedToBounds)
-                canvas.ClipRect(new Android.Graphics.Rect(0, 0, Width, Height), Region.Op.Replace);
+            if (Element == null)
+            {
+                base.Draw(canvas);
+                return;
+            }
 
+            // Should we clip?
+            if (Element.IsClippedToBounds)
+                canvas.ClipRect(new Android.Graphics.Rect(0, 0, Width, Height), Region.Op.Replace);
+            
             // Perform custom drawing
             var ncanvas = new CanvasCanvas(canvas);
             Element.Draw(ncanvas, new NGraphics.Rect(0, 0, Width, Height));
 
             // Draw elements/children etc.
-            base.Draw (canvas);
+            base.Draw(canvas);
 
         }
+
         #endregion
 
         #region Touch Handling
@@ -112,37 +121,37 @@ namespace NControl.Droid
         /// <param name="e">E.</param>
         public override bool OnTouchEvent(MotionEvent e)
         {
-            var touchInfo = new[]{ 
+            var touchInfo = new[]{
                 new NGraphics.Point(e.GetX(),e.GetY())
             };
-
+            
             var result = false;
 
             // Handle touch actions
             switch (e.Action)
             {
                 case MotionEventActions.Down:
-                if (Element != null)
-                    result = Element.TouchesBegan(touchInfo);
+                    if (Element != null)
+                        result = Element.TouchesBegan(touchInfo);
                     break;
 
                 case MotionEventActions.Move:
-                if (Element != null)
-                    result = Element.TouchesMoved(touchInfo);
+                    if (Element != null)
+                        result = Element.TouchesMoved(touchInfo);
                     break;
 
                 case MotionEventActions.Up:
-                if (Element != null)
-                    result = Element.TouchesEnded(touchInfo);
-                    break;          
+                    if (Element != null)
+                        result = Element.TouchesEnded(touchInfo);
+                    break;
 
                 case MotionEventActions.Cancel:
-                if (Element != null)
-                    result = Element.TouchesCancelled(touchInfo);
+                    if (Element != null)
+                        result = Element.TouchesCancelled(touchInfo);
                     break;
             }
 
-            System.Diagnostics.Debug.WriteLine("OnTouchEvent: " + e.Action.ToString() + 
+            System.Diagnostics.Debug.WriteLine("OnTouchEvent: " + e.Action.ToString() +
                 " for " + Element.GetType().Name + " returning " + result);
 
             return result;
@@ -166,10 +175,10 @@ namespace NControl.Droid
         /// Gets the size of the screen.
         /// </summary>
         /// <returns>The screen size.</returns>
-        protected Xamarin.Forms.Size GetScreenSize ()
-        {           
+        protected Xamarin.Forms.Size GetScreenSize()
+        {
             var metrics = Forms.Context.Resources.DisplayMetrics;
-            return new Xamarin.Forms.Size (metrics.WidthPixels, metrics.HeightPixels);
+            return new Xamarin.Forms.Size(metrics.WidthPixels, metrics.HeightPixels);
         }
         #endregion
     }
