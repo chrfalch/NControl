@@ -88,8 +88,9 @@ namespace NControlDemo.FormsApp.Controls
         public override void Draw(NGraphics.ICanvas canvas, NGraphics.Rect rect)
         {
             base.Draw(canvas, rect);
+
             canvas.DrawLine(0, rect.Height-0.5, rect.Width, rect.Height-0.5, NGraphics.Colors.Gray, 0.5);
-            canvas.DrawEllipse(new Rect(-50, -50,250, 250), null, Brushes.Red);
+            canvas.DrawEllipse(new Rect(-rect.Width/3, 0, rect.Width, rect.Width), null, Brushes.Red);
         }
     }
 }

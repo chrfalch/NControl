@@ -96,13 +96,23 @@ namespace NControl.Droid
             // Should we clip?
             if (Element.IsClippedToBounds)
                 canvas.ClipRect(new Android.Graphics.Rect(0, 0, Width, Height), Region.Op.Replace);
-            
-            // Perform custom drawing
-            var ncanvas = new CanvasCanvas(canvas);
-            Element.Draw(ncanvas, new NGraphics.Rect(0, 0, Width, Height));
-
-            // Draw elements/children etc.
+           
+            // Draws the background and default android setup. Children will also be redrawn here
             base.Draw(canvas);
+
+            // Perform custom drawing from the NGraphics subsystems
+            var ncanvas = new CanvasCanvas(canvas);
+
+            var rect = new NGraphics.Rect(0, 0, Width, Height);
+            Element.Draw(ncanvas, rect);
+
+            // Redraw children - since we might have a composite control containing both children 
+            // and custom drawing code, we want children to be drawn last. The reason for this double-
+            // drawing is that the base.Draw(canvas) call will handle background which is needed before
+            // doing NGraphics drawing - but unfortunately it also draws children - which then will 
+            // be drawn below NGraphics drawings.
+            for (var i = 0; i < ChildCount; i++)
+                GetChildAt(i).Draw(canvas);
 
         }
 
@@ -150,10 +160,7 @@ namespace NControl.Droid
                         result = Element.TouchesCancelled(touchInfo);
                     break;
             }
-
-            System.Diagnostics.Debug.WriteLine("OnTouchEvent: " + e.Action.ToString() +
-                " for " + Element.GetType().Name + " returning " + result);
-
+                    
             return result;
         }
 
