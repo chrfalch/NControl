@@ -131,10 +131,12 @@ namespace NControl.Droid
         /// <param name="e">E.</param>
         public override bool OnTouchEvent(MotionEvent e)
         {
+            var scale = Element.Width / Width;
+
             var touchInfo = new[]{
-                new NGraphics.Point(e.GetX(),e.GetY())
+                new NGraphics.Point(e.GetX() * scale, e.GetY() * scale)
             };
-            
+
             var result = false;
 
             // Handle touch actions
