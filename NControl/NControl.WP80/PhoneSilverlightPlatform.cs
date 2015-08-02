@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 using NGraphics;
 using Transform = NGraphics.Transform;
 
-namespace NControl.WP80
+namespace NControl.Win
 {
     /// <summary>
     /// Windows Phone Silverlight Platform

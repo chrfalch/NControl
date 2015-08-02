@@ -84,7 +84,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="NControlNativeView.cs" />
     <Compile Include="NControlViewRenderer.cs" />
     <Compile Include="PhoneSilverlightPlatform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -126,6 +125,7 @@
       <Name>NControl</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\..\NControl.Win\NControl.Win.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <ProjectExtensions />

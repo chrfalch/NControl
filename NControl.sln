@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NControlDemo.FormsApp", "NControlDemo\NControlDemo.FormsApp\NControlDemo.FormsApp.csproj", "{39EA0550-B11F-4ABC-B23A-61EB4136C775}"
 EndProject
@@ -43,7 +43,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NControl.WindowsStore", "NC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NControlDemo.WindowsStore", "NControlDemo\NControlDemo.WindowsStore\NControlDemo.WindowsStore.csproj", "{E89422A2-5A8D-479E-AD71-BCC4945CFE9A}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NControl.Win", "NControl.Win\NControl.Win.shproj", "{1B491EE5-956C-45F5-98B6-B20A30F28875}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		NControl.Win\NControl.Win.projitems*{9e684606-7520-4c66-a530-f65aaa129b8f}*SharedItemsImports = 4
+		NControl.Win\NControl.Win.projitems*{1b491ee5-956c-45f5-98b6-b20a30f28875}*SharedItemsImports = 13
+		NControl.Win\NControl.Win.projitems*{7417df41-1260-4f98-8af5-23b9c6048aab}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
 		Ad-Hoc|ARM = Ad-Hoc|ARM
@@ -750,6 +757,7 @@ Global
 		{9E684606-7520-4C66-A530-F65AAA129B8F} = {915A7419-1DC8-43AE-962D-2F1046F01070}
 		{7417DF41-1260-4F98-8AF5-23B9C6048AAB} = {915A7419-1DC8-43AE-962D-2F1046F01070}
 		{51B9D799-0F0B-44F9-9CBE-5AEFF7A23C1E} = {915A7419-1DC8-43AE-962D-2F1046F01070}
+		{1B491EE5-956C-45F5-98B6-B20A30F28875} = {915A7419-1DC8-43AE-962D-2F1046F01070}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
