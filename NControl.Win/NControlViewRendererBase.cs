@@ -25,23 +25,14 @@
  * 
  ************************************************************************/
 
-using Microsoft.Phone.Controls;
 using NControl.Abstractions;
-using System;
 using System.Linq;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using NControl.Win;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.WinPhone;
-using Thickness = System.Windows.Thickness;
 
 namespace NControl.Win
 {
@@ -155,12 +146,14 @@ namespace NControl.Win
 
             UpdateClip();
 
-            (Control.Child as Canvas).Children.Clear();
+            (Control.Child as Canvas).Children.Clear();            
             var canvas = CreateCanvas((Control.Child as Canvas));
             var rect = new NGraphics.Rect(0, 0, Element.Width, Element.Height);
             canvas.DrawRectangle(rect, null, new NGraphics.SolidBrush(
                 new NGraphics.Color(Element.BackgroundColor.R,
-                Element.BackgroundColor.B, Element.BackgroundColor.G, Element.BackgroundColor.A)));
+                    Element.BackgroundColor.G, 
+                    Element.BackgroundColor.B, 
+                    Element.BackgroundColor.A)));
 
             Element.Draw(canvas, rect);
         }
@@ -177,10 +170,10 @@ namespace NControl.Win
             if (Element.Width.Equals(-1) || Element.Height.Equals(-1) || ActualWidth == 0 || ActualHeight == 0)
                 return;
 
-            if (Element.IsClippedToBounds)
-                Control.Clip = new RectangleGeometry { Rect = new Rect(0, 0, this.ActualWidth, this.ActualHeight) };
+            if (Element.IsClippedToBounds)            
+                Control.Clip = new RectangleGeometry { Rect = new Rect(0, 0, this.ActualWidth, this.ActualHeight) };                
             else
-                Control.Clip = null;
+                Control.Clip = null;            
         }
 
         /// <summary>
