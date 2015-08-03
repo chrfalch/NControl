@@ -48,7 +48,7 @@ namespace NControl.Win
     /// <summary>
     /// NControlView renderer.
     /// </summary>
-    public abstract class NControlViewRendererBase : ViewRenderer<NControlView, NControlNativeView>
+    public abstract class NControlViewRendererBase : ViewRenderer<NControlView, Border>
     {
         /// <summary>
         /// Used for registration with dependency service
@@ -86,17 +86,21 @@ namespace NControl.Win
 
             if (e.NewElement != null)
             {
-                e.NewElement.OnInvalidate += HandleInvalidate;
+                e.NewElement.OnInvalidate += HandleInvalidate;                
             }
 
             if (Control == null)
             {
-                var ctrl = new NControlNativeView();
+                var ctrl = new Border();
+                ctrl.Child = new Canvas();
                 
                 SetNativeControl(ctrl);
 
-                UpdateClip();
+                // UpdateClip();
                 UpdateInputTransparent();
+
+                Control.Loaded += (s, evt) => UpdateClip();
+                Control.SizeChanged += (s, evt) => UpdateClip();
             }
 
             RedrawControl();
@@ -128,15 +132,10 @@ namespace NControl.Win
                 UpdateClip();
 
             else if (e.PropertyName == VisualElement.HeightProperty.PropertyName ||
-                e.PropertyName == VisualElement.WidthProperty.PropertyName)
-            {
-                // Redraw when height/width changes
-                UpdateClip();
+                e.PropertyName == VisualElement.WidthProperty.PropertyName ||
+                e.PropertyName == VisualElement.BackgroundColorProperty.PropertyName)
                 RedrawControl();
-            }
-            else if (e.PropertyName == NControlView.BackgroundColorProperty.PropertyName)
-                RedrawControl();
-            else if (e.PropertyName == NControlView.InputTransparentProperty.PropertyName)
+            else if (e.PropertyName == VisualElement.InputTransparentProperty.PropertyName)
                 UpdateInputTransparent();
         }
         
@@ -150,11 +149,11 @@ namespace NControl.Win
             if (Element.Width.Equals(-1) || Element.Height.Equals(-1))
                 return;
 
-            if (Control.Canvas == null)
+            if (Control.Child == null)
                 return;
 
-            Control.Canvas.Children.Clear();
-            var canvas = CreateCanvas(Control.Canvas);
+            (Control.Child as Canvas).Children.Clear();
+            var canvas = CreateCanvas((Control.Child as Canvas));
             Element.Draw(canvas, new NGraphics.Rect(0, 0, Element.Width, Element.Height));
         }
 
@@ -167,10 +166,13 @@ namespace NControl.Win
         /// </summary>
         private void UpdateClip()
         {
-            if (Element.Width.Equals(-1) || Element.Height.Equals(-1))
+            if (Element.Width.Equals(-1) || Element.Height.Equals(-1) || ActualWidth == 0 || ActualHeight == 0)
                 return;
 
-            Control.SetClip(Element.IsClippedToBounds);
+            if (Element.IsClippedToBounds)
+                Control.Clip = new RectangleGeometry { Rect = new Rect(0, 0, this.ActualWidth, this.ActualHeight) };
+            else
+                Control.Clip = null;
         }
 
         /// <summary>

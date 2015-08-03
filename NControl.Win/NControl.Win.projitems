@@ -9,7 +9,6 @@
     <Import_RootNamespace>NControl.Win</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)NControlNativeView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NControlViewRendererBase.cs" />
   </ItemGroup>
 </Project>
