@@ -96,7 +96,6 @@ namespace NControl.Win
                 
                 SetNativeControl(ctrl);
 
-                // UpdateClip();
                 UpdateInputTransparent();
 
                 Control.Loaded += (s, evt) => UpdateClip();
@@ -111,7 +110,9 @@ namespace NControl.Win
         /// </summary>
         protected override void UpdateBackgroundColor()
         {
-            base.UpdateBackgroundColor();
+            // Do not update background!!!! This will destroy clipping. We do 
+            // redraw of the background color in the redraw control method
+            // base.UpdateBackgroundColor();
 
             RedrawControl();
         }
@@ -152,9 +153,16 @@ namespace NControl.Win
             if (Control.Child == null)
                 return;
 
+            UpdateClip();
+
             (Control.Child as Canvas).Children.Clear();
             var canvas = CreateCanvas((Control.Child as Canvas));
-            Element.Draw(canvas, new NGraphics.Rect(0, 0, Element.Width, Element.Height));
+            var rect = new NGraphics.Rect(0, 0, Element.Width, Element.Height);
+            canvas.DrawRectangle(rect, null, new NGraphics.SolidBrush(
+                new NGraphics.Color(Element.BackgroundColor.R,
+                Element.BackgroundColor.B, Element.BackgroundColor.G, Element.BackgroundColor.A)));
+
+            Element.Draw(canvas, rect);
         }
 
         #endregion
