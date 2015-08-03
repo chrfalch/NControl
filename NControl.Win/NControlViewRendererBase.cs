@@ -165,21 +165,21 @@ namespace NControl.Win
         /// <summary>
         /// Updates clic on the element
         /// </summary>
-        private void UpdateClip()
+        protected virtual void UpdateClip()
         {
             if (Element.Width.Equals(-1) || Element.Height.Equals(-1) || ActualWidth == 0 || ActualHeight == 0)
                 return;
 
             if (Element.IsClippedToBounds)            
-                Control.Clip = new RectangleGeometry { Rect = new Rect(0, 0, this.ActualWidth, this.ActualHeight) };                
+                Control.Clip = new RectangleGeometry { Rect = new Rect(0, 0, this.ActualWidth, this.ActualHeight) }; 
             else
-                Control.Clip = null;            
+                Control.Clip = null;                         
         }
 
         /// <summary>
         /// Updates the IsHitTestVisible property on the native control
         /// </summary>
-        private void UpdateInputTransparent()
+        protected virtual void UpdateInputTransparent()
         {
             Control.IsHitTestVisible = !Element.InputTransparent;
         }
