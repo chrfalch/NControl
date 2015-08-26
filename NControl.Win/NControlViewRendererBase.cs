@@ -91,6 +91,7 @@ namespace NControl.Win
 
                 Control.Loaded += (s, evt) => UpdateClip();
                 Control.SizeChanged += (s, evt) => UpdateClip();
+
             }
 
             RedrawControl();
@@ -208,10 +209,23 @@ namespace NControl.Win
         {
             // Get the primary touch point. We do not track multitouch at the moment.
             var primaryTouchPoint = e.GetPrimaryTouchPoint(System.Windows.Application.Current.RootVisual);
+            
+            var uiElements = VisualTreeHelper.FindElementsInHostCoordinates(
+                primaryTouchPoint.Position, System.Windows.Application.Current.RootVisual);
 
-            var uiElements = VisualTreeHelper.FindElementsInHostCoordinates(primaryTouchPoint.Position, System.Windows.Application.Current.RootVisual);
+            // System.Console.WriteLine("Starting Touch_FrameReported");
+
             foreach(var uiElement in uiElements)
             {
+                if(uiElement is System.Windows.Controls.Button ||
+                    uiElement is System.Windows.Controls.TextBox ||
+                    uiElement is System.Windows.Controls.ListBox ||
+                    uiElement is System.Windows.Controls.CheckBox)
+                {
+                    //System.Console.WriteLine("Element " + uiElement.GetType() + " focusable, breaking.");
+                    break;
+                }
+
                 // Are we interested?
                 var renderer = uiElement as NControlViewRendererBase;
                 if (renderer == null)
@@ -219,7 +233,9 @@ namespace NControl.Win
 
                 // Get NControlView element
                 var element = renderer.Element;
-            
+
+               // System.Console.WriteLine("Handling " + primaryTouchPoint.Action + " for " + element.GetType().Name + " (renderer: " + renderer.GetType().Name + ")");
+
                 // Get this' position on screen
                 var transform = System.Windows.Application.Current.RootVisual.TransformToVisual(renderer.Control);
 
