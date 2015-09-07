@@ -25,7 +25,9 @@
  * 
  ************************************************************************/
 
+using Microsoft.Phone.Controls;
 using NControl.Abstractions;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -54,7 +56,7 @@ namespace NControl.Win
         /// </summary>
         public NControlViewRendererBase()
             : base()
-        {
+        {            
         }
 
         /// <summary>
@@ -96,7 +98,7 @@ namespace NControl.Win
 
             RedrawControl();
         }
-
+        
         /// <summary>
         /// Redraw when background color changes
         /// </summary>
@@ -209,15 +211,32 @@ namespace NControl.Win
         {
             // Get the primary touch point. We do not track multitouch at the moment.
             var primaryTouchPoint = e.GetPrimaryTouchPoint(System.Windows.Application.Current.RootVisual);
+
+            var paf = System.Windows.Application.Current.RootVisual as PhoneApplicationFrame;
+            var allUiElements = VisualTreeHelper.FindElementsInHostCoordinates(new Rect(0, 0, paf.ActualWidth, paf.ActualHeight), paf);
+            UIElement parent = paf;
+
+            var popups = VisualTreeHelper.GetOpenPopups();
             
-            var uiElements = VisualTreeHelper.FindElementsInHostCoordinates(
-                primaryTouchPoint.Position, System.Windows.Application.Current.RootVisual);
-
-            // System.Console.WriteLine("Starting Touch_FrameReported");
-
-            foreach(var uiElement in uiElements)
+            // if popups, then we should use the message box as the parent when finding elements to click
+            if(popups.Count() > 0)
             {
-                if(uiElement is System.Windows.Controls.Button ||
+                var topMostPopup = popups.First();
+
+                foreach(var element in allUiElements)
+                    if(element == topMostPopup.Child)
+                    {
+                        parent = element;
+                        break;
+                    }
+            }
+
+            var uiElements = VisualTreeHelper.FindElementsInHostCoordinates(
+                primaryTouchPoint.Position, parent);
+
+            foreach (var uiElement in uiElements)
+            {
+                if (uiElement is System.Windows.Controls.Button ||
                     uiElement is System.Windows.Controls.TextBox ||
                     uiElement is System.Windows.Controls.ListBox ||
                     uiElement is System.Windows.Controls.CheckBox)
