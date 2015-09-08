@@ -9,6 +9,7 @@
     <Import_RootNamespace>NControl.Win</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)IPopupInformationProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NControlViewRendererBase.cs" />
   </ItemGroup>
 </Project>

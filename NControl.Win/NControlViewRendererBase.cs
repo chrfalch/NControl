@@ -216,19 +216,33 @@ namespace NControl.Win
             var allUiElements = VisualTreeHelper.FindElementsInHostCoordinates(new Rect(0, 0, paf.ActualWidth, paf.ActualHeight), paf);
             UIElement parent = paf;
 
-            var popups = VisualTreeHelper.GetOpenPopups();
-            
-            // if popups, then we should use the message box as the parent when finding elements to click
-            if(popups.Count() > 0)
+            // Look for other popups using the popupprovider interface
+            var popupInfoProvider = DependencyService.Get<IPopupInformationProvider>();
+            if (popupInfoProvider != null)
             {
-                var topMostPopup = popups.First();
+                var popupParent = popupInfoProvider.GetPopupParent();
+                if (popupParent != null)
+                    parent = popupParent;
+            }
 
-                foreach(var element in allUiElements)
-                    if(element == topMostPopup.Child)
+            if (parent == paf)
+            {
+                var popups = VisualTreeHelper.GetOpenPopups();
+
+                // if popups, then we should use the message box as the parent when finding elements to click
+                if (popups.Count() > 0)
+                {
+                    var topMostPopup = popups.FirstOrDefault(p => p.IsOpen && p.ActualHeight != 0 && p.ActualWidth != 0);
+                    if (topMostPopup != null)
                     {
-                        parent = element;
-                        break;
+                        foreach (var element in allUiElements)
+                            if (element == topMostPopup.Child)
+                            {
+                                parent = element;
+                                break;
+                            }
                     }
+                }
             }
 
             var uiElements = VisualTreeHelper.FindElementsInHostCoordinates(
