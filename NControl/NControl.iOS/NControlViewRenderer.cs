@@ -33,6 +33,8 @@ using NGraphics;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
+using Foundation;
+using System;
 
 [assembly: ExportRenderer(typeof(NControlView), typeof(NControlViewRenderer))]
 namespace NControl.iOS
@@ -40,6 +42,7 @@ namespace NControl.iOS
 	/// <summary>
 	/// NControlView renderer.
 	/// </summary>
+    [Preserve(AllMembers = true)]
     public class NControlViewRenderer: VisualElementRenderer<NControlView>
 	{
         /// <summary>
@@ -50,7 +53,10 @@ namespace NControl.iOS
 		/// <summary>
 		/// Used for registration with dependency service
 		/// </summary>
-		public new static void Init() { }
+		public static void Init()
+        {
+            var temp = DateTime.Now;
+        }
 
         /// <summary>
         /// Raises the element changed event.

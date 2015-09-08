@@ -41,12 +41,16 @@ namespace NControl.Droid
     /// <summary>
     /// NControlView renderer.
     /// </summary>
+    [Preserve(AllMembers = true)]
     public class NControlViewRenderer : VisualElementRenderer<NControlView>
     {
         /// <summary>
         /// Used for registration with dependency service
         /// </summary>
-        public static void Init() { }
+        public static void Init ()
+        {
+            var temp = DateTime.Now;
+        }
 
         /// <summary>
         /// Raises the element changed event.
