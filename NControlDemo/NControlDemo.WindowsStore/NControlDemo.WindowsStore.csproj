@@ -144,12 +144,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="NGraphics">
-      <HintPath>..\..\packages\NGraphics.0.2.2\lib\win81\NGraphics.dll</HintPath>
+    <Reference Include="NGraphics, Version=0.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NGraphics.0.3.1\lib\win81\NGraphics.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NGraphics.WindowsStore">
-      <HintPath>..\..\packages\NGraphics.0.2.2\lib\win81\NGraphics.WindowsStore.dll</HintPath>
+    <Reference Include="NGraphics.WindowsStore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NGraphics.0.3.1\lib\win81\NGraphics.WindowsStore.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SharpDX">

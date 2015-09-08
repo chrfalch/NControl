@@ -14,7 +14,7 @@
     <tags>xamarin, pcl, xam.pcl, android, xamarin.forms, ios</tags>
        <dependencies>
          <dependency id="Xamarin.Forms" version="1.4.2.6355" />
-         <dependency id="NGraphics" version="0.2.2" />
+         <dependency id="NGraphics" version="0.3.1" />
        </dependencies>
    </metadata>
    <files>

@@ -92,6 +92,22 @@ namespace NControl.WindowsStore
         /// </summary>
         public BitmapImage Bitmap { get; private set; }
 
+        public Size Size
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public double Scale
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -517,6 +533,15 @@ namespace NControl.WindowsStore
                     G = fromPen.Color.G,
                     B = fromPen.Color.B
                 });            
+        }
+
+        public Size MeasureText(string text, Font font)
+        {
+            var tt = new TextBlock();
+            tt.FontFamily = new FontFamily(font.Family);
+            tt.FontSize = font.Size;
+            tt.Text = text;
+            return new Size(tt.ActualWidth, tt.ActualWidth);
         }
 
         #endregion
