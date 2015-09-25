@@ -62,7 +62,19 @@ namespace NControl.Droid
             if (e.NewElement != null)
                 e.NewElement.OnInvalidate += HandleInvalidate;
 
+            // Lets have a clear background
+            this.SetBackgroundColor (Android.Graphics.Color.Transparent);
+
             Invalidate();
+        }
+
+        /// <summary>
+        /// Override to avoid setting the background to a given color
+        /// </summary>
+        protected override void UpdateBackgroundColor()
+        {
+            // Do NOT call update background here.
+            // base.UpdateBackgroundColor();
         }
 
         /// <summary>
@@ -93,17 +105,18 @@ namespace NControl.Droid
                 return;
             }
 
-            // Should we clip?
-            if (Element.IsClippedToBounds)
-                canvas.ClipRect(new Android.Graphics.Rect(0, 0, Width, Height), Region.Op.Replace);
-           
             // Draws the background and default android setup. Children will also be redrawn here
-            base.Draw(canvas);
+            // base.Draw(canvas);
 
             // Perform custom drawing from the NGraphics subsystems
             var ncanvas = new CanvasCanvas(canvas);
 
             var rect = new NGraphics.Rect(0, 0, Width, Height);
+
+            // Fill background 
+            ncanvas.FillRectangle(rect, new NGraphics.Color(Element.BackgroundColor.R, Element.BackgroundColor.G, Element.BackgroundColor.B, Element.BackgroundColor.A));
+
+            // Custom drawing
             Element.Draw(ncanvas, rect);
 
             // Redraw children - since we might have a composite control containing both children 
@@ -111,9 +124,7 @@ namespace NControl.Droid
             // drawing is that the base.Draw(canvas) call will handle background which is needed before
             // doing NGraphics drawing - but unfortunately it also draws children - which then will 
             // be drawn below NGraphics drawings.
-            for (var i = 0; i < ChildCount; i++)
-                GetChildAt(i).Draw(canvas);
-
+            base.Draw(canvas);
         }
 
         #endregion
