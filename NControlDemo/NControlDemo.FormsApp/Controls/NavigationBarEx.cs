@@ -55,8 +55,8 @@ namespace NControlDemo.FormsApp.Controls
                 TextColor = Color.Black,
                 Text = "", 
                 BackgroundColor = Xamarin.Forms.Color.Transparent,
-                XAlign = Xamarin.Forms.TextAlignment.Center, 
-                YAlign = Xamarin.Forms.TextAlignment.Center 
+                HorizontalTextAlignment = Xamarin.Forms.TextAlignment.Center,
+                VerticalTextAlignment = Xamarin.Forms.TextAlignment.Center 
             };
 
             var layout = new RelativeLayout();

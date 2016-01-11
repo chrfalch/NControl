@@ -59,8 +59,8 @@ namespace NControlDemo.FormsApp.Controls
                 TextColor = Xamarin.Forms.Color.White,
                 FontSize = 17,
                 BackgroundColor = Xamarin.Forms.Color.Transparent,
-                XAlign = Xamarin.Forms.TextAlignment.Center,
-                YAlign = Xamarin.Forms.TextAlignment.Center,
+                HorizontalTextAlignment = Xamarin.Forms.TextAlignment.Center,
+                VerticalTextAlignment = Xamarin.Forms.TextAlignment.Center,
             };
             
             _circles = new NControlView {

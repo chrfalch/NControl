@@ -81,7 +81,7 @@ namespace NControlDemo.FormsApp.Views
 				TextColor = Color.White,
 				BackgroundColor = Color.Transparent,
 				FontSize = 12,
-				XAlign = TextAlignment.Center
+                HorizontalTextAlignment = TextAlignment.Center
 			};
 
 			activityLabel.SetBinding(Label.TextProperty,
