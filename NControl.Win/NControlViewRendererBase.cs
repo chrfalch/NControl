@@ -132,6 +132,8 @@ namespace NControl.Win
                 RedrawControl();
             else if (e.PropertyName == VisualElement.InputTransparentProperty.PropertyName)
                 UpdateInputTransparent();
+            else if (e.PropertyName == VisualElement.IsVisibleProperty.PropertyName)
+                RedrawControl();
         }
         
         #region Drawing
