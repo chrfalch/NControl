@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
    <metadata minClientVersion="2.8.1">
        <id>NControl</id>
-    <version>0.7.1</version>
+    <version>0.8.0</version>
     <authors>Christian Falch, Henrik Ilgen, Adam (awolf), BlueRaja, Frank Neuman</authors>
     <owners>Christian Falch</owners>
     <licenseUrl>https://github.com/chrfalch/NControl/blob/master/LICENSE.md</licenseUrl>
@@ -13,7 +13,7 @@
     <copyright>Copyright 2015</copyright>
     <tags>xamarin, pcl, xam.pcl, android, xamarin.forms, ios</tags>
        <dependencies>
-         <dependency id="Xamarin.Forms" version="1.4.2.6355" />
+         <dependency id="Xamarin.Forms" version="2.0.0.6490" />
          <dependency id="NGraphics" version="0.3.1" />
        </dependencies>
    </metadata>

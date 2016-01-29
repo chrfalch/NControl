@@ -92,6 +92,8 @@ namespace NControl.Droid
 
             if (e.PropertyName == NControlView.BackgroundColorProperty.PropertyName)
                 Element.Invalidate();
+            else if (e.PropertyName == NControlView.IsVisibleProperty.PropertyName)
+                Element.Invalidate();
         }
 
         #region Native Drawing 
