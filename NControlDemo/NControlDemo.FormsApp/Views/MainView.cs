@@ -120,9 +120,9 @@ namespace NControlDemo.FormsApp.Views
                     }
                 }, 0, 0);
 
-            var buttonOverlay = new BlueFrameControl();
-
-            grid.Children.Add(buttonOverlay, 0, 0);
+//            var buttonOverlay = new BlueFrameControl();
+//
+//            grid.Children.Add(buttonOverlay, 0, 0);
 
             _bottomBar = new NControlView
             {
