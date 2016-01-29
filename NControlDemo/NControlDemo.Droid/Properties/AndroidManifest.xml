@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-	<uses-sdk android:minSdkVersion="10" android:targetSdkVersion="21" />
+	<uses-sdk />
 	<application android:label="NControlDemo" android:theme="@style/Theme.NewSolution" android:icon="@drawable/icon">
 		<meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="YOUR_API_KEY_HERE" />
 	</application>

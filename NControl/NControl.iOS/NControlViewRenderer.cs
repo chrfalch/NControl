@@ -86,6 +86,8 @@ namespace NControl.iOS
                     _gestureRecognizer = new UITouchesGestureRecognizer(e.NewElement, NativeView);
                     NativeView.AddGestureRecognizer(_gestureRecognizer);
                 }
+
+                e.NewElement.Invalidate();
             }
         }
 
@@ -101,6 +103,8 @@ namespace NControl.iOS
             if (e.PropertyName == NControlView.IsClippedToBoundsProperty.PropertyName)
                 Layer.MasksToBounds = Element.IsClippedToBounds;
             else if (e.PropertyName == NControlView.BackgroundColorProperty.PropertyName)
+                Element.Invalidate();
+            else if(e.PropertyName == NControlView.IsVisibleProperty.PropertyName)
                 Element.Invalidate();
         }
 

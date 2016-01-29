@@ -53,16 +53,16 @@ namespace NControlDemo.FormsApp.Controls
                 Text = FontAwesomeLabel.FACog,
                 FontSize = 39,
                 TextColor = Xamarin.Forms.Color.FromHex("#CECECE"),
-                XAlign = Xamarin.Forms.TextAlignment.Center,
-                YAlign = Xamarin.Forms.TextAlignment.Center,
+                HorizontalTextAlignment = Xamarin.Forms.TextAlignment.Center,
+                VerticalTextAlignment = Xamarin.Forms.TextAlignment.Center,
             };
 
             var cog2 = new FontAwesomeLabel{ 
                 Text = FontAwesomeLabel.FACog,
                 FontSize = 18,
                 TextColor = Xamarin.Forms.Color.FromHex("#CECECE"),
-                XAlign = Xamarin.Forms.TextAlignment.Center,
-                YAlign = Xamarin.Forms.TextAlignment.Center,
+                HorizontalTextAlignment = Xamarin.Forms.TextAlignment.Center,
+                VerticalTextAlignment = Xamarin.Forms.TextAlignment.Center,
             };
                 
             _animation = new Animation((val) => {
