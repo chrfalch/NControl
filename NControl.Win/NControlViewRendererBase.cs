@@ -38,10 +38,13 @@ using Xamarin.Forms.Platform.WinPhone;
 
 namespace NControl.Win
 {
+    public abstract class NControlViewRendererBase : NControlViewRendererBase<NControlView> { }
+
     /// <summary>
     /// NControlView renderer.
     /// </summary>
-    public abstract class NControlViewRendererBase : ViewRenderer<NControlView, Border>
+    public abstract class NControlViewRendererBase<TNControlView> : ViewRenderer<TNControlView, Border>
+        where TNControlView : NControlView
     {
         /// <summary>
         /// Used for registration with dependency service
@@ -70,7 +73,7 @@ namespace NControl.Win
         /// Raises the element changed event.
         /// </summary>
         /// <param name="e">E.</param>
-        protected override void OnElementChanged(ElementChangedEventArgs<NControlView> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<TNControlView> e)
         {
             base.OnElementChanged(e);
 
@@ -262,7 +265,7 @@ namespace NControl.Win
                 }
 
                 // Are we interested?
-                var renderer = uiElement as NControlViewRendererBase;
+                var renderer = uiElement as NControlViewRendererBase<TNControlView>;
                 if (renderer == null)
                     continue;
 

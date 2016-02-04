@@ -10,10 +10,13 @@ using Xamarin.Forms;
 [assembly: ExportRenderer(typeof(NControlView), typeof(NControlViewRenderer))]
 namespace NControl.WP81
 {
+    public class NControlViewRenderer : NControlViewRenderer<NControlView> { }
+
     /// <summary>
     /// NControlView renderer.
     /// </summary>
-    public class NControlViewRenderer: NControlViewRendererBase
+    public class NControlViewRenderer<TNControlView>: NControlViewRendererBase<TNControlView>
+        where TNControlView : NControlView
     {
         /// <summary>
         /// Used for registration with dependency service

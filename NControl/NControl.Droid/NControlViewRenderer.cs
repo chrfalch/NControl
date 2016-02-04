@@ -38,11 +38,14 @@ using Xamarin.Forms.Platform.Android;
 [assembly: ExportRenderer(typeof(NControlView), typeof(NControlViewRenderer))]
 namespace NControl.Droid
 {
+    public class NControlViewRenderer : NControlViewRenderer<NControlView> { }
+
     /// <summary>
     /// NControlView renderer.
     /// </summary>
     [Preserve(AllMembers = true)]
-    public class NControlViewRenderer : VisualElementRenderer<NControlView>
+    public class NControlViewRenderer<TNControlView> : VisualElementRenderer<TNControlView>
+        where TNControlView : NControlView
     {
         /// <summary>
         /// Used for registration with dependency service
@@ -56,7 +59,7 @@ namespace NControl.Droid
         /// Raises the element changed event.
         /// </summary>
         /// <param name="e">E.</param>
-        protected override void OnElementChanged(ElementChangedEventArgs<NControlView> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<TNControlView> e)
         {
             base.OnElementChanged(e);
 

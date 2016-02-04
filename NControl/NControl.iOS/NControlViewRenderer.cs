@@ -39,11 +39,14 @@ using System;
 [assembly: ExportRenderer(typeof(NControlView), typeof(NControlViewRenderer))]
 namespace NControl.iOS
 {
-	/// <summary>
-	/// NControlView renderer.
-	/// </summary>
+    public class NControlViewRenderer : NControlViewRenderer<NControlView> { }
+
+    /// <summary>
+    /// NControlView renderer.
+    /// </summary>
     [Preserve(AllMembers = true)]
-    public class NControlViewRenderer: VisualElementRenderer<NControlView>
+    public class NControlViewRenderer<TNControlView> : VisualElementRenderer<TNControlView>
+        where TNControlView : NControlView
 	{
         /// <summary>
         /// The gesture recognizer.
@@ -62,7 +65,7 @@ namespace NControl.iOS
         /// Raises the element changed event.
         /// </summary>
         /// <param name="e">E.</param>
-        protected override void OnElementChanged(ElementChangedEventArgs<NControlView> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<TNControlView> e)
         {
             base.OnElementChanged(e);
 
