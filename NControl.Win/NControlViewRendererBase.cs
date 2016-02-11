@@ -153,8 +153,8 @@ namespace NControl.Win
 
             (Control.Child as Canvas).Children.Clear();            
             var canvas = CreateCanvas((Control.Child as Canvas));
-            var rect = new NGraphics.Rect(0, 0, Element.Width, Element.Height);
-            canvas.DrawRectangle(rect, null, new NGraphics.SolidBrush(
+            var rect = new NGraphics.Rect(0, 0, Element.Width, Element.Height);            
+            canvas.DrawRectangle(rect, new NGraphics.Size(0, 0), null, new NGraphics.SolidBrush(
                 new NGraphics.Color(Element.BackgroundColor.R,
                     Element.BackgroundColor.G, 
                     Element.BackgroundColor.B, 
