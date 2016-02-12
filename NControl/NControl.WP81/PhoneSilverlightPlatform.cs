@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -71,6 +72,11 @@ namespace NControl.WP81
                 bitmap.SetSource(fs);
                 return new BitmapImageImage(bitmap);
             }
+        }
+
+        public Task<Stream> OpenFileStreamForWritingAsync(string path)
+        {
+            throw new NotImplementedException();
         }
     }
 
@@ -533,6 +539,11 @@ namespace NControl.WP81
             tt.FontSize = font.Size;
             tt.Text = text;
             return new Size(tt.ActualWidth, tt.ActualWidth);
+        }
+
+        public void DrawRectangle(Rect frame, Size corner, Pen pen = null, NGraphics.Brush brush = null)
+        {
+            DrawRectangle(frame, pen, brush);
         }
 
         #endregion

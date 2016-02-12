@@ -106,13 +106,17 @@ namespace NControl.Droid
         public override void Draw(Android.Graphics.Canvas canvas)
         {
             if (Element == null)
-            {
+            {               
                 base.Draw(canvas);
                 return;
             }
 
             // Draws the background and default android setup. Children will also be redrawn here
             // base.Draw(canvas);
+
+            // Set up clipping
+            if (Element.IsClippedToBounds)
+                canvas.ClipRect(new Android.Graphics.Rect(0, 0, Width, Height));
 
             // Perform custom drawing from the NGraphics subsystems
             var ncanvas = new CanvasCanvas(canvas);

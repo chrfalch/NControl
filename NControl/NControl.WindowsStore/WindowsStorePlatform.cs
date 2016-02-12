@@ -80,7 +80,12 @@ namespace NControl.WindowsStore
             bitmap.SetSource(fileStream);
             return new BitmapImageImage(bitmap);
         }
-   }
+
+        public Task<Stream> OpenFileStreamForWritingAsync(string path)
+        {
+            throw new NotImplementedException();
+        }
+    }
 
     /// <summary>
     /// Bitmap encapsulation
@@ -191,6 +196,22 @@ namespace NControl.WindowsStore
         /// Returns scale, always 1.0
         /// </summary>
         public double Scale { get { return 1.0; } }
+
+        Size IImageCanvas.Size
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        double IImageCanvas.Scale
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         #endregion
 
@@ -542,6 +563,16 @@ namespace NControl.WindowsStore
             tt.FontSize = font.Size;
             tt.Text = text;
             return new Size(tt.ActualWidth, tt.ActualWidth);
+        }
+
+        IImage IImageCanvas.GetImage()
+        {
+            throw new NotImplementedException();
+        }
+
+        void ICanvas.DrawRectangle(Rect frame, Size corner, Pen pen, NGraphics.Brush brush)
+        {
+            DrawRectangle(frame, pen, brush);
         }
 
         #endregion
