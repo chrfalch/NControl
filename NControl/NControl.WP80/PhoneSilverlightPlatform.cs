@@ -554,7 +554,7 @@ namespace NControl.Win
 
         public void DrawRectangle(Rect frame, Size corner, Pen pen = null, NGraphics.Brush brush = null)
         {
-            throw new NotImplementedException();
+            DrawRectangle(frame, pen, brush);
         }
 
         #endregion

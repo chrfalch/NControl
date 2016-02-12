@@ -570,49 +570,9 @@ namespace NControl.WindowsStore
             throw new NotImplementedException();
         }
 
-        void ICanvas.SaveState()
-        {
-            throw new NotImplementedException();
-        }
-
-        void ICanvas.Transform(Transform transform)
-        {
-            throw new NotImplementedException();
-        }
-
-        void ICanvas.RestoreState()
-        {
-            throw new NotImplementedException();
-        }
-
-        Size ICanvas.MeasureText(string text, Font font)
-        {
-            throw new NotImplementedException();
-        }
-
-        void ICanvas.DrawText(string text, Rect frame, Font font, TextAlignment alignment, Pen pen, NGraphics.Brush brush)
-        {
-            throw new NotImplementedException();
-        }
-
-        void ICanvas.DrawPath(IEnumerable<PathOp> ops, Pen pen, NGraphics.Brush brush)
-        {
-            throw new NotImplementedException();
-        }
-
         void ICanvas.DrawRectangle(Rect frame, Size corner, Pen pen, NGraphics.Brush brush)
         {
-            throw new NotImplementedException();
-        }
-
-        void ICanvas.DrawEllipse(Rect frame, Pen pen, NGraphics.Brush brush)
-        {
-            throw new NotImplementedException();
-        }
-
-        void ICanvas.DrawImage(IImage image, Rect frame, double alpha)
-        {
-            throw new NotImplementedException();
+            DrawRectangle(frame, pen, brush);
         }
 
         #endregion
