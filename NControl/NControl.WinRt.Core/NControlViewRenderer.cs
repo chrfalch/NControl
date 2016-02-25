@@ -25,21 +25,17 @@
  * 
  ************************************************************************/
 
-using System;
 using System.Linq;
-using Windows.Devices.Input;
 using NControl.Abstractions;
-using Windows.UI.Input;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using NControl.WindowsStore;
+using NControl.WinRt.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.WinRT;
 
 [assembly: ExportRenderer(typeof(NControlView), typeof(NControlViewRenderer))]
-namespace NControl.WindowsStore
+namespace NControl.WinRt.Core
 {
     /// <summary>
     /// NControlView renderer.
