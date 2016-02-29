@@ -38,6 +38,15 @@ namespace NControl.Abstractions
 	/// </summary>
     public class NControlView: ContentView
 	{
+        #region Private Members
+
+        /// <summary>
+        /// Backing field for current platform
+        /// </summary>
+        private IPlatform _platform;
+
+        #endregion
+
         #region Events
 
         /// <summary>
@@ -118,11 +127,16 @@ namespace NControl.Abstractions
         public IPlatform Platform
         {
             get 
-            {               
-                if (OnGetPlatform == null)
-                    throw new ArgumentNullException("OnGetPlatform");
+            {     
+                if(_platform == null)
+                {           
+                    if (OnGetPlatform == null)
+                        throw new ArgumentNullException("OnGetPlatform");
 
-                return OnGetPlatform();
+                    _platform = OnGetPlatform();
+                }
+
+                return _platform;
             }
         }
 
