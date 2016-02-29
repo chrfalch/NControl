@@ -75,6 +75,7 @@ namespace NControl.iOS
                 }
 
                 e.OldElement.OnInvalidate -= HandleInvalidate;
+                e.OldElement.OnGetPlatform -= OnGetPlatformHandler;
             }
 
             if (e.NewElement != null)
@@ -86,6 +87,8 @@ namespace NControl.iOS
                     _gestureRecognizer = new UITouchesGestureRecognizer(e.NewElement, NativeView);
                     NativeView.AddGestureRecognizer(_gestureRecognizer);
                 }
+
+                e.NewElement.OnGetPlatform += OnGetPlatformHandler;
 
                 e.NewElement.Invalidate();
             }
@@ -155,6 +158,14 @@ namespace NControl.iOS
         #endregion
 
         #region Private Members
+
+        /// <summary>
+        /// Callback for the OnGetPlatform event in the abstract control
+        /// </summary>
+        private IPlatform OnGetPlatformHandler ()
+        {
+            return new ApplePlatform();
+        }
 
         /// <summary>
         /// Handles the invalidate.

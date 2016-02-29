@@ -67,6 +67,20 @@ namespace NControl.Abstractions
 
         #endregion
 
+        #region Delegates and Callbacks
+
+        /// <summary>
+        /// Get platform delegate
+        /// </summary>
+        public delegate IPlatform GetPlatformDelegate();
+
+        /// <summary>
+        /// Occurs when on create canvas.
+        /// </summary>
+        public event GetPlatformDelegate OnGetPlatform;
+
+        #endregion
+
 		#region Constructors
 
 		/// <summary>
@@ -95,7 +109,22 @@ namespace NControl.Abstractions
 	    /// Gets the drawing function.
 	    /// </summary>
 	    /// <value>The drawing function.</value>	    
-	    public Action<ICanvas, Rect> DrawingFunction { get; set; }       
+	    public Action<ICanvas, Rect> DrawingFunction { get; set; }     
+
+        /// <summary>
+        /// Gets the platform.
+        /// </summary>
+        /// <value>The platform.</value>
+        public IPlatform Platform
+        {
+            get 
+            {               
+                if (OnGetPlatform == null)
+                    throw new ArgumentNullException("OnGetPlatform");
+
+                return OnGetPlatform();
+            }
+        }
 
 		#endregion
 

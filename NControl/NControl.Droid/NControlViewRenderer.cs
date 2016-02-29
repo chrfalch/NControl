@@ -61,10 +61,16 @@ namespace NControl.Droid
             base.OnElementChanged(e);
 
             if (e.OldElement != null)
+            {
                 e.OldElement.OnInvalidate -= HandleInvalidate;
+                e.OldElement.OnGetPlatform -= OnGetPlatformHandler;
+            }
 
             if (e.NewElement != null)
+            {
                 e.NewElement.OnInvalidate += HandleInvalidate;
+                e.NewElement.OnGetPlatform += OnGetPlatformHandler;
+            }
 
             // Lets have a clear background
             this.SetBackgroundColor (Android.Graphics.Color.Transparent);
@@ -199,6 +205,14 @@ namespace NControl.Droid
         private void HandleInvalidate(object sender, System.EventArgs args)
         {
             Invalidate();
+        }
+
+        /// <summary>
+        /// Callback for the OnGetPlatform event in the abstract control
+        /// </summary>
+        private IPlatform OnGetPlatformHandler ()
+        {
+            return new AndroidPlatform();
         }
 
         /// <summary>

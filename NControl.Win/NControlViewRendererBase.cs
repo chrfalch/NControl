@@ -67,6 +67,12 @@ namespace NControl.Win
         protected abstract NGraphics.ICanvas CreateCanvas(Canvas canvas);
 
         /// <summary>
+        /// Creates the platform.
+        /// </summary>
+        /// <returns>The platform.</returns>
+        protected abstract NGraphics.IPlatform CreatePlatform();
+
+        /// <summary>
         /// Raises the element changed event.
         /// </summary>
         /// <param name="e">E.</param>
@@ -75,11 +81,15 @@ namespace NControl.Win
             base.OnElementChanged(e);
 
             if (e.OldElement != null)
+            {
                 e.OldElement.OnInvalidate -= HandleInvalidate;
+                e.OldElement.OnGetPlatform -= CreatePlatform;
+            }
 
             if (e.NewElement != null)
             {
-                e.NewElement.OnInvalidate += HandleInvalidate;                
+                e.NewElement.OnInvalidate += HandleInvalidate; 
+                e.NewElement.OnGetPlatform += CreatePlatform;
             }
 
             if (Control == null)
