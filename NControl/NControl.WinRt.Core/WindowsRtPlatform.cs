@@ -4,11 +4,13 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using NGraphics;
+using TextAlignment = NGraphics.TextAlignment;
 using Transform = NGraphics.Transform;
 
 namespace NControl.WinRt.Core
@@ -576,11 +578,22 @@ namespace NControl.WinRt.Core
 
     public Size MeasureText(string text, Font font)
     {
-      var tt = new TextBlock();
-      tt.FontFamily = new FontFamily(font.Family);
-      tt.FontSize = font.Size;
-      tt.Text = text;
-      return new Size(tt.ActualWidth, tt.ActualWidth);
+      if (text == " ")
+      {
+        text = "\u00A0";
+      }
+
+      var textBlock = new TextBlock
+      {
+        Text = text,
+        FontFamily = new FontFamily(font.Family),
+        FontSize = font.Size,
+        VerticalAlignment = VerticalAlignment.Top,
+        HorizontalAlignment = HorizontalAlignment.Left
+      };
+
+      textBlock.Measure(new Windows.Foundation.Size(double.MaxValue, double.MaxValue));
+      return new Size(textBlock.DesiredSize.Width, textBlock.DesiredSize.Height);
     }
 
     IImage IImageCanvas.GetImage()

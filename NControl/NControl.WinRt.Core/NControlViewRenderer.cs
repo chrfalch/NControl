@@ -86,6 +86,12 @@ namespace NControl.WinRt.Core
                 e.NewElement.OnInvalidate += HandleInvalidate;
             }
 
+            if ((e.OldElement != null) && (e.NewElement == null) && (Control == null))
+            {
+              return;
+            }
+
+
             if (Control == null)
             {
                 var ctrl = new NControlNativeView();
