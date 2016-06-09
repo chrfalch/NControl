@@ -70,5 +70,14 @@ namespace NControl.WP80
         {
             return new CanvasCanvas(canvas);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        protected override IPlatform CreatePlatform()
+        {
+            return new PhoneSilverlightPlatform();
+        }
     }
 }
