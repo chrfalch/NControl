@@ -27,7 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F2FDFC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NControl.WindowsStore", "NControl\NControl.WindowsStore\NControl.WindowsStore.csproj", "{51B9D799-0F0B-44F9-9CBE-5AEFF7A23C1E}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NControl.Win", "NControl.Win\NControl.Win.shproj", "{1B491EE5-956C-45F5-98B6-B20A30F28875}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NControl.Win", "NControl\NControl.Win\NControl.Win.shproj", "{1B491EE5-956C-45F5-98B6-B20A30F28875}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
