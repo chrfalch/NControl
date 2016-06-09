@@ -214,10 +214,6 @@
       <Project>{E0951DAE-4B6E-421D-AA30-5BD2203D5DEC}</Project>
       <Name>NControl</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NControlDemo.FormsApp\NControlDemo.FormsApp.csproj">
-      <Project>{39EA0550-B11F-4ABC-B23A-61EB4136C775}</Project>
-      <Name>NControlDemo.FormsApp</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NControlDemo.Localization\NControlDemo.Localization.csproj">
       <Project>{79968FF8-9E85-42D1-9917-73B52F022969}</Project>
       <Name>NControlDemo.Localization</Name>
