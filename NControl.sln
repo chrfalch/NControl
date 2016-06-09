@@ -24,9 +24,9 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NControl.Win", "NControl\NC
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		NControl.Win\NControl.Win.projitems*{9e684606-7520-4c66-a530-f65aaa129b8f}*SharedItemsImports = 4
+		NControl\NControl.Win\NControl.Win.projitems*{9e684606-7520-4c66-a530-f65aaa129b8f}*SharedItemsImports = 4
 		NControl\NControl.Win\NControl.Win.projitems*{1b491ee5-956c-45f5-98b6-b20a30f28875}*SharedItemsImports = 13
-		NControl.Win\NControl.Win.projitems*{7417df41-1260-4f98-8af5-23b9c6048aab}*SharedItemsImports = 4
+		NControl\NControl.Win\NControl.Win.projitems*{7417df41-1260-4f98-8af5-23b9c6048aab}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
