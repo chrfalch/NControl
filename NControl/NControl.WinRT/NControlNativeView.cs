@@ -2,7 +2,7 @@
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-namespace NControl.WindowsStore
+namespace NControl.WinRT
 {
     public class NControlNativeView : Grid
     {

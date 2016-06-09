@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>025d3be6-8c87-4c5c-a2b9-1551fa8a3172</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>NControl.WinRT</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)NControlNativeView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NControlViewRendererBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WindowsPhonePlatform.cs" />
+  </ItemGroup>
+</Project>

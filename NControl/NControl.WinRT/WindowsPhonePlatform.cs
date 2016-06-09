@@ -11,17 +11,17 @@ using Windows.UI.Xaml.Media.Imaging;
 using NGraphics;
 using Transform = NGraphics.Transform;
 
-namespace NControl.WindowsStore
+namespace NControl.WinRT
 {
     /// <summary>
     /// Windows Store Platform
     /// </summary>
-    public class WindowsStorePlatform : IPlatform
+    public class WindowsPhonePlatform : IPlatform
     {
         /// <summary>
         /// Returns the name of the platform
         /// </summary>
-        public string Name { get { return "WindowsStore"; } }
+        public string Name { get { return "WinRT"; } }
 
         /// <summary>
         /// Creates an object implementing the IImageCanvas interface
