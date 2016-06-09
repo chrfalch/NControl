@@ -89,10 +89,10 @@ namespace NControlDemo.FormsApp.Controls
         /// The Command property.
         /// </summary>
         public static BindableProperty CommandProperty = 
-            BindableProperty.Create<CircularButtonControl, ICommand> (p => p.Command, null,
+            BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(CircularButtonControl), defaultBindingMode:BindingMode.TwoWay, 
                 propertyChanged: (bindable, oldValue, newValue) => {
                 var ctrl = (CircularButtonControl)bindable;
-                ctrl.Command = newValue;
+                ctrl.Command = (ICommand)newValue;
             });
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace NControlDemo.FormsApp.Controls
         /// The CommandParameter property.
         /// </summary>
         public static BindableProperty CommandParameterProperty = 
-            BindableProperty.Create<CircularButtonControl, object> (p => p.CommandParameter, null,
+            BindableProperty.Create(nameof(CommandParameter), typeof(object), typeof(CircularButtonControl), defaultBindingMode:BindingMode.TwoWay,
                 propertyChanged: (bindable, oldValue, newValue) => {
                 var ctrl = (CircularButtonControl)bindable;
                 ctrl.CommandParameter = newValue;
@@ -131,12 +131,12 @@ namespace NControlDemo.FormsApp.Controls
         /// The FillColor property.
         /// </summary>
         public static BindableProperty FillColorProperty = 
-            BindableProperty.Create<CircularButtonControl, Xamarin.Forms.Color>(p => p.FillColor, 
+            BindableProperty.Create(nameof(FillColor), typeof(Xamarin.Forms.Color), typeof(CircularButtonControl), 
                 Xamarin.Forms.Color.Gray, BindingMode.TwoWay,
                 propertyChanged: (bindable, oldValue, newValue) =>
                 {
                     var ctrl = (CircularButtonControl)bindable;
-                    ctrl.FillColor = newValue;
+                    ctrl.FillColor = (Xamarin.Forms.Color)newValue;
                 });
 
         /// <summary>

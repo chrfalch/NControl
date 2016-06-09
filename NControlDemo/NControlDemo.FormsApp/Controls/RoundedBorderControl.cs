@@ -51,9 +51,12 @@ namespace NControlDemo.FormsApp.Controls
         /// The corner radius property.
         /// </summary>
         public static BindableProperty CornerRadiusProperty = 
-            BindableProperty.Create<RoundedBorderControl, int> (p => p.CornerRadius, 8, 
-                BindingMode.OneWay, null, CornerRadiusChanged);
-
+            BindableProperty.Create(nameof(CornerRadius), typeof(int), typeof(RoundedBorderControl), 0,
+                BindingMode.OneWay, null, (bindable, oldValue, newValue) =>
+                {                    
+                    (bindable as RoundedBorderControl).Invalidate();
+                });
+        
         /// <summary>
         /// Gets or sets the corner radius.
         /// </summary>
@@ -68,8 +71,11 @@ namespace NControlDemo.FormsApp.Controls
         /// The border and fill color property.
         /// </summary>
         public static new BindableProperty BackgroundColorProperty = 
-            BindableProperty.Create<RoundedBorderControl, Xamarin.Forms.Color> (
-                p => p.BackgroundColor, Xamarin.Forms.Color.Transparent, BindingMode.OneWay, null, BackgroundColorChanged);
+            BindableProperty.Create(nameof(BackgroundColor), typeof(Xamarin.Forms.Color), typeof(RoundedBorderControl), 
+                Xamarin.Forms.Color.Transparent, BindingMode.OneWay, null, (bindable, oldValue, newValue) =>
+                {
+                    (bindable as RoundedBorderControl).Invalidate();
+                });
 
         /// <summary>
         /// Gets or sets the color which will fill the background of a VisualElement. This is a bindable property.
@@ -135,32 +141,7 @@ namespace NControlDemo.FormsApp.Controls
         }
 
         #endregion
-
-        #region Property Changed
-
-        /// <summary>
-        /// Corners the radius changed.
-        /// </summary>
-        /// <returns><c>true</c>, if radius changed was cornered, <c>false</c> otherwise.</returns>
-        /// <param name="bindable">Bindable.</param>
-        /// <param name="value">Value.</param>
-        private static void CornerRadiusChanged(BindableObject bindable, int oldValue, int newValue)
-        {
-            (bindable as RoundedBorderControl).Invalidate();
-        }
-
-        /// <summary>
-        /// Borders the color changed.
-        /// </summary>
-        /// <param name="bindable">Bindable.</param>
-        /// <param name="oldValue">Old value.</param>
-        /// <param name="newValue">New value.</param>
-        private static void BackgroundColorChanged(BindableObject bindable, Xamarin.Forms.Color oldValue, Xamarin.Forms.Color newValue)
-        {
-            (bindable as RoundedBorderControl).Invalidate();
-        }
-
-        #endregion
+       
     }
 }
 
