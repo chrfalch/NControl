@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NControl.WindowsPhone", "NC
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NControl.WinRT", "NControl\NControl.WinRT\NControl.WinRT.shproj", "{025D3BE6-8C87-4C5C-A2B9-1551FA8A3172}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NControl.UWP", "NControl\NControl.UWP\NControl.UWP.csproj", "{986998C3-8C08-45F3-86C7-E1023D5A4293}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		NControl\NControl.WinRT\NControl.WinRT.projitems*{025d3be6-8c87-4c5c-a2b9-1551fa8a3172}*SharedItemsImports = 13
@@ -384,6 +386,62 @@ Global
 		{036F649F-2348-41CE-85E1-3DF2B0331270}.Release|x64.Build.0 = Release|Any CPU
 		{036F649F-2348-41CE-85E1-3DF2B0331270}.Release|x86.ActiveCfg = Release|x86
 		{036F649F-2348-41CE-85E1-3DF2B0331270}.Release|x86.Build.0 = Release|x86
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Ad-Hoc|ARM.ActiveCfg = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Ad-Hoc|ARM.Build.0 = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Ad-Hoc|iPhoneSimulator.Build.0 = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Ad-Hoc|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Ad-Hoc|Mixed Platforms.Build.0 = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Ad-Hoc|x64.ActiveCfg = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Ad-Hoc|x64.Build.0 = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Ad-Hoc|x86.ActiveCfg = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Ad-Hoc|x86.Build.0 = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.AppStore|Any CPU.Build.0 = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.AppStore|ARM.ActiveCfg = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.AppStore|ARM.Build.0 = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.AppStore|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.AppStore|iPhoneSimulator.Build.0 = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.AppStore|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.AppStore|Mixed Platforms.Build.0 = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.AppStore|x64.ActiveCfg = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.AppStore|x64.Build.0 = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.AppStore|x86.ActiveCfg = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.AppStore|x86.Build.0 = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Debug|ARM.Build.0 = Debug|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Debug|x64.Build.0 = Debug|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Debug|x86.Build.0 = Debug|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Release|Any CPU.Build.0 = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Release|ARM.ActiveCfg = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Release|ARM.Build.0 = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Release|iPhone.Build.0 = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Release|x64.ActiveCfg = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Release|x64.Build.0 = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Release|x86.ActiveCfg = Release|Any CPU
+		{986998C3-8C08-45F3-86C7-E1023D5A4293}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -398,6 +456,7 @@ Global
 		{1B491EE5-956C-45F5-98B6-B20A30F28875} = {915A7419-1DC8-43AE-962D-2F1046F01070}
 		{036F649F-2348-41CE-85E1-3DF2B0331270} = {915A7419-1DC8-43AE-962D-2F1046F01070}
 		{025D3BE6-8C87-4C5C-A2B9-1551FA8A3172} = {915A7419-1DC8-43AE-962D-2F1046F01070}
+		{986998C3-8C08-45F3-86C7-E1023D5A4293} = {915A7419-1DC8-43AE-962D-2F1046F01070}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0

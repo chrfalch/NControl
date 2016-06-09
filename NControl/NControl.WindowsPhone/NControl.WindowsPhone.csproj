@@ -90,7 +90,6 @@
   <ItemGroup>
     <Compile Include="NControlViewRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WindowsPhonePlatform.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="NGraphics, Version=0.2.2.0, Culture=neutral, processorArchitecture=MSIL">

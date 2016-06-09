@@ -55,7 +55,8 @@ namespace NControl.WindowsPhone
         /// <returns></returns>
         protected override ICanvas CreateCanvas(Canvas canvas)
         {
-            return new CanvasCanvas(canvas);
+            return new WICBitmapCanvas(new NGraphics.Size(canvas.RenderSize.Width,
+                canvas.RenderSize.Height));
         }
 
         /// <summary>
