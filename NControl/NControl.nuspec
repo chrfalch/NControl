@@ -23,7 +23,6 @@
      
      <!--Xamarin.Android-->
      <file src="NControl.Droid/bin/Release/NControl.Droid.dll" target="lib\MonoAndroid10\NControl.Droid.dll" />
-
      <file src="NControl.Droid/bin/Release/NControl.dll" target="lib\MonoAndroid10\NControl.dll" />
 
      <!--Xamarin.WP80 -->
@@ -36,6 +35,10 @@
 
      <!--Xamarin.WIN81 -->
      <file src="NControl.WindowsStore/Bin/Release/NControl.WindowsStore.dll" target="lib\win81\NControl.WindowsStore.dll" />
+     <file src="NControl.WindowsStore/Bin/Release/NControl.dll" target="lib\win81\NControl.dll" />
+     
+     <!--Xamarin.WINPHONE81-->
+     <file src="NControl.WindowsStore/Bin/Release/NControl.WindowsPhone.dll" target="lib\win81\NControl.WindowsPhone.dll" />
      <file src="NControl.WindowsStore/Bin/Release/NControl.dll" target="lib\win81\NControl.dll" />
 
     <!--Xamarin.iOSUnified-->
