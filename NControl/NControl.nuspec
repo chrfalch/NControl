@@ -39,7 +39,7 @@
      
      <!--Xamarin.WINPHONE81-->
      <file src="NControl.WindowsPhone/Bin/Release/NControl.WindowsPhone.dll" target="lib\wpa81\NControl.WindowsPhone.dll" />
-     <file src="NControl.WindowsPhone/Bin/Release/NControl.dll" target="lib\wpa\NControl.dll" />
+     <file src="NControl.WindowsPhone/Bin/Release/NControl.dll" target="lib\wpa81\NControl.dll" />
 
     <!--Xamarin.iOSUnified-->
      <file src="NControl.iOS/bin/Release/NControl.iOS.dll" target="lib\Xamarin.iOS10\NControl.iOS.dll" />
