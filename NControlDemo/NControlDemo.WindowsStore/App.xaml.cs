@@ -66,7 +66,7 @@ namespace NControlDemo.WindowsStore
                 // TODO
                 //Xamarin.FormsMaps.Init();
 
-                NControl.WindowsStore.NControlViewRenderer.Init();
+                NControl.WinRt.Core.NControlViewRenderer.Init();
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
