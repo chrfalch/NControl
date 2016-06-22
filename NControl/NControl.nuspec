@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
    <metadata minClientVersion="2.8.1">
        <id>NControl</id>
-    <version>0.8.6</version>
+    <version>0.9.0.1</version>
     <authors>Christian Falch, Henrik Ilgen, Adam (awolf), BlueRaja, Frank Neuman</authors>
     <owners>Christian Falch</owners>
     <licenseUrl>https://github.com/chrfalch/NControl/blob/master/LICENSE.md</licenseUrl>
@@ -13,7 +13,7 @@
     <copyright>Copyright 2015</copyright>
     <tags>xamarin, pcl, xam.pcl, android, xamarin.forms, ios</tags>
        <dependencies>
-         <dependency id="Xamarin.Forms" version="2.0.1.6505" />
+         <dependency id="Xamarin.Forms" version="2.2.0.45" />
          <dependency id="NGraphics" version="0.4.0" />
        </dependencies>
    </metadata>
@@ -23,7 +23,6 @@
      
      <!--Xamarin.Android-->
      <file src="NControl.Droid/bin/Release/NControl.Droid.dll" target="lib\MonoAndroid10\NControl.Droid.dll" />
-
      <file src="NControl.Droid/bin/Release/NControl.dll" target="lib\MonoAndroid10\NControl.dll" />
 
      <!--Xamarin.WP80 -->
@@ -37,6 +36,10 @@
      <!--Xamarin.WIN81 -->
      <file src="NControl.WindowsStore/Bin/Release/NControl.WindowsStore.dll" target="lib\win81\NControl.WindowsStore.dll" />
      <file src="NControl.WindowsStore/Bin/Release/NControl.dll" target="lib\win81\NControl.dll" />
+     
+     <!--Xamarin.WINPHONE81-->
+     <file src="NControl.WindowsPhone/Bin/Release/NControl.WindowsPhone.dll" target="lib\wpa81\NControl.WindowsPhone.dll" />
+     <file src="NControl.WindowsPhone/Bin/Release/NControl.dll" target="lib\wpa81\NControl.dll" />
 
     <!--Xamarin.iOSUnified-->
      <file src="NControl.iOS/bin/Release/NControl.iOS.dll" target="lib\Xamarin.iOS10\NControl.iOS.dll" />

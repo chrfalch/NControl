@@ -34,14 +34,14 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using NControl.WindowsStore;
+using NControl.WindowsPhone;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.WinRT;
 using NGraphics;
 using NControl.WinRT;
 
 [assembly: ExportRenderer(typeof(NControlView), typeof(NControlViewRenderer))]
-namespace NControl.WindowsStore
+namespace NControl.WindowsPhone
 {
     /// <summary>
     /// NControlView renderer.
@@ -55,7 +55,8 @@ namespace NControl.WindowsStore
         /// <returns></returns>
         protected override ICanvas CreateCanvas(Canvas canvas)
         {
-            return new CanvasCanvas(canvas);
+            return new WICBitmapCanvas(new NGraphics.Size(canvas.RenderSize.Width,
+                canvas.RenderSize.Height));
         }
 
         /// <summary>
@@ -64,7 +65,7 @@ namespace NControl.WindowsStore
         /// <returns></returns>
         protected override IPlatform CreatePlatform()
         {
-            return new WinRTPlatform();
+            return new NGraphics.WinRTPlatform();
         }
     }
 }
