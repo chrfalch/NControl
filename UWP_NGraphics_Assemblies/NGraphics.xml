@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NGraphics</name>
+    </assembly>
+    <members>
+        <member name="T:NGraphics.Point">
+            <summary>
+            Yet another 2D point struct. I hope you enjoy this one.
+            </summary>
+        </member>
+        <member name="M:NGraphics.CanvasEx.Rotate(NGraphics.ICanvas,System.Double)">
+            <summary>
+            Rotate the specified canvas by the given angle (in degrees).
+            </summary>
+            <param name="canvas">The canvas to rotate.</param>
+            <param name="angle">Angle in degrees.</param>
+        </member>
+        <member name="M:NGraphics.CanvasEx.Rotate(NGraphics.ICanvas,System.Double,NGraphics.Point)">
+            <param name="canvas">The canvas to rotate.</param>
+            <param name="angle">Angle in degrees.</param>
+            <param name="point">The translation point.</param>
+        </member>
+        <member name="M:NGraphics.CanvasEx.Rotate(NGraphics.ICanvas,System.Double,System.Double,System.Double)">
+            <param name="canvas">The canvas to rotate.</param>
+            <param name="angle">Angle in degrees.</param>
+            <param name="x">The x coordinate of the translation point.</param>
+            <param name="y">The y coordinate of the translation point.</param>
+        </member>
+        <member name="T:NGraphics.DrawImageCache`1">
+            <summary>
+            Caches drawings by rendering them to images.
+            Drawings are identified by a key and are removed from the cache
+            based upon their access times (least recently accessed entries are removed first).
+            </summary>
+        </member>
+        <member name="M:NGraphics.DrawImageCache`1.#ctor(System.Int32,NGraphics.IPlatform,System.Double,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="M:NGraphics.DrawImageCache`1.#ctor(System.Int32,NGraphics.IPlatform,System.Double,System.Boolean)"/> class.
+            </summary>
+            <param name="maxNumEntries">Max number cache entries.</param>
+            <param name="platform">The graphics platform used to generate images.</param>
+            <param name="scale">The image scale.</param>
+            <param name="transparency">Whether the image should have a transparent background.</param>
+        </member>
+        <member name="M:NGraphics.DrawImageCache`1.Clear">
+            <summary>
+            Clear the cache.
+            </summary>
+        </member>
+        <member name="M:NGraphics.DrawImageCache`1.GetImage(`0,NGraphics.Size,System.Action{NGraphics.ICanvas})">
+            <summary>
+            Gets the image by either pulling it from the cache or re-rendering it.
+            </summary>
+            <returns>The image.</returns>
+            <param name="key">Key identifying this entry.</param>
+            <param name="size">The image size.</param>
+            <param name="draw">The function called to draw the entry.</param>
+        </member>
+    </members>
+</doc>
