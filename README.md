@@ -19,14 +19,18 @@ Add the [Nuget](https://www.nuget.org/packages/NControl/) packages to your iOS, 
 
 Remember to to add calls to ```NControlViewRenderer.Init()``` after ```Forms.Init()``` in your AppDelegate and in your MainActivity. 
 
-NOTE: there is a special Forms.Init override for UWP where you must include the Assemblies of 3rd party controls and those with custom renderers, like NControl. If you fail to do so, the NControlView won't appear in builds that use the "Compile with .NET Native tool chain" option (Release or App Store builds).
+**Note For UWP:** there is a special Forms.Init override for UWP where you must include the Assemblies of 3rd party controls and those with custom renderers, like NControl. If you fail to do so, the NControlView won't appear in builds that use the "Compile with .NET Native tool chain" option (Release or App Store builds).
+
 More info from Xamarin [here](https://developer.xamarin.com/guides/xamarin-forms/platform-features/windows/installation/universal/#Troubleshooting)
+
+```csharp
 // For .NET Native compilation, you have to tell Xamarin.Forms which assemblies it should scan for custom controls and renderers
 var rendererAssemblies = new[]
 {
     typeof(NControl.UWP.NControlViewRenderer).GetTypeInfo().Assembly
 };
 Xamarin.Forms.Forms.Init(e, rendererAssemblies);
+```
 
 ## Example Usage
 In your Xamarin.Forms project, add a new NControlView element to your page in the constructor and provide a drawing function where your custom drawing is performed:
