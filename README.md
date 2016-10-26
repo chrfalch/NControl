@@ -10,13 +10,23 @@ The library currently supports native renderers for the following platforms:
 
 - Android
 - iOS Unified
-- Windows Phone
-- Windows Store
+- Windows Phone (8, 8.1 & Silverlight 8.1)
+- Windows Store (Windows 8.1)
+- UWP (Windows 10)
 
 ## Installation
 Add the [Nuget](https://www.nuget.org/packages/NControl/) packages to your iOS, Android and Forms-project.
 
 Remember to to add calls to ```NControlViewRenderer.Init()``` after ```Forms.Init()``` in your AppDelegate and in your MainActivity. 
+
+NOTE: there is a special Forms.Init override for UWP where you must include the Assemblies of 3rd party controls and those with custom renderers, like NControl. If you fail to do so, the NControlView won't appear in builds that use the "Compile with .NET Native tool chain" option (Release or App Store builds).
+More info from Xamarin [here](https://developer.xamarin.com/guides/xamarin-forms/platform-features/windows/installation/universal/#Troubleshooting)
+// For .NET Native compilation, you have to tell Xamarin.Forms which assemblies it should scan for custom controls and renderers
+var rendererAssemblies = new[]
+{
+    typeof(NControl.UWP.NControlViewRenderer).GetTypeInfo().Assembly
+};
+Xamarin.Forms.Forms.Init(e, rendererAssemblies);
 
 ## Example Usage
 In your Xamarin.Forms project, add a new NControlView element to your page in the constructor and provide a drawing function where your custom drawing is performed:
