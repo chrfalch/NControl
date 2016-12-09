@@ -26,7 +26,6 @@
  ************************************************************************/
 
 using System;
-using System.Collections.Generic;
 using Android.Graphics;
 using Android.Runtime;
 using Android.Views;
@@ -161,13 +160,9 @@ namespace NControl.Droid
         {
             var scale = Element.Width / Width;
 
-            var touchInfo = new List<NGraphics.Point>();
-            for (var i = 0; i < e.PointerCount; i++)
-            {
-                var coord = new MotionEvent.PointerCoords();
-                e.GetPointerCoords(i, coord);
-                touchInfo.Add(new NGraphics.Point(coord.X*scale, coord.Y*scale));
-            }
+            var touchInfo = new[]{
+                new NGraphics.Point(e.GetX() * scale, e.GetY() * scale)
+            };
 
             var result = false;
 
