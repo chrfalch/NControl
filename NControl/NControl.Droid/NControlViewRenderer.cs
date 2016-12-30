@@ -102,6 +102,16 @@ namespace NControl.Droid
                 Element.Invalidate();
         }
 
+        protected override void Dispose (bool disposing)
+        {
+            if (disposing && Element != null)
+            {
+                Element.OnInvalidate -= HandleInvalidate;
+                Element.OnGetPlatform -= OnGetPlatformHandler;
+            }
+            base.Dispose (disposing);
+        }
+
         #region Native Drawing 
 
         /// <Docs>The Canvas to which the View is rendered.</Docs>
