@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{915A7419-1DC8-43AE-962D-2F1046F01070}"
 	ProjectSection(SolutionItems) = preProject
@@ -44,14 +44,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NControlDemo.WP80", "NContr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NControlDemo.WP81", "NControlDemo\NControlDemo.WP81\NControlDemo.WP81.csproj", "{28DF003B-40C3-4550-8000-103AD513BC6D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NControl.UWP", "NControl\NControl.UWP\NControl.UWP.csproj", "{28EBD08D-5763-4027-9525-0F18B28D5F7B}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		NControl\NControl.WinRT\NControl.WinRT.projitems*{025d3be6-8c87-4c5c-a2b9-1551fa8a3172}*SharedItemsImports = 13
-		NControl\NControl.WinRT\NControl.WinRT.projitems*{51b9d799-0f0b-44f9-9cbe-5aeff7a23c1e}*SharedItemsImports = 4
 		NControl\NControl.WinRT\NControl.WinRT.projitems*{036f649f-2348-41ce-85e1-3df2b0331270}*SharedItemsImports = 4
-		NControl\NControl.Win\NControl.Win.projitems*{9e684606-7520-4c66-a530-f65aaa129b8f}*SharedItemsImports = 4
 		NControl\NControl.Win\NControl.Win.projitems*{1b491ee5-956c-45f5-98b6-b20a30f28875}*SharedItemsImports = 13
+		NControl\NControl.WinRT\NControl.WinRT.projitems*{51b9d799-0f0b-44f9-9cbe-5aeff7a23c1e}*SharedItemsImports = 4
 		NControl\NControl.Win\NControl.Win.projitems*{7417df41-1260-4f98-8af5-23b9c6048aab}*SharedItemsImports = 4
+		NControl\NControl.Win\NControl.Win.projitems*{9e684606-7520-4c66-a530-f65aaa129b8f}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
@@ -956,6 +958,7 @@ Global
 		{E89422A2-5A8D-479E-AD71-BCC4945CFE9A} = {A3E9ECE5-1DF0-4C35-BC22-19B72E356937}
 		{D563351A-165C-4932-8A03-7E70E9E33D70} = {A3E9ECE5-1DF0-4C35-BC22-19B72E356937}
 		{28DF003B-40C3-4550-8000-103AD513BC6D} = {A3E9ECE5-1DF0-4C35-BC22-19B72E356937}
+		{28EBD08D-5763-4027-9525-0F18B28D5F7B} = {915A7419-1DC8-43AE-962D-2F1046F01070}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
