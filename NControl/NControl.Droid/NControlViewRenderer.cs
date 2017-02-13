@@ -143,15 +143,10 @@ namespace NControl.Droid
             // Fill background 
             ncanvas.FillRectangle(rect, new NGraphics.Color(Element.BackgroundColor.R, Element.BackgroundColor.G, Element.BackgroundColor.B, Element.BackgroundColor.A));
 
-            // Custom drawing
-            Element.Draw(ncanvas, rect);
-
-            // Redraw children - since we might have a composite control containing both children 
-            // and custom drawing code, we want children to be drawn last. The reason for this double-
-            // drawing is that the base.Draw(canvas) call will handle background which is needed before
-            // doing NGraphics drawing - but unfortunately it also draws children - which then will 
-            // be drawn below NGraphics drawings.
             base.Draw(canvas);
+
+            // Custom drawing over children
+            Element.Draw(ncanvas, rect);
         }
 
         #endregion
